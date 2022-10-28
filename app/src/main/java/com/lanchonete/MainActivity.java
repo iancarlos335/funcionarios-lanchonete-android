@@ -1,12 +1,11 @@
 package com.lanchonete;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,11 +21,13 @@ public class MainActivity extends AppCompatActivity {
         mensagem = findViewById(R.id.mensagem);
         botao = findViewById(R.id.botao);
 
-        botao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SegundaPagina.class);
-            }
+        botao.setOnClickListener(view -> {
+
+
+
+            Intent intent = new Intent(getApplicationContext(), SegundaPagina.class);
+            startService(intent);
+            //Toast.makeText(getApplicationContext(), "Indo pra próxima página", Toast.LENGTH_SHORT).show();
         });
 
 
