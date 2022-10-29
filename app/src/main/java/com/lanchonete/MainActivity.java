@@ -21,17 +21,6 @@ public class MainActivity extends AppCompatActivity {
         mensagem = findViewById(R.id.mensagem);
         botao = findViewById(R.id.botao);
 
-        botao.setOnClickListener(view -> {
-
-
-
-            Intent intent = new Intent(getApplicationContext(), SegundaPagina.class);
-            startService(intent);
-            //Toast.makeText(getApplicationContext(), "Indo pra próxima página", Toast.LENGTH_SHORT).show();
-        });
-
-
-
 
 
     }
