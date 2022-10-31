@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">lanchonete</string>
+    <string name="nome_bebida">Nome Bebida</string>
+    <string name="valor">Valor</string>
 </resources>
