@@ -17,7 +17,7 @@ public class SegundaPagina extends AppCompatActivity {
         botao = findViewById(R.id.buttonSegundaPagina);
 
         botao.setOnClickListener(view -> {
-            Intent intent = new Intent(this, ActivityExample.class);
+            Intent intent = new Intent(getApplicationContext(), ActivityExample.class);
             startActivity(intent);
         });
 
