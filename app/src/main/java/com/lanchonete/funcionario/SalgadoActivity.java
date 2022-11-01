@@ -1,14 +1,16 @@
-package com.lanchonete;
+package com.lanchonete.funcionario;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class DoceActivity extends AppCompatActivity {
+import com.lanchonete.R;
+
+public class SalgadoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.doce_activity);
+        setContentView(R.layout.salgado_activity);
     }
 }

@@ -1,4 +1,4 @@
-package com.lanchonete;
+package com.lanchonete.funcionario;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.lanchonete.R;
 import com.lanchonete.model.Bebida;
 import com.lanchonete.retrofit.RetrofitService;
 import com.lanchonete.retrofit.api.BebidaAPI;
