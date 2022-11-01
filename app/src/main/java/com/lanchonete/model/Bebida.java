@@ -10,9 +10,11 @@ public class Bebida {
 
 	private String descricao;
 
+	private String imagem;
+
 	public Bebida() {}
 
-	public Bebida(String nomeBebida, double valor, String descricao) {
+	public Bebida(String nomeBebida, double valor, String descricao, String imagem) {
 		super();
 		this.nomeBebida = nomeBebida;
 		this.valor = valor;
@@ -50,6 +52,14 @@ public class Bebida {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
 	}
 	
 	

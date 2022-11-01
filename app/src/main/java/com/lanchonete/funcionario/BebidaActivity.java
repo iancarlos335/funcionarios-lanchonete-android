@@ -21,7 +21,7 @@ import retrofit2.Response;
 
 public class BebidaActivity extends AppCompatActivity {
 
-    EditText editTextNomeBebida, editTextValor, editTextDescricao;
+    EditText editTextNomeBebida, editTextValor, editTextDescricao, editTextImagem;
     Button buttonBotao;
 
 
@@ -38,6 +38,7 @@ public class BebidaActivity extends AppCompatActivity {
         editTextNomeBebida = findViewById(R.id.nome_bebida);
         editTextValor = findViewById(R.id.valor_bebida);
         editTextDescricao = findViewById(R.id.descricao_bebida); //adicionar input direito
+        editTextImagem = findViewById(R.id.imagem_bebida);
 
 
         RetrofitService retrofitService = new RetrofitService();
@@ -48,11 +49,13 @@ public class BebidaActivity extends AppCompatActivity {
             String descricao = editTextDescricao.getText().toString();
             String strvalor = editTextValor.getText().toString();
             double valor = Double.parseDouble(strvalor); //só vou usar esse cara
+            String imgBebida = editTextImagem.getText().toString();
 
             Bebida bebida = new Bebida();
             bebida.setNomeBebida(nomeBebida);
             bebida.setValor(valor);
             bebida.setDescricao(descricao);
+            bebida.setImagem(imgBebida);
 
             bebidaAPI.addBebida(bebida) //chama o método POST
                     .enqueue(new Callback<Bebida>() { //deixa as requisições em fila

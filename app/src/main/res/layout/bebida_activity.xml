@@ -11,10 +11,11 @@
         android:layout_width="339dp"
         android:layout_height="49dp"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="216dp"
         android:layout_marginEnd="36dp"
         android:text="Cadastrar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descricao_bebida" />
 
@@ -59,8 +60,8 @@
 
     <EditText
         android:id="@+id/descricao_bebida"
-        android:layout_width="252dp"
-        android:layout_height="107dp"
+        android:layout_width="258dp"
+        android:layout_height="74dp"
         android:layout_marginTop="32dp"
         android:ems="10"
         android:gravity="start|top"
@@ -69,6 +70,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/valor_bebida" />
+
+    <EditText
+        android:id="@+id/imagem_bebida"
+        android:layout_width="263dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Imagem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descricao_bebida" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
