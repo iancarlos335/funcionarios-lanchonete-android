@@ -9,7 +9,7 @@ public class RetrofitService {
 
     private Retrofit retrofit;
 
-    public RetrofitService() {
+    public RetrofitService() {        
         iniciarRetrofit();
     }
 
