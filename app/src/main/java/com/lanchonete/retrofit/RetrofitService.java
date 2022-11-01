@@ -15,7 +15,7 @@ public class RetrofitService {
 
     public void iniciarRetrofit() {
         retrofit = new Retrofit.Builder() //podem ser adiocionadas mais configurações dps desse Retrofit
-                .baseUrl("http://192.168.0.48:5432")
+                .baseUrl("http://192.168.0.196:8080") //É na porta 8080 q o TomCat sobe, só vai funcionar as inserções se a api tiver rodando na porta 8080
                 .addConverterFactory(GsonConverterFactory.create(new Gson())) //Se for necessário definir parâmetros pra esse Gson dps, é só mdificar o objeto(Gson)
                 .build();
     }
