@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             String strvalor = editTextValor.getText().toString();
             Double valor = Double.parseDouble(strvalor); //só vou usar esse cara
 
-            
+
 
 
 
