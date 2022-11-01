@@ -1,6 +1,5 @@
 package com.lanchonete.retrofit.api;
 
-import com.lanchonete.model.Bebida;
 import com.lanchonete.model.Salgado;
 
 import java.util.List;

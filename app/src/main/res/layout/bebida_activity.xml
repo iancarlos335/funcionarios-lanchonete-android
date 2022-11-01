@@ -4,37 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     tools:context=".BebidaActivity">
 
     <Button
-        android:id="@+id/botao"
+        android:id="@+id/botao_bebida"
         android:layout_width="339dp"
         android:layout_height="49dp"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="36dp"
-        android:text="Button"
+        android:text="Cadastrar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/valor" />
+        app:layout_constraintTop_toBottomOf="@+id/descricao_bebida" />
 
     <EditText
         android:id="@+id/nome_bebida"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_width="278dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="48dp"
         android:ems="10"
         android:hint="@string/nome_bebida"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titulo" />
+        app:layout_constraintTop_toBottomOf="@+id/titulo_bebida" />
 
     <TextView
-        android:id="@+id/titulo"
+        android:id="@+id/titulo_bebida"
         android:layout_width="180dp"
         android:layout_height="61dp"
         android:layout_marginTop="48dp"
@@ -48,16 +46,29 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/valor"
+        android:id="@+id/valor_bebida"
         android:layout_width="243dp"
         android:layout_height="57dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
-        android:inputType="numberDecimal"
         android:hint="@string/valor"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nome_bebida" />
+
+    <EditText
+        android:id="@+id/descricao_bebida"
+        android:layout_width="252dp"
+        android:layout_height="107dp"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Descrição"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/valor_bebida" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

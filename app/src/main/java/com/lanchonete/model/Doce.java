@@ -3,19 +3,29 @@ package com.lanchonete.model;
 public class Doce {
 
 	private long id;
-	
 
 	private String nomeDoce;
-	
 
 	private double valor;
-	
+
+	private String descricao;
+
 	public Doce() {}
 
-	public Doce(String nomeDoce, double valor) {
+	public Doce(String nomeDoce, double valor, String descricao) {
 		super();
 		this.nomeDoce = nomeDoce;
 		this.valor = valor;
+		this.descricao = descricao;
+	}
+
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public long getId() {
@@ -41,8 +51,5 @@ public class Doce {
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
-	
-	
-	
 	
 }

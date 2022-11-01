@@ -3,7 +3,6 @@ package com.lanchonete;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +20,7 @@ import retrofit2.Response;
 
 public class BebidaActivity extends AppCompatActivity {
 
-    EditText editTextNomeBebida, editTextValor;
+    EditText editTextNomeBebida, editTextValor, editTextDescricao;
     Button buttonBotao;
 
 
@@ -34,9 +33,10 @@ public class BebidaActivity extends AppCompatActivity {
     }
 
     private void iniciandoComponentes() {
-        buttonBotao = findViewById(R.id.botao);
+        buttonBotao = findViewById(R.id.botao_bebida);
         editTextNomeBebida = findViewById(R.id.nome_bebida);
-        editTextValor = findViewById(R.id.valor);
+        editTextValor = findViewById(R.id.valor_bebida);
+        editTextDescricao = findViewById(R.id.descricao_bebida); //adicionar input direito
 
 
         RetrofitService retrofitService = new RetrofitService();
@@ -44,12 +44,14 @@ public class BebidaActivity extends AppCompatActivity {
 
         buttonBotao.setOnClickListener(view -> {
             String nomeBebida = editTextNomeBebida.getText().toString();
+            String descricao = editTextDescricao.getText().toString();
             String strvalor = editTextValor.getText().toString();
             double valor = Double.parseDouble(strvalor); //só vou usar esse cara
 
             Bebida bebida = new Bebida();
             bebida.setNomeBebida(nomeBebida);
             bebida.setValor(valor);
+            bebida.setDescricao(descricao);
 
             bebidaAPI.addBebida(bebida) //chama o método POST
                     .enqueue(new Callback<Bebida>() { //deixa as requisições em fila
@@ -64,8 +66,6 @@ public class BebidaActivity extends AppCompatActivity {
                             Logger.getLogger(BebidaActivity.class.getName()).log(Level.SEVERE, "Um erro ocorreu", t);
                         }
                     });
-
-
         });
     }
 }

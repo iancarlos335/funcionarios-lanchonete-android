@@ -7,7 +7,8 @@ public class Funcionario {
 	private long id;
 
 	private String nomeFuncionario;
-	
+
+
 	public Funcionario() {}
 
 	public Funcionario(String nomeFuncionario) {
@@ -30,5 +31,5 @@ public class Funcionario {
 	public void setNomeFuncionario(String nomeFuncionario) {
 		this.nomeFuncionario = nomeFuncionario;
 	}
-	
+
 }
