@@ -10,8 +10,11 @@
         android:id="@+id/textView2"
         android:layout_width="268dp"
         android:layout_height="96dp"
+        android:layout_marginTop="136dp"
         android:text="OLá mundo!"
         android:textSize="48sp"
-        tools:layout_editor_absoluteX="71dp"
-        tools:layout_editor_absoluteY="237dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.601"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
