@@ -6,18 +6,81 @@
     android:layout_height="match_parent"
     tools:context=".funcionario.DoceActivity">
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="163dp"
-        android:layout_height="81dp"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="89dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="561dp"
-        android:text="Doces"
-        android:textSize="48sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <Button
+        android:id="@+id/botao_doce"
+        android:layout_width="339dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="216dp"
+        android:layout_marginEnd="36dp"
+        android:text="@string/cadastrar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descricao_doce" />
+
+    <EditText
+        android:id="@+id/nome_doce"
+        android:layout_width="278dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="48dp"
+        android:ems="10"
+        android:hint="@string/nome"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titulo_doce" />
+
+    <TextView
+        android:id="@+id/titulo_doce"
+        android:layout_width="143dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="48dp"
+        android:text="Doces"
+        android:textColor="#2F5022"
+        android:textColorHint="#6CEA3A"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/valor_doce"
+        android:layout_width="243dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="@string/valor"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nome_doce" />
+
+    <EditText
+        android:id="@+id/descricao_doce"
+        android:layout_width="258dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/descricao"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/valor_doce" />
+
+    <EditText
+        android:id="@+id/imagem_doce"
+        android:layout_width="263dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/imagem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descricao_doce" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.lanchonete.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_produtos"
+        android:name="com.lanchonete.ui.produtos.ProdutosFragment"
+        android:label="Produtos"
+        tools:layout="@layout/fragment_produtos" />
+
+    <fragment
+        android:id="@+id/nav_pedidos"
+        android:name="com.lanchonete.ui.pedidos.PedidosFragment"
+        android:label="Pedidos"
+        tools:layout="@layout/fragment_pedidos" />
+
+    <fragment
+        android:id="@+id/nav_cadastro_funcionarios"
+        android:name="com.lanchonete.ui.pedidos.PedidosFragment"
+        android:label="Cadastro Funcionarios"
+        tools:layout="@layout/fragment_pedidos" />
+</navigation>
