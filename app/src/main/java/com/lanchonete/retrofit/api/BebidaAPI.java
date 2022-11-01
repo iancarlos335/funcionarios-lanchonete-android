@@ -10,10 +10,10 @@ import retrofit2.http.POST;
 
 public interface BebidaAPI { //N funciona se for uma classe
 
-    @GET("/bebidas/get-all")
+    @GET("/bebidas")
     Call <List<Bebida>> listBebida();
 
-    @POST("/bebidas/save")
+    @POST("/bebidas")
     Call <Bebida> addBebida(@Body Bebida bebidaDto);
 
 }
