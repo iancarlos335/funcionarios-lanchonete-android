@@ -10,9 +10,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_icone_lanchonete"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_icone_lanchonete_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Lanchonete"
         tools:targetApi="31">
@@ -55,20 +55,6 @@
         </activity>
         <activity
             android:name=".funcionario.SalgadoActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ActivityExample"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".SegundaPagina"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
