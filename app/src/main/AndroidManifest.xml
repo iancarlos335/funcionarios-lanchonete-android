@@ -16,6 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Lanchonete"
         tools:targetApi="31">
+
         <activity
             android:name=".FuncionarioMenu"
             android:exported="false"

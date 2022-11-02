@@ -2,6 +2,7 @@ package com.lanchonete;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -23,8 +24,8 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         btnMenuFuncionario.setOnClickListener(view -> {
-            //Intent intent = new Intent(getApplicationContext(), FuncionarioMenu.class);
-            //startActivity(intent);
+            Intent intent = new Intent(getApplicationContext(), FuncionarioMenu.class);
+            startActivity(intent);
         });
     }
 }
