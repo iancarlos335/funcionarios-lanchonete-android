@@ -18,14 +18,15 @@ public class PedidosFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        PedidosViewModel slideshowViewModel =
+        PedidosViewModel pedidosViewModel =
                 new ViewModelProvider(this).get(PedidosViewModel.class);
 
         binding = FragmentPedidosBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textPedidos;
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        pedidosViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

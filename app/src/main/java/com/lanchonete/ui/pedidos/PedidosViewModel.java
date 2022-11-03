@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 public class PedidosViewModel extends ViewModel {
 
-    private final MutableLiveData<String> mText;
+    private final MutableLiveData<String> mText; //O interessante disso, é que ele vai processando as informações de acordo com a a chegada de novos dados, e sua necessidade de orientação
 
     public PedidosViewModel() {
         mText = new MutableLiveData<>();

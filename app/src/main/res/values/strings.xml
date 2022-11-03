@@ -17,4 +17,7 @@
     <string name="menu_pedidos">Pedidos</string>
     <string name="menu_produtos">Produtos</string>
     <string name="menu_funcionarios">Funcionarios</string>
+    <string name="menu_bebidas">Bebidas</string>
+    <string name="menu_doces">Doces</string>
+    <string name="menu_salgados">Salgados</string>
 </resources>
