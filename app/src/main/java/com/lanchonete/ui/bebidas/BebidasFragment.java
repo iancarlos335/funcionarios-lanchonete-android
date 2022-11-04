@@ -1,4 +1,4 @@
-package com.lanchonete.ui.produtos;
+package com.lanchonete.ui.bebidas;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.lanchonete.databinding.FragmentProdutosBinding;
+import com.lanchonete.databinding.FragmentBebidasBinding;
 
-public class ProdutosFragment extends Fragment {
+public class BebidasFragment extends Fragment {
 
-    private FragmentProdutosBinding binding;
+    private FragmentBebidasBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        ProdutosViewModel galleryViewModel =
-                new ViewModelProvider(this).get(ProdutosViewModel.class);
+        BebidasViewModel bebidasViewModel =
+                new ViewModelProvider(this).get(BebidasViewModel.class);
 
-        binding = FragmentProdutosBinding.inflate(inflater, container, false);
+        binding = FragmentBebidasBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textProdutos;
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textBebidas;
+        bebidasViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

@@ -42,7 +42,7 @@ public class FuncionarioMenu extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_pedidos, R.id.nav_produtos, R.id.nav_funcionarios)
+                R.id.nav_home, R.id.nav_pedidos, R.id.nav_funcionarios, R.id.nav_bebidas, R.id.nav_salgados, R.id.nav_doces)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_funcionario_menu);
