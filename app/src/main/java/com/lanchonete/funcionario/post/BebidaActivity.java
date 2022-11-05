@@ -1,4 +1,4 @@
-package com.lanchonete.funcionario;
+package com.lanchonete.funcionario.post;
 
 import android.os.Bundle;
 import android.widget.Button;

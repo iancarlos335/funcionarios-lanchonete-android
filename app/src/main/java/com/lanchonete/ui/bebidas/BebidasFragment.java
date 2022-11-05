@@ -9,12 +9,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.lanchonete.databinding.FragmentBebidasBinding;
 
 public class BebidasFragment extends Fragment {
 
     private FragmentBebidasBinding binding;
+
+    private RecyclerView recyclerView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -23,6 +26,7 @@ public class BebidasFragment extends Fragment {
 
         binding = FragmentBebidasBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
 
         final TextView textView = binding.textBebidas;
         bebidasViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);

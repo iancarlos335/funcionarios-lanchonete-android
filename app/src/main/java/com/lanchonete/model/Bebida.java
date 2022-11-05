@@ -10,7 +10,7 @@ public class Bebida {
 
 	private String descricao;
 
-	private String imagem;
+	private String imagem; //#TODO pra adicionar a imagem eu vou ter que aprender a fazer requisição http com o retrofit de endereço de imagem. Tipo download do arquivo naquele endereço
 
 	public Bebida() {}
 

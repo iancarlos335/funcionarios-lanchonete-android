@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".ui.bebidas.BebidasFragment">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bebidasList_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <TextView
         android:id="@+id/text_bebidas"
         android:layout_width="match_parent"

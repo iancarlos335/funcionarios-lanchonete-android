@@ -9,8 +9,12 @@ public class BebidasViewModel extends ViewModel {
     private final MutableLiveData<String> mText;
 
     public BebidasViewModel() {
+
         mText = new MutableLiveData<>();
         mText.setValue("This is Bebidas fragment");
+
+
+
     }
 
     public LiveData<String> getText() {

@@ -47,21 +47,21 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".funcionario.DoceActivity"
+            android:name=".funcionario.post.DoceActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".funcionario.SalgadoActivity"
+            android:name=".funcionario.post.SalgadoActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".funcionario.BebidaActivity"
+            android:name=".funcionario.post.BebidaActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
