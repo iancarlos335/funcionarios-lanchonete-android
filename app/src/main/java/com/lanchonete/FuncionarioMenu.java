@@ -14,6 +14,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.lanchonete.databinding.FuncionarioMenuActivityBinding;
 
@@ -64,5 +66,11 @@ public class FuncionarioMenu extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_funcionario_menu);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public RecyclerView.LayoutManager configRecyclerView() {
+        RecyclerView recyclerView = findViewById(R.id.bebidasList_recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        return recyclerView.getLayoutManager();
     }
 }
