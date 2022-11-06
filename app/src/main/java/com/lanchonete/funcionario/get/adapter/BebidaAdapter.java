@@ -1,30 +1,18 @@
 package com.lanchonete.funcionario.get.adapter;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lanchonete.R;
-import com.lanchonete.databinding.FragmentBebidasBinding;
 import com.lanchonete.model.Bebida;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 
-public class BebidaAdapter extends RecyclerView.Adapter<BebidaHolder> {
+public class BebidaAdapter extends RecyclerView.Adapter<BebidaHolder>{
 
     private List<Bebida> bebidaList;
 
@@ -44,12 +32,16 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaHolder> {
     public void onBindViewHolder(@NonNull BebidaHolder holder, int position) {
         Bebida bebida = bebidaList.get(position);
         String strValue = Double.toString(bebida.getValor());
-        String strImage = bebida.getImagem(); //vo chamar a string completa do banco
+
+        //String strImage = String.valueOf(new BebidaHolder.ImageDownloader().execute(bebida.getImagem())); //vo chamar a string completa do banco
 
         holder.nome_bebida.setText(bebida.getNomeBebida());
         holder.descricao_bebida.setText(bebida.getDescricao());
         holder.valor_bebida.setText(strValue);
-        holder.imagem_bebida.setImageBitmap(bebida.getImagem()); // é int
+        holder.imagem_bebida.setContentDescription(bebida.getImagem()); //talvez ele adicione tudo de acordo com a posição da imagem
+         //coloquei isso pq eu acho q se eu n colocar ele n vai rodar novas imagens nesse ImageView
+         // pensei aqui q talvez nem precise configurar isso, pq a img não vai estar no app de qualquer forma, isso é só pra nortear novas atualizações no banco
+
 
     }
 

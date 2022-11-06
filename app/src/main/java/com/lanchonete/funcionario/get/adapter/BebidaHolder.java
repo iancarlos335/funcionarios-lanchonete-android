@@ -27,18 +27,20 @@ public class BebidaHolder extends RecyclerView.ViewHolder {
     TextView nome_bebida, descricao_bebida, valor_bebida;
     ImageView imagem_bebida;
 
+    private Bebida bebida;
+
     public BebidaHolder(@NonNull View itemView) {
         super(itemView);
-        Bebida bebida = new Bebida();
 
-        new ImageDownloader().execute(bebida.getImagem()); //TODO se ele conseguir pegar certinho, vai tudo funcionar perfeitamente. Se der erro, verificar em qual endereço foi configurado a API do springboot
+        new ImageDownloader().execute(bebida.getImagem());
+        //TODO se ele conseguir pegar certinho, vai tudo funcionar perfeitamente. Se der erro, verificar em qual endereço foi configurado a API do springboot
         nome_bebida = itemView.findViewById(R.id.bebidasListItem_nome);
         descricao_bebida = itemView.findViewById(R.id.bebidasListItem_descricao);
         valor_bebida = itemView.findViewById(R.id.bebidasListItem_valor);
         imagem_bebida = itemView.findViewById(R.id.bebidasListItem_imagem);
-
-
     }
+
+
 
     private class ImageDownloader extends AsyncTask<String, Void, Bitmap> {
 
@@ -51,6 +53,7 @@ public class BebidaHolder extends RecyclerView.ViewHolder {
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 InputStream inputStream = new BufferedInputStream(httpURLConnection.getInputStream());
                 Bitmap temp = BitmapFactory.decodeStream(inputStream);
+                return temp;
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -62,7 +65,7 @@ public class BebidaHolder extends RecyclerView.ViewHolder {
         }
 
         @Override
-        protected void onPostExecute(Bitmap bitmap) {
+        public void onPostExecute(Bitmap bitmap) {
             if (bitmap != null) {
                 imagem_bebida.setImageBitmap(bitmap);
                 Toast.makeText(imagem_bebida.getContext(), "Download deu certo", Toast.LENGTH_SHORT).show();
@@ -77,4 +80,7 @@ public class BebidaHolder extends RecyclerView.ViewHolder {
             super.onProgressUpdate(values);
         }
     }
+
+
 }
+

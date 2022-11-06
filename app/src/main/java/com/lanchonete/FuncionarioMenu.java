@@ -68,7 +68,7 @@ public class FuncionarioMenu extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    public RecyclerView.LayoutManager configRecyclerView() {
+    public RecyclerView.LayoutManager configRecyclerView() { // n vou ysar isso
         RecyclerView recyclerView = findViewById(R.id.bebidasList_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         return recyclerView.getLayoutManager();

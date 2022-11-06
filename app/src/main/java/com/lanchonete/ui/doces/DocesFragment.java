@@ -10,9 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.lanchonete.databinding.FragmentBebidasBinding;
 import com.lanchonete.databinding.FragmentDocesBinding;
-import com.lanchonete.ui.bebidas.BebidasViewModel;
 
 public class DocesFragment extends Fragment {
 
