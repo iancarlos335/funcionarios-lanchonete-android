@@ -19,6 +19,7 @@ public class Bebida {
 		this.nomeBebida = nomeBebida;
 		this.valor = valor;
 		this.descricao = descricao;
+		this.imagem = imagem;
 	}
 
 

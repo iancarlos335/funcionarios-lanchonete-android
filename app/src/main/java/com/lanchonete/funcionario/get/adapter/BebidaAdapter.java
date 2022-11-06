@@ -1,8 +1,10 @@
 package com.lanchonete.funcionario.get.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,10 +34,13 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaHolder> {
     @Override
     public void onBindViewHolder(@NonNull BebidaHolder holder, int position) {
         Bebida bebida = bebidaList.get(position);
-        String strvalor = holder.valor_bebida.getTransformationMethod(bebida.getValor().toString());
+        String strValue = Double.toString(bebida.getValor());
+        holder.imagem_bebida.setImageResource(bebida.getImagem());
 
         holder.nome_bebida.setText(bebida.getNomeBebida());
         holder.descricao_bebida.setText(bebida.getDescricao());
+        holder.valor_bebida.setText(strValue);
+        holder.imagem_bebida.setText(bebida.getImagem()); // é int
 
     }
 
