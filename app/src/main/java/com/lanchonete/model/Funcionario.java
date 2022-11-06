@@ -8,12 +8,22 @@ public class Funcionario {
 
 	private String nomeFuncionario;
 
+	private String imagem;
 
 	public Funcionario() {}
 
-	public Funcionario(String nomeFuncionario) {
+	public Funcionario(String nomeFuncionario, String imagem) {
 		super();
 		this.nomeFuncionario = nomeFuncionario;
+		this.imagem = imagem;
+	}
+
+	public String getImagem() {
+		return "https://funcionarios-lanchonete.vercel.app/" + imagem;
+	}
+
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
 	}
 
 	public long getId() {

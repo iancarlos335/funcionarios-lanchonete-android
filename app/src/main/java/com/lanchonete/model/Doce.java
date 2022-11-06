@@ -10,6 +10,8 @@ public class Doce {
 
 	private String descricao;
 
+	private String imagem;
+
 	public Doce() {}
 
 	public Doce(String nomeDoce, double valor, String descricao) {
@@ -18,7 +20,6 @@ public class Doce {
 		this.valor = valor;
 		this.descricao = descricao;
 	}
-
 
 	public String getDescricao() {
 		return descricao;
@@ -51,5 +52,14 @@ public class Doce {
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
-	
+
+	public String getImagem() {
+		return "https://funcionarios-lanchonete.vercel.app/" + imagem;
+	}
+
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
+	}
+
+
 }

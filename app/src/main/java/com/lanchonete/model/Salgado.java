@@ -12,15 +12,25 @@ public class Salgado {
 
 	private String descricao;
 
+	private String imagem;
+
 	public Salgado() {}
 
-	public Salgado(String nomeSalgado, double valor, String descricao) {
+	public Salgado(String nomeSalgado, double valor, String descricao, String imagem) {
 		super();
 		this.nomeSalgado = nomeSalgado;
 		this.valor = valor;
 		this.descricao = descricao;
+		this.imagem = imagem;
 	}
 
+	public String getImagem() {
+		return "https://funcionarios-lanchonete.vercel.app/" + imagem;
+	}
+
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
+	}
 
 	public String getDescricao() {
 		return descricao;
@@ -53,5 +63,5 @@ public class Salgado {
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
-	
+
 }

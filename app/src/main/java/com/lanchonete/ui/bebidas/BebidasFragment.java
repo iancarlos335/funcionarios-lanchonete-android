@@ -20,8 +20,6 @@ public class BebidasFragment extends Fragment {
 
     private FragmentBebidasBinding binding;
 
-
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         BebidasViewModel bebidasViewModel =
@@ -30,8 +28,6 @@ public class BebidasFragment extends Fragment {
         binding = FragmentBebidasBinding.inflate(inflater, container, false); //Tenho q seguir a view indicada pelo Fragment, pq é derivado de outros nav, fragmentos e etc.
 
         View root = binding.getRoot();
-
-        BebidaAdapter bebidaAdapter = new BebidaAdapter();
 
 
         final TextView textView = binding.textBebidas; // é do tipo text view isso, se fosse Image é só mudar aqui, bem simples parece
