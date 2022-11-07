@@ -12,7 +12,9 @@ public class Doce {
 
 	private String imagem;
 
-    public Doce(String nomeDoce, double valor, String descricao, String imagem) {
+	public Doce() {}
+
+	public Doce(String nomeDoce, double valor, String descricao, String imagem) {
 		super();
 		this.nomeDoce = nomeDoce;
 		this.valor = valor;
@@ -28,5 +30,36 @@ public class Doce {
 		this.imagem = imagem;
 	}
 
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getNomeDoce() {
+		return nomeDoce;
+	}
+
+	public void setNomeDoce(String nomeDoce) {
+		this.nomeDoce = nomeDoce;
+	}
+
+	public double getValor() {
+		return valor;
+	}
+
+	public void setValor(double valor) {
+		this.valor = valor;
+	}
 
 }

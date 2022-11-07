@@ -3,7 +3,6 @@ package com.lanchonete.model;
 
 public class Cliente {
 
-
     private long id;
 
     private String nomeCliente;

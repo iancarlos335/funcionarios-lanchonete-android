@@ -10,29 +10,27 @@ public class Bebida { //interessante
 
     private String descricao;
 
-    //private String imagem;
+    private String imagem;
 
     public Bebida() {
     }
 
-    public Bebida(String nomeBebida, double valor, String descricao) {
+    public Bebida(String nomeBebida, double valor, String descricao, String imagem) {
         super();
         this.nomeBebida = nomeBebida;
         this.valor = valor;
         this.descricao = descricao;
-        //this.imagem = imagem;
+        this.imagem  = imagem;
     }
 
-/*
-    String getImagem() { //se eu n adicionar esse recurso de construção no get, eu n vou conseguir acessar pelo android
+
+    public String getImagem() { //se eu n adicionar esse recurso de construção no get, eu n vou conseguir acessar pelo android
         return imagem;
     }
 
     public void setImagem(String imagem) {
         this.imagem = imagem;
     }
-
- */
 
     public String getDescricao() {
         return descricao;

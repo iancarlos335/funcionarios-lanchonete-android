@@ -5,6 +5,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.lanchonete.R;
@@ -55,17 +56,17 @@ public class BebidaActivity extends AppCompatActivity {
             bebida.setNomeBebida(nomeBebida);
             bebida.setValor(valor);
             bebida.setDescricao(descricao);
-            //bebida.setImagem(imgBebida);
+            bebida.setImagem(imgBebida);
 
             bebidaAPI.addBebida(bebida) //chama o método POST
                     .enqueue(new Callback<Bebida>() { //deixa as requisições em fila
                         @Override
-                        public void onResponse(Call<Bebida> call, Response<Bebida> response) {
+                        public void onResponse(@NonNull Call<Bebida> call, @NonNull Response<Bebida> response) {
                             Toast.makeText(getApplicationContext(), "Salvo com sucesso no banco", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
-                        public void onFailure(Call<Bebida> call, Throwable t) {
+                        public void onFailure(@NonNull Call<Bebida> call, @NonNull Throwable t) {
                             Toast.makeText(getApplicationContext(), "Não salvou!!", Toast.LENGTH_SHORT).show();
                             Logger.getLogger(BebidaActivity.class.getName()).log(Level.SEVERE, "Um erro ocorreu", t);
                         }
