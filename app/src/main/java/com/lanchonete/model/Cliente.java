@@ -1,7 +1,8 @@
 package com.lanchonete.model;
 
 
-public class Clientes {
+public class Cliente {
+
 
     private long id;
 
@@ -11,11 +12,11 @@ public class Clientes {
 
     private String enderecoCliente;
 
-    public Clientes(){
+    public Cliente(){
 
     }
 
-    public Clientes(String nomeCliente, String cpfCliente , String enderecoCliente){
+    public Cliente(String nomeCliente, String cpfCliente , String enderecoCliente){
         super();
         this.nomeCliente = nomeCliente;
         this.cpfCliente = cpfCliente;

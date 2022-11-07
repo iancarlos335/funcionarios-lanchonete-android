@@ -7,7 +7,6 @@
     tools:context="com.lanchonete.funcionario.post.DoceActivity">
 
     <Button
-        android:id="@+id/botao_doce"
         android:layout_width="339dp"
         android:layout_height="49dp"
         android:layout_marginStart="36dp"
@@ -30,7 +29,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titulo_doce" />
+        app:layout_constraintTop_toBottomOf="@+id/titulo_doce"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/titulo_doce"
@@ -56,7 +56,8 @@
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nome_doce" />
+        app:layout_constraintTop_toBottomOf="@+id/nome_doce"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/descricao_doce"
@@ -69,10 +70,10 @@
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/valor_doce" />
+        app:layout_constraintTop_toBottomOf="@+id/valor_doce"
+        android:autofillHints="" />
 
     <EditText
-        android:id="@+id/imagem_doce"
         android:layout_width="263dp"
         android:layout_height="56dp"
         android:layout_marginTop="40dp"
@@ -81,6 +82,7 @@
         android:hint="@string/imagem"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descricao_doce" />
+        app:layout_constraintTop_toBottomOf="@+id/descricao_doce"
+        android:autofillHints="" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

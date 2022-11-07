@@ -1,26 +1,18 @@
-package com.lanchonete.ui.bebidas;
+package com.lanchonete.funcionario.get;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lanchonete.R;
-import com.lanchonete.databinding.ActivityBebidaListBinding;
-import com.lanchonete.databinding.FragmentDocesBinding;
 import com.lanchonete.funcionario.get.adapter.BebidaAdapter;
 import com.lanchonete.model.Bebida;
 import com.lanchonete.retrofit.RetrofitService;
 import com.lanchonete.retrofit.api.BebidaAPI;
-import com.lanchonete.ui.doces.DocesViewModel;
 
 import java.util.List;
 
@@ -30,14 +22,14 @@ import retrofit2.Response;
 
 public class BebidaListActivity extends AppCompatActivity {
 
-    private ActivityBebidaListBinding binding;
-
     private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bebida_list);
+
+        Intent intent = getIntent();
 
         recyclerView = findViewById(R.id.bebidasList_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

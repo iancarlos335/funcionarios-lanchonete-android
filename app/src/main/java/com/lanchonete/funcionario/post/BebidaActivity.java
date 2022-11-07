@@ -55,7 +55,7 @@ public class BebidaActivity extends AppCompatActivity {
             bebida.setNomeBebida(nomeBebida);
             bebida.setValor(valor);
             bebida.setDescricao(descricao);
-            bebida.setImagem(imgBebida);
+            //bebida.setImagem(imgBebida);
 
             bebidaAPI.addBebida(bebida) //chama o método POST
                     .enqueue(new Callback<Bebida>() { //deixa as requisições em fila

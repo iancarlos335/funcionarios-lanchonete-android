@@ -14,15 +14,5 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.Lanchonete.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="Theme.Lanchonete.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="Theme.Lanchonete.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-
 
 </resources>

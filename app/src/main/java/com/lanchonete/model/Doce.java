@@ -12,45 +12,12 @@ public class Doce {
 
 	private String imagem;
 
-	public Doce() {}
-
-	public Doce(String nomeDoce, double valor, String descricao) {
+    public Doce(String nomeDoce, double valor, String descricao, String imagem) {
 		super();
 		this.nomeDoce = nomeDoce;
 		this.valor = valor;
 		this.descricao = descricao;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getNomeDoce() {
-		return nomeDoce;
-	}
-
-	public void setNomeDoce(String nomeDoce) {
-		this.nomeDoce = nomeDoce;
-	}
-
-	public double getValor() {
-		return valor;
-	}
-
-	public void setValor(double valor) {
-		this.valor = valor;
+		this.imagem = imagem;
 	}
 
 	public String getImagem() {

@@ -1,38 +1,24 @@
 package com.lanchonete.funcionario.get.adapter;
 
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lanchonete.R;
-import com.lanchonete.model.Bebida;
-
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class BebidaHolder extends RecyclerView.ViewHolder {
 
     TextView nome_bebida, descricao_bebida, valor_bebida;
     ImageView imagem_bebida;
 
-    private Bebida bebida;
-
     public BebidaHolder(@NonNull View itemView) {
         super(itemView);
 
-        //new ImageDownloader().execute(bebida.getImagem());
+        //new ImageDownloader().execute("https://funcionarios-lanchonete.vercel.app/" + bebida.getImagem());
         //TODO se ele conseguir pegar certinho, vai tudo funcionar perfeitamente. Se der erro, verificar em qual endereço foi configurado a API do springboot
         nome_bebida = itemView.findViewById(R.id.bebidasListItem_nome);
         descricao_bebida = itemView.findViewById(R.id.bebidasListItem_descricao);
@@ -41,7 +27,7 @@ public class BebidaHolder extends RecyclerView.ViewHolder {
     }
 
 
-
+/*
     private class ImageDownloader extends AsyncTask<String, Void, Bitmap> {
 
         HttpURLConnection httpURLConnection;
@@ -80,6 +66,8 @@ public class BebidaHolder extends RecyclerView.ViewHolder {
             super.onProgressUpdate(values);
         }
     }
+
+ */
 
 
 }

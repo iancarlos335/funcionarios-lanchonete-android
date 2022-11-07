@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.lanchonete.funcionario.get.BebidaListActivity;
+
+
 public class LoginActivity extends AppCompatActivity {
 
     Button btnMenuCliente, btnMenuFuncionario;
@@ -24,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         btnMenuFuncionario.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), FuncionarioMenu.class);
+            Intent intent = new Intent(getApplicationContext(), BebidaListActivity.class);
             startActivity(intent);
         });
     }

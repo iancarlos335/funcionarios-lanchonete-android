@@ -5,22 +5,5 @@
     <string name="cadastrar">Cadastrar</string>
     <string name="descricao">Descrição</string>
     <string name="imagem">Imagem</string>
-    <string name="title_activity_funcionario_menu">FuncionarioMenu</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Lanchonete</string>
-    <string name="nav_header_subtitle">suporte@lanchonete.app</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_pedidos">Pedidos</string>
-    <string name="menu_produtos">Produtos</string>
-    <string name="menu_funcionarios">Funcionarios</string>
-    <string name="menu_bebidas">Bebidas</string>
-    <string name="menu_doces">Doces</string>
-    <string name="menu_salgados">Salgados</string>
-    <string name="title_activity_bebida_list">BebidaListActivity</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
 </resources>
