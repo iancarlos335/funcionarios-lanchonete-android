@@ -1,5 +1,6 @@
 package com.lanchonete.funcionario.get.adapter;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,7 @@ import java.util.List;
 
 public class BebidaAdapter extends RecyclerView.Adapter<BebidaHolder>{
 
-    private List<Bebida> bebidaList;
+    private final List<Bebida> bebidaList;
 
     public BebidaAdapter(List<Bebida> bebidaList) {
         this.bebidaList = bebidaList;
@@ -24,7 +25,7 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaHolder>{
     @Override
     public BebidaHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_bebidas_items, parent, true); //eu vou chamar ele la no fragment, que usa root, se eu n me engano
+                .inflate(R.layout.list_bebidas_items, parent, false); //esse macete do binding.getRoot() talvez me salve
         return new BebidaHolder(view);
     }
 
@@ -38,7 +39,7 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaHolder>{
         holder.nome_bebida.setText(bebida.getNomeBebida());
         holder.descricao_bebida.setText(bebida.getDescricao());
         holder.valor_bebida.setText(strValue);
-        holder.imagem_bebida.setContentDescription(bebida.getImagem()); //talvez ele adicione tudo de acordo com a posição da imagem
+        //holder.imagem_bebida.setContentDescription(bebida.getImagem()); //talvez ele adicione tudo de acordo com a posição da imagem
          //coloquei isso pq eu acho q se eu n colocar ele n vai rodar novas imagens nesse ImageView
          // pensei aqui q talvez nem precise configurar isso, pq a img não vai estar no app de qualquer forma, isso é só pra nortear novas atualizações no banco
 

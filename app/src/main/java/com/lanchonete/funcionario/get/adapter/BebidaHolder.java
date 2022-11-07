@@ -32,7 +32,7 @@ public class BebidaHolder extends RecyclerView.ViewHolder {
     public BebidaHolder(@NonNull View itemView) {
         super(itemView);
 
-        new ImageDownloader().execute(bebida.getImagem());
+        //new ImageDownloader().execute(bebida.getImagem());
         //TODO se ele conseguir pegar certinho, vai tudo funcionar perfeitamente. Se der erro, verificar em qual endereço foi configurado a API do springboot
         nome_bebida = itemView.findViewById(R.id.bebidasListItem_nome);
         descricao_bebida = itemView.findViewById(R.id.bebidasListItem_descricao);

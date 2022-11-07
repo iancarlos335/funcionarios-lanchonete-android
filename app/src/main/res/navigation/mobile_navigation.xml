@@ -23,11 +23,11 @@
         android:label="@string/menu_funcionarios"
         tools:layout="@layout/fragment_funcionarios" />
 
-    <fragment
+    <activity
         android:id="@+id/nav_bebidas"
-        android:name="com.lanchonete.ui.funcionarios.FuncionariosFragment"
+        android:name="com.lanchonete.ui.bebidas.BebidaListActivity"
         android:label="@string/menu_bebidas"
-        tools:layout="@layout/fragment_bebidas" />
+        tools:layout="@layout/activity_bebida_list" />
 
     <fragment
         android:id="@+id/nav_salgados"
@@ -40,6 +40,5 @@
         android:name="com.lanchonete.ui.funcionarios.FuncionariosFragment"
         android:label="@string/menu_doces"
         tools:layout="@layout/fragment_doces" />
-
 
 </navigation>

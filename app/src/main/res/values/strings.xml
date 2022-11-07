@@ -20,4 +20,7 @@
     <string name="menu_bebidas">Bebidas</string>
     <string name="menu_doces">Doces</string>
     <string name="menu_salgados">Salgados</string>
+    <string name="title_activity_bebida_list">BebidaListActivity</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
 </resources>
