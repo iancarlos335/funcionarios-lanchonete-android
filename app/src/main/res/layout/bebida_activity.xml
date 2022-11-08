@@ -20,11 +20,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:id="@+id/nome_bebidaInputLayout"
-        android:layout_width="278dp"
-        android:layout_height="45dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="297dp"
+        android:layout_height="70dp"
         android:layout_marginTop="48dp"
+        app:helperText="Campos Importantes"
+        app:helperTextTextColor="@color/blue"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titulo_bebida">
@@ -32,20 +35,21 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/nome_bebida"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:ems="10"
+            android:layout_height="52dp"
             android:hint="@string/nome"
             android:inputType="textPersonName" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:id="@+id/valor_bebidaInputLayout"
-        android:layout_width="243dp"
-        android:layout_height="57dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="251dp"
+        android:layout_height="69dp"
         android:layout_marginTop="20dp"
+        app:helperText="Campos Importantes"
+        app:helperTextTextColor="@color/blue"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nome_bebidaInputLayout">
@@ -53,21 +57,22 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/valor_bebida"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:ems="10"
+            android:layout_height="49dp"
             android:hint="@string/valor"
             android:inputType="numberDecimal" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:id="@+id/descricao_bebidaInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="258dp"
         android:layout_height="74dp"
         android:layout_marginTop="32dp"
         android:gravity="start|top"
+        app:helperText="Campos Importantes"
+        app:helperTextTextColor="@color/blue"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/valor_bebidaInputLayout">
@@ -75,19 +80,20 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/descricao_bebida"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:ems="10"
+            android:layout_height="54dp"
             android:hint="@string/descricao"
             android:inputType="textMultiLine" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-        android:layout_width="263dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="40dp"
         android:id="@+id/imagem_bebidaInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="273dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="40dp"
+        app:helperText="Campos Importantes"
+        app:helperTextTextColor="@color/blue"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descricao_bebidaInputLayout">
@@ -95,9 +101,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/imagem_bebida"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:ems="10"
+            android:layout_height="37dp"
             android:hint="@string/imagem"
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -118,7 +122,7 @@
     <ImageButton
         android:id="@+id/btnVoltar"
         android:layout_width="54dp"
-        android:layout_height="46dp"
+        android:layout_height="48dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="28dp"
         android:contentDescription="@string/imagem"
