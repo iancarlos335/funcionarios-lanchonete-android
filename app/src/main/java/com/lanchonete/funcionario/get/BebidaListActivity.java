@@ -2,6 +2,7 @@ package com.lanchonete.funcionario.get;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.lanchonete.R;
 import com.lanchonete.funcionario.get.adapter.BebidaAdapter;
+import com.lanchonete.funcionario.get.adapter.BebidaHolder;
 import com.lanchonete.funcionario.post.BebidaActivity;
 import com.lanchonete.model.Bebida;
 import com.lanchonete.retrofit.RetrofitService;
@@ -73,6 +75,13 @@ public class BebidaListActivity extends AppCompatActivity {
     private void preencherListView(List<Bebida> bebidaList) {
         BebidaAdapter bebidaAdapter = new BebidaAdapter(bebidaList);
         recyclerView.setAdapter(bebidaAdapter);
+    }
+
+    private void selecionarPeloId(List<Bebida> bebidaList) {
+        //View
+        //BebidaHolder bebidaHolder = new BebidaHolder();
+        BebidaAdapter bebidaAdapter = new BebidaAdapter(bebidaList);
+        //recyclerView.getChildItemId()
     }
 
 }

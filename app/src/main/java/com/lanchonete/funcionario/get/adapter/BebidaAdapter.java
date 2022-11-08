@@ -29,7 +29,7 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaHolder>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BebidaHolder holder, int position) {
+    public void onBindViewHolder(@NonNull BebidaHolder holder, int position) { //É esse position que armazena cada item pelo id
         Bebida bebida = bebidaList.get(position);
         String strValue = Double.toString(bebida.getValor());
 
