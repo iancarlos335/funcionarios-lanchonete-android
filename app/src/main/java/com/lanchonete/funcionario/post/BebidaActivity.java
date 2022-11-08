@@ -18,6 +18,7 @@ import com.lanchonete.model.Bebida;
 import com.lanchonete.retrofit.RetrofitService;
 import com.lanchonete.retrofit.api.BebidaAPI;
 
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -69,17 +70,9 @@ public class BebidaActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String alertNomeBebida = s.toString();
-                if (alertNomeBebida.length() != 0) {
-                    Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
-                    Matcher matcher = pattern.matcher(alertNomeBebida);
-                    boolean caracteresEspeciais = matcher.find();
-                    if (caracteresEspeciais) {
-                        inputLayoutNomeBebida.setError("Caracteres não permitidos!");
-                        inputLayoutNomeBebida.setHelperText("");
-                    } else {
-                        inputLayoutNomeBebida.setHelperText("");
-                        inputLayoutNomeBebida.setError("");
-                    }
+                if (alertNomeBebida.length() != 0) { //tem o matcher com o pattern pra verificar os intervalos no input, mas aqui não ficaria interessante
+                    inputLayoutNomeBebida.setHelperText("");
+                    inputLayoutNomeBebida.setError("");
                 } else {
                     inputLayoutNomeBebida.setHelperText("");
                     inputLayoutNomeBebida.setError("Campo Obrigatório");
@@ -102,17 +95,12 @@ public class BebidaActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String alertValue = s.toString();
                 if (alertValue.length() != 0) {
-                    Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
-                    Matcher matcher = pattern.matcher(alertValue);
-                    boolean caracteresEspeciais = matcher.find();
-                    if (!caracteresEspeciais) {
-                        inputLayoutValor.setHelperText("");
-                        //iniciandoComponentes();
-                    } else {
-                        inputLayoutValor.setHelperText("Evite letras maiúsculas");
-                    }
+                    inputLayoutValor.setHelperText("");
+                    inputLayoutValor.setError("");
+
                 } else {
-                    inputLayoutValor.setHelperText("Campo Obrigatório*");
+                    inputLayoutValor.setHelperText("");
+                    inputLayoutValor.setError("Campo Obrigatório");
                 }
             }
 
@@ -125,24 +113,17 @@ public class BebidaActivity extends AppCompatActivity {
         editTextDescricao.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String alertDescricao = s.toString();
                 if (alertDescricao.length() != 0) {
-                    Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
-                    Matcher matcher = pattern.matcher(alertDescricao);
-                    boolean caracteresEspeciais = matcher.find();
-                    if (!caracteresEspeciais) {
-                        inputLayoutDescricao.setHelperText("");
-                        //iniciandoComponentes();
-                    } else {
-                        inputLayoutDescricao.setHelperText("Evite letras maiúsculas");
-                    }
+                    inputLayoutDescricao.setHelperText("");
+                    inputLayoutDescricao.setError("");
                 } else {
-                    inputLayoutDescricao.setHelperText("Campo Obrigatório*");
+                    inputLayoutDescricao.setHelperText("");
+                    inputLayoutDescricao.setError("Campo Obrigatório");
                 }
             }
 
@@ -162,17 +143,11 @@ public class BebidaActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String alertImagem = s.toString();
                 if (alertImagem.length() != 0) {
-                    Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
-                    Matcher matcher = pattern.matcher(alertImagem);
-                    boolean caracteresEspeciais = matcher.find();
-                    if (!caracteresEspeciais) {
-                        inputLayoutImagem.setHelperText("");
-                        //iniciandoComponentes();
-                    } else {
-                        inputLayoutImagem.setHelperText("Evite letras maiúsculas");
-                    }
+                    inputLayoutImagem.setHelperText("");
+                    inputLayoutImagem.setError("");
                 } else {
-                    inputLayoutImagem.setHelperText("Campo Obrigatório*");
+                    inputLayoutImagem.setHelperText("");
+                    inputLayoutImagem.setError("Campo Obrigatório");
                 }
             }
 
@@ -182,6 +157,16 @@ public class BebidaActivity extends AppCompatActivity {
             }
         });
 
+        // A única forma de os dois serem iguais é se n houver erro nenhum. Pq desde o inicio da activity eles são diferentes
+        Boolean compareInputNomeBebida = Objects.equals(inputLayoutNomeBebida.getHelperText(), inputLayoutNomeBebida.getError());
+        Boolean compareInputValor = Objects.equals(inputLayoutValor.getHelperText(), inputLayoutValor.getError()); // a IDE que me ajudou a fazer essa construção de dados, eu ia deixar String.valueOf(obj).equals() msm
+        Boolean compareInputDescricao = Objects.equals(inputLayoutDescricao.getHelperText(), inputLayoutDescricao.getError());
+        Boolean compareInputImagem = Objects.equals(inputLayoutImagem.getHelperText(), inputLayoutImagem.getError());
+
+        //tentei fazer isso com o switch, mas ele n compara boolean
+        if (compareInputNomeBebida && compareInputValor && compareInputDescricao && compareInputImagem) { //retorna por padrão true
+            iniciandoComponentes();
+        }
 
     }
 
