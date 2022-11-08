@@ -10,18 +10,12 @@ public class Pedido {
 
     private List<String> bebidas;
 
-    @JoinColumn(name="doces")
-    @ElementCollection(targetClass=String.class)
     private List<String> doces;
 
-    @JoinColumn(name="salgados")
-    @ElementCollection(targetClass=String.class)
     private List<String> salgados;
 
-    @Column(name="funcionario")
     private String funcionario;
 
-    @Column(name="cliente")
     private String cliente;
 
     public Pedido() {}

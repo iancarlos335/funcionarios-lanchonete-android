@@ -1,13 +1,12 @@
 package com.lanchonete.funcionario.get;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.lanchonete.R;
 import com.lanchonete.funcionario.get.adapter.BebidaAdapter;
@@ -44,12 +43,12 @@ public class BebidaListActivity extends AppCompatActivity {
         bebidaAPI.listBebida()
                 .enqueue(new Callback<List<Bebida>>() {
                     @Override
-                    public void onResponse(@NonNull Call<List<Bebida>> call, @NonNull Response<List<Bebida>> response) {
+                    public void onResponse(Call<List<Bebida>> call, Response<List<Bebida>> response) {
                         preencherListView(response.body());
                     }
 
                     @Override
-                    public void onFailure(@NonNull Call<List<Bebida>> call, @NonNull Throwable t) {
+                    public void onFailure(Call<List<Bebida>> call, Throwable t) {
                         Toast.makeText(BebidaListActivity.this, "Falha ao pegar do banco", Toast.LENGTH_SHORT).show();
                     }
                 });
