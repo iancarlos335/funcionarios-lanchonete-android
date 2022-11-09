@@ -81,19 +81,21 @@
         android:id="@+id/navigationView"
         android:layout_width="66dp"
         android:layout_height="735dp"
+        android:layout_gravity="start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnGoMenu"
-        android:layout_width="88dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="122dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="132dp"
         android:backgroundTint="@color/black"
         android:text="Menu"
         android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@+id/textView7"
-        tools:layout_editor_absoluteX="122dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
