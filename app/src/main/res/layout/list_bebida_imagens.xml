@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/imageButtonCoca"
+        android:layout_width="135dp"
+        android:layout_height="149dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="60dp"
+        android:scaleType="centerInside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/lata_coca" />
+
+    <RadioButton
+        android:id="@+id/radioButtonFanta"
+        android:layout_width="30dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="92dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonCoca" />
+
+    <RadioButton
+        android:id="@+id/radioButtonSprite"
+        android:layout_width="28dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="92dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonSprite" />
+
+    <RadioButton
+        android:id="@+id/radioButtonCoca"
+        android:layout_width="30dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="92dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonFanta" />
+
+    <ImageButton
+        android:id="@+id/imageButtonFanta"
+        android:layout_width="133dp"
+        android:layout_height="146dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="40dp"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/fanta" />
+
+    <RadioButton
+        android:id="@+id/radioButtonPepsi"
+        android:layout_width="32dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="88dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonPepsi" />
+
+    <ImageButton
+        android:id="@+id/imageButtonPepsi"
+        android:layout_width="135dp"
+        android:layout_height="143dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="36dp"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioButtonFanta"
+        app:srcCompat="@drawable/pepsi" />
+
+    <ImageButton
+        android:id="@+id/imageButtonSprite"
+        android:layout_width="137dp"
+        android:layout_height="144dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="40dp"
+        android:scaleType="centerInside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioButtonCoca"
+        app:srcCompat="@drawable/pepsi_twist" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

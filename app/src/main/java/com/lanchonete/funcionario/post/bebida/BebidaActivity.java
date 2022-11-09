@@ -1,4 +1,4 @@
-package com.lanchonete.funcionario.post;
+package com.lanchonete.funcionario.post.bebida;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.lanchonete.R;
@@ -28,10 +29,12 @@ import retrofit2.Response;
 
 public class BebidaActivity extends AppCompatActivity {
 
-    TextInputLayout inputLayoutNomeBebida, inputLayoutValor, inputLayoutDescricao, inputLayoutImagem;
-    EditText editTextNomeBebida, editTextValor, editTextDescricao, editTextImagem;
+    TextInputLayout inputLayoutNomeBebida, inputLayoutValor, inputLayoutDescricao;
+    EditText editTextNomeBebida, editTextValor, editTextDescricao;
     Button btnBotao;
     ImageButton btnVoltar;
+
+    RecyclerView bebidasImagens;
 
 
     @Override
@@ -39,18 +42,17 @@ public class BebidaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bebida_activity);
 
-        btnVoltar = findViewById(R.id.btnVoltar);
+        btnVoltar = findViewById(R.id.btnBebidaVoltar);
         btnBotao = findViewById(R.id.botao_bebida);
         editTextNomeBebida = findViewById(R.id.nome_bebida);
         editTextValor = findViewById(R.id.valor_bebida);
         editTextDescricao = findViewById(R.id.descricao_bebida); //adicionar input direito
-        editTextImagem = findViewById(R.id.imagem_bebida);
+        bebidasImagens = findViewById(R.id.bebidaViewImagens);
 
         //Aaaaaaa mannnnnnnn
         inputLayoutNomeBebida = findViewById(R.id.nome_bebidaInputLayout);
         inputLayoutValor = findViewById(R.id.valor_bebidaInputLayout);
         inputLayoutDescricao = findViewById(R.id.descricao_bebidaInputLayout);
-        inputLayoutImagem = findViewById(R.id.imagem_bebidaInputLayout);
 
         Intent intent = getIntent();
 
@@ -58,6 +60,8 @@ public class BebidaActivity extends AppCompatActivity {
             Intent intentGoBebidaListActivity = new Intent(getApplicationContext(), BebidaListActivity.class);
             startActivity(intentGoBebidaListActivity);
         });
+
+        bebidasImagens.set
 
 
         editTextNomeBebida.addTextChangedListener(new TextWatcher() {
@@ -131,45 +135,20 @@ public class BebidaActivity extends AppCompatActivity {
             }
         });
 
-        editTextImagem.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String alertImagem = s.toString();
-                if (alertImagem.length() != 0) {
-                    inputLayoutImagem.setHelperText("");
-                    inputLayoutImagem.setError("");
-                } else {
-                    inputLayoutImagem.setHelperText("");
-                    inputLayoutImagem.setError("Campo Obrigatório");
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
         // A única forma de os dois serem iguais é se n houver erro nenhum. Pq desde o inicio da activity eles são diferentes
         Boolean compareInputNomeBebida = Objects.equals(inputLayoutNomeBebida.getHelperText(), inputLayoutNomeBebida.getError());
         Boolean compareInputValor = Objects.equals(inputLayoutValor.getHelperText(), inputLayoutValor.getError()); // a IDE que me ajudou a fazer essa construção de dados, eu ia deixar String.valueOf(obj).equals() msm
         Boolean compareInputDescricao = Objects.equals(inputLayoutDescricao.getHelperText(), inputLayoutDescricao.getError());
-        Boolean compareInputImagem = Objects.equals(inputLayoutImagem.getHelperText(), inputLayoutImagem.getError());
+
 
         //tentei fazer isso com o switch, mas ele n compara boolean
-        if (compareInputNomeBebida && compareInputValor && compareInputDescricao && compareInputImagem) { //retorna por padrão true
+        if (compareInputNomeBebida && compareInputValor && compareInputDescricao) { //retorna por padrão true
             iniciandoComponentes();
         }
 
     }
 
     private void iniciandoComponentes() {
-
 
         RetrofitService retrofitService = new RetrofitService();
         BebidaAPI bebidaAPI = retrofitService.getRetrofit().create(BebidaAPI.class); //ele vai gerar uma nova requisição http, e nesse caso do tipo POST
@@ -179,14 +158,14 @@ public class BebidaActivity extends AppCompatActivity {
             String nomeBebida = editTextNomeBebida.getText().toString();
             String descricao = editTextDescricao.getText().toString();
             String strValor = editTextValor.getText().toString();
-            String imgBebida = editTextImagem.getText().toString();
+            //String imgBebida = editTextImagem.getText().toString(); // chamar da classe holder
             double valor = Double.parseDouble(strValor); // se ele ta dando erro vo botar ele aqui, só uso ele nesse objeto msm
 
             Bebida bebida = new Bebida();
             bebida.setNomeBebida(nomeBebida);
             bebida.setValor(valor);
             bebida.setDescricao(descricao);
-            bebida.setImagem(imgBebida);
+            //bebida.setImagem(imgBebida);
 
             bebidaAPI.addBebida(bebida) //chama o método POST
                     .enqueue(new Callback<Bebida>() { //deixa as requisições em fila
@@ -206,6 +185,7 @@ public class BebidaActivity extends AppCompatActivity {
 
         });
     }
+
 }
 
 
