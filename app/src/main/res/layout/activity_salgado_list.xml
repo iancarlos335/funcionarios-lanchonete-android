@@ -4,6 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".funcionario.get.SalgadoListActivity">
+    tools:context=".funcionario.get.salgado.SalgadoListActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/salgadosList_recyclerView"
+        android:layout_width="412dp"
+        android:layout_height="533dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.496" />
+
+    <Button
+        android:id="@+id/btnAdicionarNovoSalgado"
+        android:layout_width="127dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/adicionar"
+        android:backgroundTint="@color/green_foward"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/salgadosList_recyclerView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

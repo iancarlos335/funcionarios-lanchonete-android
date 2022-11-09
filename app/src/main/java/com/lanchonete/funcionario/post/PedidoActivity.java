@@ -1,4 +1,4 @@
-package com.lanchonete.funcionario.get;
+package com.lanchonete.funcionario.post;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.lanchonete.R;
 
-public class SalgadoListActivity extends AppCompatActivity {
+public class PedidoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_salgado_list);
+        setContentView(R.layout.activity_pedido);
     }
 }

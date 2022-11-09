@@ -1,4 +1,4 @@
-package com.lanchonete.funcionario.get;
+package com.lanchonete.funcionario.get.pedido;
 
 import androidx.appcompat.app.AppCompatActivity;
 
