@@ -17,6 +17,13 @@
         android:theme="@style/Theme.Lanchonete"
         tools:targetApi="31">
         <activity
+            android:name=".funcionario.MenuFuncionario"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".funcionario.get.BebidaListActivity"
             android:exported="false">
             <meta-data
