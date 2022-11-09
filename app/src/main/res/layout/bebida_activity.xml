@@ -24,10 +24,10 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="297dp"
         android:layout_height="70dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="28dp"
+        app:errorEnabled="true"
         app:helperText="Campos Importantes"
         app:helperTextTextColor="@color/blue"
-        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titulo_bebida">
@@ -85,39 +85,19 @@
             android:inputType="textMultiLine" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/imagem_bebidaInputLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-        android:layout_width="273dp"
-        android:layout_height="62dp"
-        android:layout_marginTop="40dp"
-        app:helperText="Campos Importantes"
-        app:helperTextTextColor="@color/blue"
-        app:errorEnabled="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descricao_bebidaInputLayout">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/imagem_bebida"
-            android:layout_width="match_parent"
-            android:layout_height="37dp"
-            android:hint="@string/imagem"
-            android:inputType="textPersonName" />
-    </com.google.android.material.textfield.TextInputLayout>
-
     <Button
         android:id="@+id/botao_bebida"
         android:layout_width="339dp"
         android:layout_height="49dp"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="216dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="36dp"
         android:backgroundTint="@color/green_foward"
         android:text="@string/cadastrar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descricao_bebidaInputLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
     <ImageButton
         android:id="@+id/btnVoltar"
@@ -131,6 +111,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="408dp"
+        android:layout_height="172dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descricao_bebidaInputLayout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
