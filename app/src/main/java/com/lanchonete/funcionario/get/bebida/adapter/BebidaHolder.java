@@ -1,4 +1,4 @@
-package com.lanchonete.funcionario.get.adapter;
+package com.lanchonete.funcionario.get.bebida.adapter;
 
 
 import android.view.View;

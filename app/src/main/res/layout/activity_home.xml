@@ -42,10 +42,10 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="272dp"
-        android:layout_height="288dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="72dp"
+        android:layout_width="253dp"
+        android:layout_height="270dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="52dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5"
         app:srcCompat="@mipmap/ic_icone_lanchonete" />
@@ -54,8 +54,8 @@
         android:id="@+id/textView5"
         android:layout_width="228dp"
         android:layout_height="69dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="92dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="64dp"
         android:fontFamily="sans-serif-medium"
         android:text="Gerenciamento de Lanchonete"
         android:textColor="@color/black"
@@ -65,8 +65,8 @@
 
     <TextView
         android:id="@+id/textView7"
-        android:layout_width="169dp"
-        android:layout_height="33dp"
+        android:layout_width="158dp"
+        android:layout_height="31dp"
 
         android:layout_marginTop="8dp"
         android:layout_marginEnd="120dp"
@@ -84,5 +84,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnGoMenu"
+        android:layout_width="88dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/black"
+        android:text="Menu"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        tools:layout_editor_absoluteX="122dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

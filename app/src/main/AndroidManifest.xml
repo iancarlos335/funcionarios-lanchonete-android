@@ -17,6 +17,34 @@
         android:theme="@style/Theme.Lanchonete"
         tools:targetApi="31">
         <activity
+            android:name=".SalgadoListActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".PedidosListActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".FuncionarioListActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".DoceListActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Home"
             android:exported="false">
             <meta-data
@@ -31,7 +59,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".funcionario.get.BebidaListActivity"
+            android:name=".funcionario.get.bebida.BebidaListActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -52,6 +80,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
