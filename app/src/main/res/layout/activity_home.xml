@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Home">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolBarTop"
+        android:layout_width="416dp"
+        android:layout_height="58dp"
+        android:background="?attr/colorOnSecondary"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolBarBottom"
+        android:layout_width="412dp"
+        android:layout_height="58dp"
+        android:background="?attr/colorOnSecondary"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="172dp"
+        android:layout_height="23dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/direitos"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/toolBarBottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="272dp"
+        android:layout_height="288dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="72dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:srcCompat="@mipmap/ic_icone_lanchonete" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="228dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="92dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Gerenciamento de Lanchonete"
+        android:textColor="@color/black"
+        android:textSize="26sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolBarTop" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="169dp"
+        android:layout_height="33dp"
+
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="120dp"
+        android:fontFamily="sans-serif"
+        android:text="Desenvolvido por:"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigationView"
+        android:layout_width="66dp"
+        android:layout_height="735dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

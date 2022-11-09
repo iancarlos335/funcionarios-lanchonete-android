@@ -7,54 +7,88 @@
     tools:context=".funcionario.MenuFuncionario">
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="114dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="180dp"
-        android:text="Button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="188dp"
-        android:layout_marginEnd="72dp"
-        android:text="Button"
+        android:id="@+id/btnMenuFuncionario"
+        android:layout_width="161dp"
+        android:layout_height="68dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="124dp"
+        android:backgroundTint="@color/black"
+        android:text="@string/funcionario"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btnPedidos" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnPedidos"
+        android:layout_width="149dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginEnd="132dp"
+        android:backgroundTint="@color/black"
+        android:text="@string/pedidos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnMenuDoce" />
+
+    <Button
+        android:id="@+id/btnMenuDoce"
         android:layout_width="98dp"
         android:layout_height="65dp"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="44dp"
-        android:text="Button"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="212dp"
+        android:backgroundTint="@color/black"
+        android:text="@string/doces"
+        app:layout_constraintEnd_toStartOf="@+id/btnMenuSalgados"
+        app:layout_constraintHorizontal_bias="0.297"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="80dp"
-        android:text="Button"
+        android:id="@+id/btnMenuSalgados"
+        android:layout_width="136dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="212dp"
+        android:layout_marginEnd="4dp"
+        android:backgroundTint="@color/black"
+        android:text="@string/salgados"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="138dp"
+        android:layout_height="41dp"
+
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/produtos"
+        android:textColor="@color/black"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnMenuBebidas"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="164dp"
-        android:layout_marginBottom="232dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4"
-        app:layout_constraintVertical_bias="0.522" />
+        android:id="@+id/btnMenuBebidas"
+        android:layout_width="101dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="212dp"
+        android:backgroundTint="@color/black"
+        android:text="@string/bebidas"
+        app:layout_constraintEnd_toStartOf="@+id/btnMenuDoce"
+        app:layout_constraintHorizontal_bias="0.433"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="116dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="64dp"
+        android:fontFamily="@font/poppinsbold"
+        android:text="Listas"
+        android:textColor="@color/black"
+        android:textSize="38sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

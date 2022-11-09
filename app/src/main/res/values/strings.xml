@@ -5,5 +5,14 @@
     <string name="cadastrar">Cadastrar</string>
     <string name="descricao">Descrição</string>
     <string name="imagem">Imagem</string>
+    <string name="adicionar">Adicionar</string>
+    <string name="direitos">All Rigth Reserved 2022 @</string>
+    <string name="cliente">Cliente</string>
+    <string name="funcionario">Funcionários</string>
+    <string name="pedidos">Pedidos</string>
+    <string name="doces">Doces</string>
+    <string name="salgados">Salgados</string>
+    <string name="produtos">Produtos</string>
+    <string name="bebidas">Bebidas</string>
 
 </resources>

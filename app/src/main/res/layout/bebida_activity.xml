@@ -11,7 +11,7 @@
         android:layout_width="180dp"
         android:layout_height="61dp"
         android:layout_marginTop="48dp"
-        android:text="Bebidas"
+        android:text="@string/bebidas"
         android:textColor="#2F5022"
         android:textColorHint="#6CEA3A"
         android:textSize="48sp"

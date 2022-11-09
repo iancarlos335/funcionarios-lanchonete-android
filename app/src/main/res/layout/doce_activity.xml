@@ -37,7 +37,7 @@
         android:layout_width="143dp"
         android:layout_height="62dp"
         android:layout_marginTop="48dp"
-        android:text="Doces"
+        android:text="@string/doces"
         android:textColor="#2F5022"
         android:textColorHint="#6CEA3A"
         android:textSize="48sp"

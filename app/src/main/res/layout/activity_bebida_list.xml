@@ -22,7 +22,7 @@
         android:layout_height="39dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:text="Adicionar"
+        android:text="@string/adicionar"
         android:backgroundTint="@color/green_foward"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bebidasList_recyclerView" />
