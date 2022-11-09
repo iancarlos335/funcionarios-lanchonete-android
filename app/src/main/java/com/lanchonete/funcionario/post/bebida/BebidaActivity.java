@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,9 +33,9 @@ public class BebidaActivity extends AppCompatActivity {
     TextInputLayout inputLayoutNomeBebida, inputLayoutValor, inputLayoutDescricao;
     EditText editTextNomeBebida, editTextValor, editTextDescricao;
     Button btnBotao;
-    ImageButton btnVoltar;
 
-    RecyclerView bebidasImagens;
+    ImageButton btnVoltar, imagemCoca, imagemFanta, imagemSprite, imagemPepsi;
+    RadioButton radioCoca, radioFanta, radioSprite, radioPepsi;
 
 
     @Override
@@ -47,7 +48,16 @@ public class BebidaActivity extends AppCompatActivity {
         editTextNomeBebida = findViewById(R.id.nome_bebida);
         editTextValor = findViewById(R.id.valor_bebida);
         editTextDescricao = findViewById(R.id.descricao_bebida); //adicionar input direito
-        bebidasImagens = findViewById(R.id.bebidaViewImagens);
+
+        imagemCoca = findViewById(R.id.imageButtonCoca);
+        imagemFanta = findViewById(R.id.imageButtonFanta);
+        imagemSprite = findViewById(R.id.imageButtonSprite);
+        imagemPepsi = findViewById(R.id.imageButtonPepsi);
+
+        radioCoca = findViewById(R.id.radioButtonCoca);
+        radioFanta = findViewById(R.id.radioButtonFanta);
+        radioSprite = findViewById(R.id.radioButtonSprite);
+        radioPepsi = findViewById(R.id.radioButtonPepsi);
 
         //Aaaaaaa mannnnnnnn
         inputLayoutNomeBebida = findViewById(R.id.nome_bebidaInputLayout);
@@ -60,8 +70,6 @@ public class BebidaActivity extends AppCompatActivity {
             Intent intentGoBebidaListActivity = new Intent(getApplicationContext(), BebidaListActivity.class);
             startActivity(intentGoBebidaListActivity);
         });
-
-        bebidasImagens.set
 
 
         editTextNomeBebida.addTextChangedListener(new TextWatcher() {

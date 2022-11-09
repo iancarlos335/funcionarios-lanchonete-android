@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context="com.lanchonete.funcionario.post.bebida.BebidaActivity">
 
+    <ImageButton
+        android:id="@+id/btnBebidaVoltar"
+        android:layout_width="54dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="28dp"
+        android:contentDescription="@string/imagem"
+        app:layout_constraintEnd_toStartOf="@+id/titulo_bebida"
+        app:layout_constraintHorizontal_bias="0.235"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
+
     <TextView
         android:id="@+id/titulo_bebida"
         android:layout_width="180dp"
@@ -47,9 +60,9 @@
         android:layout_width="251dp"
         android:layout_height="69dp"
         android:layout_marginTop="20dp"
+        app:errorEnabled="true"
         app:helperText="Campos Importantes"
         app:helperTextTextColor="@color/blue"
-        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nome_bebidaInputLayout">
@@ -70,9 +83,9 @@
         android:layout_height="74dp"
         android:layout_marginTop="32dp"
         android:gravity="start|top"
+        app:errorEnabled="true"
         app:helperText="Campos Importantes"
         app:helperTextTextColor="@color/blue"
-        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/valor_bebidaInputLayout">
@@ -85,41 +98,97 @@
             android:inputType="textMultiLine" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="410dp"
+        android:layout_height="174dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descricao_bebidaInputLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/imageButtonCoca"
+                android:layout_width="135dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="40dp"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/lata_coca" />
+
+            <RadioButton
+                android:id="@+id/radioButtonCoca"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="95dp" />
+
+            <ImageButton
+                android:id="@+id/imageButtonFanta"
+                android:layout_width="135dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="220dp"
+                android:layout_marginTop="-182dp"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/fanta" />
+
+            <RadioButton
+                android:id="@+id/radioButtonFanta"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="275dp" />
+
+            <ImageButton
+                android:id="@+id/imageButtonSprite"
+                android:layout_width="135dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="40dp"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/pepsi_twist" />
+
+            <RadioButton
+                android:id="@+id/radioButtonSprite"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="95dp" />
+
+
+            <ImageButton
+                android:id="@+id/imageButtonPepsi"
+                android:layout_width="135dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="-182dp"
+                android:layout_marginStart="220dp"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/pepsi" />
+
+            <RadioButton
+                android:id="@+id/radioButtonPepsi"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="275dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
     <Button
         android:id="@+id/botao_bebida"
         android:layout_width="339dp"
         android:layout_height="49dp"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="36dp"
         android:backgroundTint="@color/green_foward"
         android:text="@string/cadastrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bebidaViewImagens" />
-
-    <ImageButton
-        android:id="@+id/btnBebidaVoltar"
-        android:layout_width="54dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="28dp"
-        android:contentDescription="@string/imagem"
-        app:layout_constraintEnd_toStartOf="@+id/titulo_bebida"
-        app:layout_constraintHorizontal_bias="0.235"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/bebidaViewImagens"
-        android:layout_width="408dp"
-        android:layout_height="172dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descricao_bebidaInputLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
