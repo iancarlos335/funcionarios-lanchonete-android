@@ -17,29 +17,9 @@
         android:theme="@style/Theme.Lanchonete"
         tools:targetApi="31">
 
-        <activity
-            android:name=".funcionario.post.FuncionarioActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+
         <activity
             android:name=".funcionario.get.salgado.SalgadoListActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".funcionario.get.pedido.PedidoListActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".funcionario.get.funcionario.FuncionarioListActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

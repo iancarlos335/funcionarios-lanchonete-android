@@ -10,8 +10,6 @@ import com.lanchonete.Home;
 import com.lanchonete.R;
 import com.lanchonete.funcionario.get.bebida.BebidaListActivity;
 import com.lanchonete.funcionario.get.doce.DoceListActivity;
-import com.lanchonete.funcionario.get.funcionario.FuncionarioListActivity;
-import com.lanchonete.funcionario.get.pedido.PedidoListActivity;
 import com.lanchonete.funcionario.get.salgado.SalgadoListActivity;
 
 public class MenuFuncionario extends AppCompatActivity {

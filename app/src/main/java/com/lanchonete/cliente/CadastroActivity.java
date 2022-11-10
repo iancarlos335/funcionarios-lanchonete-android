@@ -24,6 +24,7 @@ public class CadastroActivity extends AppCompatActivity {
 
         btnSair.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
         });
 
 

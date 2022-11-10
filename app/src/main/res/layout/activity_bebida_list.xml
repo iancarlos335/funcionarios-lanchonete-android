@@ -30,8 +30,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/bebidasList_recyclerView"
-        android:layout_width="361dp"
-        android:layout_height="364dp"
+        android:layout_width="359dp"
+        android:layout_height="366dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.666"

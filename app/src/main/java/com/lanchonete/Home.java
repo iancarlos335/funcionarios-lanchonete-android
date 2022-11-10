@@ -29,6 +29,7 @@ public class Home extends AppCompatActivity {
 
         btnSair.setOnClickListener(v -> {
             Intent intent2 = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent2);
         });
     }
 }
