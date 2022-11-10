@@ -14,5 +14,9 @@
     <string name="salgados">Salgados</string>
     <string name="produtos">Produtos</string>
     <string name="bebidas">Bebidas</string>
+    <string name="link_fanta">assetsimgfanta.jpg</string>
+    <string name="link_coca_cola">assetsimglata_coca.png</string>
+    <string name="link_pepsi_twist">assetsimgpepsi_twist.png</string>
+    <string name="link_pepsi">assetsimgpepsi.png</string>
 
 </resources>

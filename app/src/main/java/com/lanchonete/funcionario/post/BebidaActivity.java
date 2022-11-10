@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,7 +36,8 @@ public class BebidaActivity extends AppCompatActivity {
     Button btnBotao;
 
     ImageButton btnVoltar, imagemCoca, imagemFanta, imagemSprite, imagemPepsi;
-    RadioButton radioCoca, radioFanta, radioSprite, radioPepsi;
+    RadioButton radioCoca, radioFanta, radioSprite, radioPepsi, radioButtonFinal;
+    RadioGroup radioGroup;
 
 
     @Override
@@ -57,6 +60,8 @@ public class BebidaActivity extends AppCompatActivity {
         radioFanta = findViewById(R.id.radioButtonFanta);
         radioSprite = findViewById(R.id.radioButtonSprite);
         radioPepsi = findViewById(R.id.radioButtonPepsi);
+
+        radioGroup = findViewById(R.id.radioBebida);
 
         //Aaaaaaa mannnnnnnn
         inputLayoutNomeBebida = findViewById(R.id.nome_bebidaInputLayout);
@@ -147,13 +152,36 @@ public class BebidaActivity extends AppCompatActivity {
         Boolean compareInputValor = Objects.equals(inputLayoutValor.getHelperText(), inputLayoutValor.getError()); // a IDE que me ajudou a fazer essa construção de dados, eu ia deixar String.valueOf(obj).equals() msm
         Boolean compareInputDescricao = Objects.equals(inputLayoutDescricao.getHelperText(), inputLayoutDescricao.getError());
 
+        imagemCoca.setOnClickListener(v -> {
+            radioCoca.setChecked(true);
+        });
+        imagemFanta.setOnClickListener(v -> {
+            radioFanta.setChecked(true);
+        });
+        imagemSprite.setOnClickListener(v -> {
+            radioSprite.setChecked(true);
+        });
+        imagemPepsi.setOnClickListener(v -> {
+            radioPepsi.setChecked(true);
+        });
+
+        int radioId = radioGroup.getCheckedRadioButtonId();
+        radioButtonFinal = findViewById(radioId);
+
+        boolean radioIdIsEmpty = Objects.isNull(radioId);
 
         //tentei fazer isso com o switch, mas ele n compara boolean
         if (compareInputNomeBebida && compareInputValor && compareInputDescricao) { //retorna por padrão true
             iniciandoComponentes();
         }
 
+        if (!radioIdIsEmpty){
+            radioButtonFinal.getText().toString();
+            iniciandoComponentes();
+        }
+
     }
+
 
     private void iniciandoComponentes() {
 
@@ -165,14 +193,16 @@ public class BebidaActivity extends AppCompatActivity {
             String nomeBebida = editTextNomeBebida.getText().toString();
             String descricao = editTextDescricao.getText().toString();
             String strValor = editTextValor.getText().toString();
-            //String imgBebida = editTextImagem.getText().toString(); // chamar da classe holder
+            String imgBebida = radioButtonFinal.getText().toString();// tentei com o to string e n deu certo
             double valor = Double.parseDouble(strValor); // se ele ta dando erro vo botar ele aqui, só uso ele nesse objeto msm
+
+             //ele só vai receber alguma coisa se tiver algum ID rodando
 
             Bebida bebida = new Bebida();
             bebida.setNomeBebida(nomeBebida);
             bebida.setValor(valor);
             bebida.setDescricao(descricao);
-            //bebida.setImagem(imgBebida);
+            bebida.setImagem(imgBebida);
 
             bebidaAPI.addBebida(bebida) //chama o método POST
                     .enqueue(new Callback<Bebida>() { //deixa as requisições em fila

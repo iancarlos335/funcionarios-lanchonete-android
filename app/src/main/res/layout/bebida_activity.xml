@@ -98,76 +98,86 @@
                 android:inputType="textMultiLine" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <RadioGroup
+            android:id="@+id/radioBebida"
+            android:layout_width="match_parent"
+            android:layout_height="435dp"
+            android:layout_marginTop="20dp">
 
-        <ImageButton
-            android:id="@+id/imageButtonCoca"
-            android:layout_width="135dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="40dp"
-            android:contentDescription="\assets\img\avatar-man.png"
-            android:scaleType="centerInside"
-            app:srcCompat="@drawable/lata_coca" />
+            <ImageButton
+                android:id="@+id/imageButtonCoca"
+                android:layout_width="135dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/lata_coca" />
 
-        <RadioButton
-            android:id="@+id/radioButtonCoca"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="84dp" />
+            <RadioButton
+                android:id="@+id/radioButtonCoca"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="84dp"
+                android:text="@string/link_coca_cola" />
 
-        <ImageButton
-            android:id="@+id/imageButtonFanta"
-            android:layout_width="135dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="200dp"
-            android:layout_marginTop="-180dp"
-            android:scaleType="centerInside"
-            app:srcCompat="@drawable/fanta" />
+            <ImageButton
+                android:id="@+id/imageButtonFanta"
+                android:layout_width="135dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="200dp"
+                android:layout_marginTop="-180dp"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/fanta" />
 
-        <RadioButton
-            android:id="@+id/radioButtonFanta"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="255dp" />
+            <RadioButton
+                android:id="@+id/radioButtonFanta"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="255dp"
+                android:text="@string/link_fanta" />
 
-        <ImageButton
-            android:id="@+id/imageButtonSprite"
-            android:layout_width="135dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="40dp"
-            android:scaleType="centerInside"
-            app:srcCompat="@drawable/pepsi_twist" />
+            <ImageButton
+                android:id="@+id/imageButtonSprite"
+                android:layout_width="135dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="40dp"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/pepsi_twist" />
 
-        <RadioButton
-            android:id="@+id/radioButtonSprite"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="84dp" />
+            <RadioButton
+                android:id="@+id/radioButtonSprite"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="84dp"
+                android:text="@string/link_pepsi_twist" />
 
 
-        <ImageButton
-            android:id="@+id/imageButtonPepsi"
-            android:layout_width="135dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="200dp"
-            android:layout_marginTop="-180dp"
+            <ImageButton
+                android:id="@+id/imageButtonPepsi"
+                android:layout_width="135dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="200dp"
+                android:layout_marginTop="-180dp"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/pepsi" />
 
-            android:scaleType="centerInside"
-            app:srcCompat="@drawable/pepsi" />
+            <RadioButton
+                android:id="@+id/radioButtonPepsi"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="255dp"
+                android:text="@string/link_pepsi" />
 
-        <RadioButton
-            android:id="@+id/radioButtonPepsi"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="255dp" />
+        </RadioGroup>
 
         <Button
             android:id="@+id/botao_bebida"
             android:layout_width="320dp"
             android:layout_height="49dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="35dp"
             android:backgroundTint="@color/green_foward"
             android:text="@string/cadastrar" />
 
