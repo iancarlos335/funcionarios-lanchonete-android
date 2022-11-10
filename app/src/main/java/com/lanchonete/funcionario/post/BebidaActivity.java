@@ -1,4 +1,4 @@
-package com.lanchonete.funcionario.post.bebida;
+package com.lanchonete.funcionario.post;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,6 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.lanchonete.R;

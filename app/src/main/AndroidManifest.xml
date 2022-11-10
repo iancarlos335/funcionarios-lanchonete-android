@@ -108,7 +108,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".funcionario.post.bebida.BebidaActivity"
+            android:name=".funcionario.post.BebidaActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

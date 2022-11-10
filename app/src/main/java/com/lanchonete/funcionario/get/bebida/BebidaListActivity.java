@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.lanchonete.R;
 import com.lanchonete.funcionario.get.bebida.adapter.BebidaAdapter;
-import com.lanchonete.funcionario.post.bebida.BebidaActivity;
+import com.lanchonete.funcionario.post.BebidaActivity;
 import com.lanchonete.model.Bebida;
 import com.lanchonete.retrofit.RetrofitService;
 import com.lanchonete.retrofit.api.BebidaAPI;

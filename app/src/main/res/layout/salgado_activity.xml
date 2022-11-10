@@ -1,9 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.lanchonete.funcionario.post.SalgadoActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <ImageButton
+            android:id="@+id/btnSalgadoVoltar"
+            android:layout_width="54dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="28dp"
+            android:contentDescription="@string/imagem"
+            app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
+
+        <TextView
+            android:id="@+id/titulo_salgado"
+            android:layout_width="180dp"
+            android:layout_height="61dp"
+            android:layout_marginStart="98dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/salgados"
+            android:textColor="#2F5022"
+            android:fontFamily="@font/poppinsmedium"
+            android:textColorHint="#6CEA3A"
+            android:textSize="48sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nome_salgadoInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="30dp"
+            app:errorEnabled="true"
+            app:helperText="Campos Importantes"
+            app:helperTextTextColor="@color/blue">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nome_salgado"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:hint="@string/nome"
+                android:inputType="textPersonName" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/valor_salgadoInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            android:layout_width="230dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="65dp"
+            android:layout_marginTop="24dp"
+            app:errorEnabled="true"
+            app:helperText="Campos Importantes"
+            app:helperTextTextColor="@color/blue">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/valor_salgado"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:hint="@string/valor"
+                android:inputType="numberDecimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/descricao_salgadoInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            android:layout_width="300dp"
+            android:layout_height="74dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="24dp"
+            android:gravity="start|top"
+            app:errorEnabled="true"
+            app:helperText="Campos Importantes"
+            app:helperTextTextColor="@color/blue">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/descricao_salgado"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:hint="@string/descricao"
+                android:inputType="textMultiLine" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <ImageButton
+            android:id="@+id/imageButtonCoca"
+            android:layout_width="135dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="40dp"
+            android:contentDescription="\assets\img\avatar-man.png"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/lata_coca" />
+
+        <RadioButton
+            android:id="@+id/radioButtonCoca"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="84dp" />
+
+        <ImageButton
+            android:id="@+id/imageButtonFanta"
+            android:layout_width="135dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="-180dp"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/fanta" />
+
+        <RadioButton
+            android:id="@+id/radioButtonFanta"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="255dp" />
+
+        <ImageButton
+            android:id="@+id/imageButtonSprite"
+            android:layout_width="135dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="40dp"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/pepsi_twist" />
+
+        <RadioButton
+            android:id="@+id/radioButtonSprite"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="84dp" />
+
+
+        <ImageButton
+            android:id="@+id/imageButtonPepsi"
+            android:layout_width="135dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="-180dp"
+
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/pepsi" />
+
+        <RadioButton
+            android:id="@+id/radioButtonPepsi"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="255dp" />
+
+        <Button
+            android:id="@+id/botao_salgado"
+            android:layout_width="320dp"
+            android:layout_height="49dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/green_foward"
+            android:text="@string/cadastrar" />
+
+    </LinearLayout>
+
+
+</ScrollView>
+
+
