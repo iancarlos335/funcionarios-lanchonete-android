@@ -29,7 +29,6 @@
             android:layout_marginTop="15dp"
             android:text="@string/doces"
             android:textColor="#2F5022"
-            android:fontFamily="@font/poppinsmedium"
             android:textColorHint="#6CEA3A"
             android:textSize="48sp" />
 
@@ -93,76 +92,72 @@
                 android:inputType="textMultiLine" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <RadioGroup
+            android:id="@+id/radioDoce"
+            android:layout_width="match_parent"
+            android:layout_height="435dp"
+            android:layout_marginTop="20dp">
 
-        <ImageButton
-            android:id="@+id/imageButtonCoca"
-            android:layout_width="135dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="40dp"
-            android:contentDescription="\assets\img\avatar-man.png"
-            android:scaleType="centerInside"
-            app:srcCompat="@drawable/lata_coca" />
+            <ImageButton
+                android:id="@+id/imageButtonPudim"
+                android:layout_width="135dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/pudim" />
 
-        <RadioButton
-            android:id="@+id/radioButtonCoca"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="84dp" />
+            <RadioButton
+                android:id="@+id/radioButtonPudim"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="84dp"
+                android:onClick="checkButtonDoce"
+                android:text="@string/link_pudim" />
 
-        <ImageButton
-            android:id="@+id/imageButtonFanta"
-            android:layout_width="135dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="200dp"
-            android:layout_marginTop="-180dp"
-            android:scaleType="centerInside"
-            app:srcCompat="@drawable/fanta" />
+            <ImageButton
+                android:id="@+id/imageButtonBolo"
+                android:layout_width="135dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="200dp"
+                android:layout_marginTop="-180dp"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/bolo" />
 
-        <RadioButton
-            android:id="@+id/radioButtonFanta"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="255dp" />
+            <RadioButton
+                android:id="@+id/radioButtonBolo"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="255dp"
+                android:onClick="checkButtonDoce"
+                android:text="@string/link_bolo" />
 
-        <ImageButton
-            android:id="@+id/imageButtonSprite"
-            android:layout_width="135dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="40dp"
-            android:scaleType="centerInside"
-            app:srcCompat="@drawable/pepsi_twist" />
+            <ImageButton
+                android:id="@+id/imageButtonDonuts"
+                android:layout_width="135dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="130dp"
+                android:layout_marginTop="40dp"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/donuts" />
 
-        <RadioButton
-            android:id="@+id/radioButtonSprite"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="84dp" />
+            <RadioButton
+                android:id="@+id/radioButtonDonuts"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="184dp"
+                android:onClick="checkButtonDoce"
+                android:text="@string/link_donuts" />
 
-
-        <ImageButton
-            android:id="@+id/imageButtonPepsi"
-            android:layout_width="135dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="200dp"
-            android:layout_marginTop="-180dp"
-
-            android:scaleType="centerInside"
-            app:srcCompat="@drawable/pepsi" />
-
-        <RadioButton
-            android:id="@+id/radioButtonPepsi"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="255dp" />
+        </RadioGroup>
 
         <Button
             android:id="@+id/botao_doce"
             android:layout_width="320dp"
             android:layout_height="49dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="35dp"
             android:backgroundTint="@color/green_foward"
             android:text="@string/cadastrar" />
 

@@ -61,10 +61,7 @@
             android:layout_marginTop="24dp"
             app:errorEnabled="true"
             app:helperText="Campos Importantes"
-            app:helperTextTextColor="@color/blue"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nome_bebidaInputLayout">
+            app:helperTextTextColor="@color/blue">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/valor_bebida"
@@ -85,10 +82,7 @@
             android:gravity="start|top"
             app:errorEnabled="true"
             app:helperText="Campos Importantes"
-            app:helperTextTextColor="@color/blue"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/valor_bebidaInputLayout">
+            app:helperTextTextColor="@color/blue">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/descricao_bebida"
@@ -111,13 +105,14 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="20dp"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/lata_coca" />
+                app:srcCompat="@drawable/coca" />
 
             <RadioButton
                 android:id="@+id/radioButtonCoca"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="84dp"
+                android:onClick="checkButtonBebida"
                 android:text="@string/link_coca_cola" />
 
             <ImageButton
@@ -134,23 +129,25 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="255dp"
+                android:onClick="checkButtonBebida"
                 android:text="@string/link_fanta" />
 
             <ImageButton
-                android:id="@+id/imageButtonSprite"
+                android:id="@+id/imageButtonGuarana"
                 android:layout_width="135dp"
                 android:layout_height="150dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="40dp"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/pepsi_twist" />
+                app:srcCompat="@drawable/guarana" />
 
             <RadioButton
-                android:id="@+id/radioButtonSprite"
+                android:id="@+id/radioButtonGuarana"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="84dp"
-                android:text="@string/link_pepsi_twist" />
+                android:onClick="checkButtonBebida"
+                android:text="@string/link_guarana" />
 
 
             <ImageButton
@@ -167,6 +164,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="255dp"
+                android:onClick="checkButtonBebida"
                 android:text="@string/link_pepsi" />
 
         </RadioGroup>

@@ -1,21 +1,24 @@
 package com.lanchonete.funcionario.post;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.lanchonete.R;
 
 
+import com.lanchonete.funcionario.get.salgado.SalgadoListActivity;
 import com.lanchonete.model.Salgado;
 import com.lanchonete.retrofit.RetrofitService;
 import com.lanchonete.retrofit.api.SalgadoAPI;
@@ -35,8 +38,9 @@ public class SalgadoActivity extends AppCompatActivity {
     EditText editTextNomeSalgado, editTextValor, editTextDescricao;
     Button btnBotao;
 
-    ImageButton btnVoltar, imagemCoca, imagemFanta, imagemSprite, imagemPepsi;
-    RadioButton radioCoca, radioFanta, radioSprite, radioPepsi;
+    ImageButton btnVoltar, imagemHamburguer, imagemTriploHamburguer, imagemXSaladaEgg;
+    RadioButton radioHamburguer, radioTriploHamburguer, radioXSaladaEgg, radioButtonFinal;
+    RadioGroup radioGroup;
 
 
     @Override
@@ -45,21 +49,20 @@ public class SalgadoActivity extends AppCompatActivity {
         setContentView(R.layout.salgado_activity);
 
         btnVoltar = findViewById(R.id.btnSalgadoVoltar);
-        btnBotao = findViewById(R.id.botao_salgado);
+        btnBotao = findViewById(R.id.botao_Salgado);
         editTextNomeSalgado = findViewById(R.id.nome_salgado);
         editTextValor = findViewById(R.id.valor_salgado);
         editTextDescricao = findViewById(R.id.descricao_salgado); //adicionar input direito
 
-        /*imagemCoca = findViewById(R.id.imageButtonCoca);
-        imagemFanta = findViewById(R.id.imageButtonFanta);
-        imagemSprite = findViewById(R.id.imageButtonSprite);
-        imagemPepsi = findViewById(R.id.imageButtonPepsi);
+        imagemHamburguer = findViewById(R.id.imageButtonHamburguer);
+        imagemTriploHamburguer = findViewById(R.id.imageButtonTriploHamburguer);
+        imagemXSaladaEgg = findViewById(R.id.imageButtonXSaladaEgg);
 
-        radioCoca = findViewById(R.id.radioButtonCoca);
-        radioFanta = findViewById(R.id.radioButtonFanta);
-        radioSprite = findViewById(R.id.radioButtonSprite);
-        radioPepsi = findViewById(R.id.radioButtonPepsi);
-         */
+        radioHamburguer = findViewById(R.id.radioButtonHamburguer);
+        radioTriploHamburguer = findViewById(R.id.radioButtonTriploHamburguer);
+        radioXSaladaEgg = findViewById(R.id.radioButtonXSaladaEgg);
+
+        radioGroup = findViewById(R.id.radioSalgado);
 
         //Aaaaaaa mannnnnnnn
         inputLayoutNomeSalgado = findViewById(R.id.nome_salgadoInputLayout);
@@ -69,7 +72,7 @@ public class SalgadoActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         btnVoltar.setOnClickListener(view -> {
-            Intent intentGoSalgadoListActivity = new Intent(getApplicationContext(), SalgadoActivity.class);
+            Intent intentGoSalgadoListActivity = new Intent(getApplicationContext(), SalgadoListActivity.class);
             startActivity(intentGoSalgadoListActivity);
         });
 
@@ -146,10 +149,21 @@ public class SalgadoActivity extends AppCompatActivity {
         });
 
         // A única forma de os dois serem iguais é se n houver erro nenhum. Pq desde o inicio da activity eles são diferentes
-        Boolean compareInputNomeSalgado = Objects.equals(inputLayoutNomeSalgado.getHelperText(), inputLayoutNomeSalgado.getError());
-        Boolean compareInputValor = Objects.equals(inputLayoutValor.getHelperText(), inputLayoutValor.getError()); // a IDE que me ajudou a fazer essa construção de dados, eu ia deixar String.valueOf(obj).equals() msm
-        Boolean compareInputDescricao = Objects.equals(inputLayoutDescricao.getHelperText(), inputLayoutDescricao.getError());
+        boolean compareInputNomeSalgado = Objects.equals(inputLayoutNomeSalgado.getHelperText(), inputLayoutNomeSalgado.getError());
+        boolean compareInputValor = Objects.equals(inputLayoutValor.getHelperText(), inputLayoutValor.getError()); // a IDE que me ajudou a fazer essa construção de dados, eu ia deixar String.valueOf(obj).equals() msm
+        boolean compareInputDescricao = Objects.equals(inputLayoutDescricao.getHelperText(), inputLayoutDescricao.getError());
 
+        imagemHamburguer.setOnClickListener(v -> radioHamburguer.setChecked(true)); //ativa radio pela imagem
+        imagemTriploHamburguer.setOnClickListener(v -> radioTriploHamburguer.setChecked(true));
+        imagemXSaladaEgg.setOnClickListener(v -> radioXSaladaEgg.setChecked(true));
+
+        btnBotao.setOnClickListener(view -> {
+            int radioId = radioGroup.getCheckedRadioButtonId();
+            radioButtonFinal = findViewById(radioId);
+            iniciandoComponentes();
+        });
+
+        //tentei o empty tbm mas n dava certo nunca
 
         //tentei fazer isso com o switch, mas ele n compara boolean
         if (compareInputNomeSalgado && compareInputValor && compareInputDescricao) { //retorna por padrão true
@@ -157,6 +171,12 @@ public class SalgadoActivity extends AppCompatActivity {
         }
 
     }
+
+    public void checkButtonSalgado(View view) {
+        int radioId = radioGroup.getCheckedRadioButtonId();
+        radioButtonFinal = findViewById(radioId);
+    }
+
 
     private void iniciandoComponentes() {
 
@@ -168,22 +188,24 @@ public class SalgadoActivity extends AppCompatActivity {
             String nomeSalgado = editTextNomeSalgado.getText().toString();
             String descricao = editTextDescricao.getText().toString();
             String strValor = editTextValor.getText().toString();
-            //String imgSalgado = editTextImagem.getText().toString(); // chamar da classe holder
+            String imgSalgado = radioButtonFinal.getText().toString();// tentei com o to string e n deu certo
             double valor = Double.parseDouble(strValor); // se ele ta dando erro vo botar ele aqui, só uso ele nesse objeto msm
+
+            //ele só vai receber alguma coisa se tiver algum ID rodando
 
             Salgado salgado = new Salgado();
             salgado.setNomeSalgado(nomeSalgado);
             salgado.setValor(valor);
             salgado.setDescricao(descricao);
-            //salgado.setImagem(imgSalgado);
+            salgado.setImagem(imgSalgado);
 
             salgadoAPI.addSalgado(salgado) //chama o método POST
                     .enqueue(new Callback<Salgado>() { //deixa as requisições em fila
                         @Override
                         public void onResponse(Call<Salgado> call, Response<Salgado> response) {
                             Toast.makeText(getApplicationContext(), "Salvo com sucesso no banco", Toast.LENGTH_SHORT).show();
-                            Intent intentGoSalgadoListActivity = new Intent(getApplicationContext(), SalgadoActivity.class);
-                            startActivity(intentGoSalgadoListActivity);
+                            Intent intentGoSalgadosListActivity = new Intent(getApplicationContext(), SalgadoActivity.class);
+                            startActivity(intentGoSalgadosListActivity);
                         }
 
                         @Override
@@ -195,4 +217,7 @@ public class SalgadoActivity extends AppCompatActivity {
 
         });
     }
+
 }
+
+

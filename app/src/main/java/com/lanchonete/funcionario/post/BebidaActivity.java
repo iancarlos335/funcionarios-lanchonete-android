@@ -24,6 +24,8 @@ import com.lanchonete.retrofit.api.BebidaAPI;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,8 +37,8 @@ public class BebidaActivity extends AppCompatActivity {
     EditText editTextNomeBebida, editTextValor, editTextDescricao;
     Button btnBotao;
 
-    ImageButton btnVoltar, imagemCoca, imagemFanta, imagemSprite, imagemPepsi;
-    RadioButton radioCoca, radioFanta, radioSprite, radioPepsi, radioButtonFinal;
+    ImageButton btnVoltar, imagemCoca, imagemFanta, imagemGuarana, imagemPepsi;
+    RadioButton radioCoca, radioFanta, radioGuarana, radioPepsi, radioButtonFinal;
     RadioGroup radioGroup;
 
 
@@ -53,12 +55,12 @@ public class BebidaActivity extends AppCompatActivity {
 
         imagemCoca = findViewById(R.id.imageButtonCoca);
         imagemFanta = findViewById(R.id.imageButtonFanta);
-        imagemSprite = findViewById(R.id.imageButtonSprite);
+        imagemGuarana = findViewById(R.id.imageButtonGuarana);
         imagemPepsi = findViewById(R.id.imageButtonPepsi);
 
         radioCoca = findViewById(R.id.radioButtonCoca);
         radioFanta = findViewById(R.id.radioButtonFanta);
-        radioSprite = findViewById(R.id.radioButtonSprite);
+        radioGuarana = findViewById(R.id.radioButtonGuarana);
         radioPepsi = findViewById(R.id.radioButtonPepsi);
 
         radioGroup = findViewById(R.id.radioBebida);
@@ -111,7 +113,6 @@ public class BebidaActivity extends AppCompatActivity {
                 if (alertValue.length() != 0) {
                     inputLayoutValor.setHelperText("");
                     inputLayoutValor.setError("");
-
                 } else {
                     inputLayoutValor.setHelperText("");
                     inputLayoutValor.setError("Campo Obrigatório");
@@ -148,38 +149,39 @@ public class BebidaActivity extends AppCompatActivity {
         });
 
         // A única forma de os dois serem iguais é se n houver erro nenhum. Pq desde o inicio da activity eles são diferentes
-        Boolean compareInputNomeBebida = Objects.equals(inputLayoutNomeBebida.getHelperText(), inputLayoutNomeBebida.getError());
-        Boolean compareInputValor = Objects.equals(inputLayoutValor.getHelperText(), inputLayoutValor.getError()); // a IDE que me ajudou a fazer essa construção de dados, eu ia deixar String.valueOf(obj).equals() msm
-        Boolean compareInputDescricao = Objects.equals(inputLayoutDescricao.getHelperText(), inputLayoutDescricao.getError());
+        boolean compareInputNomeBebida = Objects.equals(inputLayoutNomeBebida.getHelperText(), inputLayoutNomeBebida.getError());
+        boolean compareInputValor = Objects.equals(inputLayoutValor.getHelperText(), inputLayoutValor.getError()); // a IDE que me ajudou a fazer essa construção de dados, eu ia deixar String.valueOf(obj).equals() msm
+        boolean compareInputDescricao = Objects.equals(inputLayoutDescricao.getHelperText(), inputLayoutDescricao.getError());
 
         imagemCoca.setOnClickListener(v -> {
             radioCoca.setChecked(true);
         });
-        imagemFanta.setOnClickListener(v -> {
-            radioFanta.setChecked(true);
-        });
-        imagemSprite.setOnClickListener(v -> {
-            radioSprite.setChecked(true);
+        imagemFanta.setOnClickListener(v -> radioFanta.setChecked(true));
+        imagemGuarana.setOnClickListener(v -> {
+            radioGuarana.setChecked(true);
         });
         imagemPepsi.setOnClickListener(v -> {
             radioPepsi.setChecked(true);
         });
 
-        int radioId = radioGroup.getCheckedRadioButtonId();
-        radioButtonFinal = findViewById(radioId);
+        btnBotao.setOnClickListener(view -> {
+            int radioId = radioGroup.getCheckedRadioButtonId();
+            radioButtonFinal = findViewById(radioId);
+            iniciandoComponentes();
+        });
 
-        boolean radioIdIsEmpty = Objects.isNull(radioId);
+        //tentei o empty tbm mas n dava certo nunca
 
         //tentei fazer isso com o switch, mas ele n compara boolean
         if (compareInputNomeBebida && compareInputValor && compareInputDescricao) { //retorna por padrão true
             iniciandoComponentes();
         }
 
-        if (!radioIdIsEmpty){
-            radioButtonFinal.getText().toString();
-            iniciandoComponentes();
-        }
+    }
 
+    public void checkButtonBebida(View view) {
+        int radioId = radioGroup.getCheckedRadioButtonId();
+        radioButtonFinal = findViewById(radioId);
     }
 
 
@@ -196,7 +198,7 @@ public class BebidaActivity extends AppCompatActivity {
             String imgBebida = radioButtonFinal.getText().toString();// tentei com o to string e n deu certo
             double valor = Double.parseDouble(strValor); // se ele ta dando erro vo botar ele aqui, só uso ele nesse objeto msm
 
-             //ele só vai receber alguma coisa se tiver algum ID rodando
+            //ele só vai receber alguma coisa se tiver algum ID rodando
 
             Bebida bebida = new Bebida();
             bebida.setNomeBebida(nomeBebida);

@@ -14,9 +14,20 @@
     <string name="salgados">Salgados</string>
     <string name="produtos">Produtos</string>
     <string name="bebidas">Bebidas</string>
-    <string name="link_fanta">assetsimgfanta.jpg</string>
-    <string name="link_coca_cola">assetsimglata_coca.png</string>
-    <string name="link_pepsi_twist">assetsimgpepsi_twist.png</string>
-    <string name="link_pepsi">assetsimgpepsi.png</string>
+
+
+    <string name="link_coca_cola">assets/img/coca.png</string>
+    <string name="link_fanta">assets/img/fanta.png</string>
+    <string name="link_guarana">assets/img/guarana.png</string>
+    <string name="link_pepsi">assets/img/pepsi.png</string>
+
+    <string name="link_pudim">assets/img/pudim.png</string>
+    <string name="link_bolo">assets/img/bolo.png</string>
+    <string name="link_donuts">assets/img/donuts.png</string>
+
+
+    <string name="link_triplo_hamburguer">assets/img/triplo hamburguer.png</string>
+    <string name="link_xsaladaegg">assets/img/xsaladaegg.png</string>
+    <string name="link_hamburguer">assets/img/hamburguer.png</string>
 
 </resources>

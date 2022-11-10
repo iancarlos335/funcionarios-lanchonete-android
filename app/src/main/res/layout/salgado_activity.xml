@@ -22,14 +22,13 @@
             app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
 
         <TextView
-            android:id="@+id/titulo_salgado"
+            android:id="@+id/titulo_Salgado"
             android:layout_width="180dp"
             android:layout_height="61dp"
             android:layout_marginStart="98dp"
             android:layout_marginTop="15dp"
             android:text="@string/salgados"
             android:textColor="#2F5022"
-            android:fontFamily="@font/poppinsmedium"
             android:textColorHint="#6CEA3A"
             android:textSize="48sp" />
 
@@ -93,76 +92,72 @@
                 android:inputType="textMultiLine" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <RadioGroup
+            android:id="@+id/radioSalgado"
+            android:layout_width="match_parent"
+            android:layout_height="435dp"
+            android:layout_marginTop="20dp">
 
-        <ImageButton
-            android:id="@+id/imageButtonCoca"
-            android:layout_width="135dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="40dp"
-            android:contentDescription="\assets\img\avatar-man.png"
-            android:scaleType="centerInside"
-            app:srcCompat="@drawable/lata_coca" />
+            <ImageButton
+                android:id="@+id/imageButtonHamburguer"
+                android:layout_width="135dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/hamburguer" />
 
-        <RadioButton
-            android:id="@+id/radioButtonCoca"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="84dp" />
+            <RadioButton
+                android:id="@+id/radioButtonHamburguer"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="84dp"
+                android:onClick="checkButtonSalgado"
+                android:text="@string/link_hamburguer" />
 
-        <ImageButton
-            android:id="@+id/imageButtonFanta"
-            android:layout_width="135dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="200dp"
-            android:layout_marginTop="-180dp"
-            android:scaleType="centerInside"
-            app:srcCompat="@drawable/fanta" />
+            <ImageButton
+                android:id="@+id/imageButtonTriploHamburguer"
+                android:layout_width="135dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="200dp"
+                android:layout_marginTop="-180dp"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/triplo_hamburguer" />
 
-        <RadioButton
-            android:id="@+id/radioButtonFanta"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="255dp" />
+            <RadioButton
+                android:id="@+id/radioButtonTriploHamburguer"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="255dp"
+                android:onClick="checkButtonSalgado"
+                android:text="@string/link_triplo_hamburguer" />
 
-        <ImageButton
-            android:id="@+id/imageButtonSprite"
-            android:layout_width="135dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="40dp"
-            android:scaleType="centerInside"
-            app:srcCompat="@drawable/pepsi_twist" />
+            <ImageButton
+                android:id="@+id/imageButtonXSaladaEgg"
+                android:layout_width="135dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="130dp"
+                android:layout_marginTop="40dp"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/xsaladaegg" />
 
-        <RadioButton
-            android:id="@+id/radioButtonSprite"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="84dp" />
+            <RadioButton
+                android:id="@+id/radioButtonXSaladaEgg"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="184dp"
+                android:onClick="checkButtonSalgado"
+                android:text="@string/link_xsaladaegg" />
 
-
-        <ImageButton
-            android:id="@+id/imageButtonPepsi"
-            android:layout_width="135dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="200dp"
-            android:layout_marginTop="-180dp"
-
-            android:scaleType="centerInside"
-            app:srcCompat="@drawable/pepsi" />
-
-        <RadioButton
-            android:id="@+id/radioButtonPepsi"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="255dp" />
+        </RadioGroup>
 
         <Button
-            android:id="@+id/botao_salgado"
+            android:id="@+id/botao_Salgado"
             android:layout_width="320dp"
             android:layout_height="49dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="35dp"
             android:backgroundTint="@color/green_foward"
             android:text="@string/cadastrar" />
 

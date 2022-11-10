@@ -1,20 +1,21 @@
 package com.lanchonete.funcionario.post;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.lanchonete.R;
-
 
 import com.lanchonete.funcionario.get.doce.DoceListActivity;
 import com.lanchonete.model.Doce;
@@ -36,8 +37,9 @@ public class DoceActivity extends AppCompatActivity {
     EditText editTextNomeDoce, editTextValor, editTextDescricao;
     Button btnBotao;
 
-    ImageButton btnVoltar, imagemCoca, imagemFanta, imagemSprite, imagemPepsi;
-    RadioButton radioCoca, radioFanta, radioSprite, radioPepsi;
+    ImageButton btnVoltar, imagemPudim, imagemBolo, imagemDonuts;
+    RadioButton radioPudim, radioBolo, radioDonuts, radioButtonFinal;
+    RadioGroup radioGroup;
 
 
     @Override
@@ -51,16 +53,15 @@ public class DoceActivity extends AppCompatActivity {
         editTextValor = findViewById(R.id.valor_doce);
         editTextDescricao = findViewById(R.id.descricao_doce); //adicionar input direito
 
-        /*imagemCoca = findViewById(R.id.imageButtonCoca);
-        imagemFanta = findViewById(R.id.imageButtonFanta);
-        imagemSprite = findViewById(R.id.imageButtonSprite);
-        imagemPepsi = findViewById(R.id.imageButtonPepsi);
+        imagemPudim = findViewById(R.id.imageButtonPudim);
+        imagemBolo = findViewById(R.id.imageButtonBolo);
+        imagemDonuts = findViewById(R.id.imageButtonDonuts);
 
-        radioCoca = findViewById(R.id.radioButtonCoca);
-        radioFanta = findViewById(R.id.radioButtonFanta);
-        radioSprite = findViewById(R.id.radioButtonSprite);
-        radioPepsi = findViewById(R.id.radioButtonPepsi);
-         */
+        radioPudim = findViewById(R.id.radioButtonPudim);
+        radioBolo = findViewById(R.id.radioButtonBolo);
+        radioDonuts = findViewById(R.id.radioButtonDonuts);
+
+        radioGroup = findViewById(R.id.radioDoce);
 
         //Aaaaaaa mannnnnnnn
         inputLayoutNomeDoce = findViewById(R.id.nome_doceInputLayout);
@@ -147,10 +148,21 @@ public class DoceActivity extends AppCompatActivity {
         });
 
         // A única forma de os dois serem iguais é se n houver erro nenhum. Pq desde o inicio da activity eles são diferentes
-        Boolean compareInputNomeDoce = Objects.equals(inputLayoutNomeDoce.getHelperText(), inputLayoutNomeDoce.getError());
-        Boolean compareInputValor = Objects.equals(inputLayoutValor.getHelperText(), inputLayoutValor.getError()); // a IDE que me ajudou a fazer essa construção de dados, eu ia deixar String.valueOf(obj).equals() msm
-        Boolean compareInputDescricao = Objects.equals(inputLayoutDescricao.getHelperText(), inputLayoutDescricao.getError());
+        boolean compareInputNomeDoce = Objects.equals(inputLayoutNomeDoce.getHelperText(), inputLayoutNomeDoce.getError());
+        boolean compareInputValor = Objects.equals(inputLayoutValor.getHelperText(), inputLayoutValor.getError()); // a IDE que me ajudou a fazer essa construção de dados, eu ia deixar String.valueOf(obj).equals() msm
+        boolean compareInputDescricao = Objects.equals(inputLayoutDescricao.getHelperText(), inputLayoutDescricao.getError());
 
+        imagemPudim.setOnClickListener(v -> radioPudim.setChecked(true)); //ativa radio pela imagem
+        imagemBolo.setOnClickListener(v -> radioBolo.setChecked(true));
+        imagemDonuts.setOnClickListener(v -> radioDonuts.setChecked(true));
+
+        btnBotao.setOnClickListener(view -> {
+            int radioId = radioGroup.getCheckedRadioButtonId();
+            radioButtonFinal = findViewById(radioId);
+            iniciandoComponentes();
+        });
+
+        //tentei o empty tbm mas n dava certo nunca
 
         //tentei fazer isso com o switch, mas ele n compara boolean
         if (compareInputNomeDoce && compareInputValor && compareInputDescricao) { //retorna por padrão true
@@ -158,6 +170,12 @@ public class DoceActivity extends AppCompatActivity {
         }
 
     }
+
+    public void checkButtonDoce(View view) {
+        int radioId = radioGroup.getCheckedRadioButtonId();
+        radioButtonFinal = findViewById(radioId);
+    }
+
 
     private void iniciandoComponentes() {
 
@@ -169,21 +187,23 @@ public class DoceActivity extends AppCompatActivity {
             String nomeDoce = editTextNomeDoce.getText().toString();
             String descricao = editTextDescricao.getText().toString();
             String strValor = editTextValor.getText().toString();
-            //String imgDoce = editTextImagem.getText().toString(); // chamar da classe holder
+            String imgDoce = radioButtonFinal.getText().toString();// tentei com o to string e n deu certo
             double valor = Double.parseDouble(strValor); // se ele ta dando erro vo botar ele aqui, só uso ele nesse objeto msm
+
+            //ele só vai receber alguma coisa se tiver algum ID rodando
 
             Doce doce = new Doce();
             doce.setNomeDoce(nomeDoce);
             doce.setValor(valor);
             doce.setDescricao(descricao);
-            //doce.setImagem(imgDoce);
+            doce.setImagem(imgDoce);
 
             doceAPI.addDoce(doce) //chama o método POST
                     .enqueue(new Callback<Doce>() { //deixa as requisições em fila
                         @Override
                         public void onResponse(Call<Doce> call, Response<Doce> response) {
                             Toast.makeText(getApplicationContext(), "Salvo com sucesso no banco", Toast.LENGTH_SHORT).show();
-                            Intent intentGoDoceListActivity = new Intent(getApplicationContext(), DoceListActivity.class);
+                            Intent intentGoDoceListActivity = new Intent(getApplicationContext(), DoceActivity.class);
                             startActivity(intentGoDoceListActivity);
                         }
 
@@ -196,4 +216,7 @@ public class DoceActivity extends AppCompatActivity {
 
         });
     }
+
 }
+
+
