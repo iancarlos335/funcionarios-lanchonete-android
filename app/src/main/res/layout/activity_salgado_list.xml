@@ -6,25 +6,94 @@
     android:layout_height="match_parent"
     tools:context=".funcionario.get.salgado.SalgadoListActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/salgadosList_recyclerView"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolBarTop"
+        android:layout_width="416dp"
+        android:layout_height="58dp"
+        android:background="?attr/colorOnSecondary"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolBarBottom"
         android:layout_width="412dp"
-        android:layout_height="533dp"
+        android:layout_height="58dp"
+        android:background="?attr/colorOnSecondary"
+        android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/salgadosList_recyclerView"
+        android:layout_width="410dp"
+        android:layout_height="447dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.496" />
+        app:layout_constraintTop_toBottomOf="@+id/tituloListaSalgado"
+        app:layout_constraintVertical_bias="0.546" />
 
     <Button
         android:id="@+id/btnAdicionarNovoSalgado"
         android:layout_width="127dp"
         android:layout_height="39dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/adicionar"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="24dp"
         android:backgroundTint="@color/green_foward"
+        android:text="@string/adicionar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/salgadosList_recyclerView" />
+
+    <ImageButton
+        android:id="@+id/imageButtonVoltarInicioSalgado"
+        android:layout_width="45dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/salgadosList_recyclerView"
+        app:srcCompat="@drawable/ic_baseline_home_24" />
+
+    <TextView
+        android:id="@+id/tituloListaSalgado"
+        android:layout_width="258dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="88dp"
+        android:fontFamily="@font/poppinsbold"
+        android:text="Lista Salgados"
+        android:textColor="@color/black"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textItemDescricaoSalgados"
+        android:layout_width="87dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="12dp"
+        android:text="Item/Descrição"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/salgadosList_recyclerView"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textValorDoce"
+        android:layout_width="60dp"
+        android:layout_height="33dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="12dp"
+        android:text="Valor"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/salgadosList_recyclerView"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

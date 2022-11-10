@@ -3,6 +3,7 @@ package com.lanchonete.funcionario.get.bebida;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lanchonete.R;
+import com.lanchonete.funcionario.MenuFuncionario;
 import com.lanchonete.funcionario.get.bebida.adapter.BebidaAdapter;
 import com.lanchonete.funcionario.post.BebidaActivity;
 import com.lanchonete.model.Bebida;
@@ -26,7 +28,7 @@ import retrofit2.Response;
 public class BebidaListActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-
+    ImageView irInicio;
     Button buttonAddBebida;
 
     @Override
@@ -44,6 +46,13 @@ public class BebidaListActivity extends AppCompatActivity {
         carregarBebidas();
 
         buttonAddBebida = findViewById(R.id.btnAdicionarNovaBebida);
+        irInicio = findViewById(R.id.imageButtonVoltarInicioBebida);
+
+        irInicio.setOnClickListener(v -> {
+            Intent intent1 = new Intent(getApplicationContext(), MenuFuncionario.class);
+            startActivity(intent1);
+        });
+
         buttonAddBebida.setOnClickListener(v -> {
            Intent intentGoBebidaActivity = new Intent(getApplicationContext(), BebidaActivity.class);
            startActivity(intentGoBebidaActivity);

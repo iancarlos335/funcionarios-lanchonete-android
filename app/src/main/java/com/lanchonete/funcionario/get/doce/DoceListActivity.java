@@ -8,9 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.lanchonete.R;
+import com.lanchonete.funcionario.MenuFuncionario;
 import com.lanchonete.funcionario.get.doce.adapter.DoceAdapter;
 import com.lanchonete.funcionario.post.DoceActivity;
 import com.lanchonete.model.Doce;
@@ -26,7 +28,7 @@ import retrofit2.Response;
 public class DoceListActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-
+    ImageView irInicio;
     Button buttonAddDoce;
 
     @Override
@@ -44,6 +46,13 @@ public class DoceListActivity extends AppCompatActivity {
         carregarDoces();
 
         buttonAddDoce = findViewById(R.id.btnAdicionarNovoDoce);
+        irInicio = findViewById(R.id.imageButtonVoltarInicioDoce);
+
+        irInicio.setOnClickListener(v -> {
+            Intent intent1 = new Intent(getApplicationContext(), MenuFuncionario.class);
+            startActivity(intent1);
+        });
+
         buttonAddDoce.setOnClickListener(v -> {
             Intent intentGoBebidaActivity = new Intent(getApplicationContext(), DoceActivity.class);
             startActivity(intentGoBebidaActivity);

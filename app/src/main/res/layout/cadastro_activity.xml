@@ -6,4 +6,49 @@
     android:layout_height="match_parent"
     tools:context="com.lanchonete.cliente.CadastroActivity">
 
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolBarTop"
+        android:layout_width="416dp"
+        android:layout_height="58dp"
+        android:background="?attr/colorOnSecondary"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolBarBottom"
+        android:layout_width="412dp"
+        android:layout_height="58dp"
+        android:background="?attr/colorOnSecondary"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="281dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="296dp"
+        android:fontFamily="@font/poppinsbold"
+        android:text="Em breve..."
+        android:textColor="@color/black"
+        android:textSize="45sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolBarTop" />
+
+    <Button
+        android:id="@+id/btnSairCliente"
+        android:layout_width="96dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="13dp"
+        android:text="Sair"
+        android:backgroundTint="#9F1D1D"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

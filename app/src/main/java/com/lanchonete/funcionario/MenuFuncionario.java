@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.lanchonete.Home;
 import com.lanchonete.R;
 import com.lanchonete.funcionario.get.bebida.BebidaListActivity;
 import com.lanchonete.funcionario.get.doce.DoceListActivity;
@@ -15,7 +16,7 @@ import com.lanchonete.funcionario.get.salgado.SalgadoListActivity;
 
 public class MenuFuncionario extends AppCompatActivity {
 
-    Button btnViewFuncionario, btnViewPedidos, btnViewDoce, btnViewSalgados, btnViewBebidas;
+    Button btnViewDoce, btnViewSalgados, btnViewBebidas, btnVoltar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +27,8 @@ public class MenuFuncionario extends AppCompatActivity {
 
         btnViewBebidas = findViewById(R.id.btnMenuBebidas);
         btnViewDoce = findViewById(R.id.btnMenuDoce);
-        btnViewFuncionario = findViewById(R.id.btnMenuFuncionario);
-        btnViewPedidos = findViewById(R.id.btnMenuPedidos);
         btnViewSalgados = findViewById(R.id.btnMenuSalgados);
+        btnVoltar = findViewById(R.id.btnVoltarMenuFuncionario);
 
         btnViewBebidas.setOnClickListener(v -> {
             Intent intent1 = new Intent(getApplicationContext(), BebidaListActivity.class);
@@ -40,18 +40,14 @@ public class MenuFuncionario extends AppCompatActivity {
             startActivity(intent2);
         });
 
-        btnViewFuncionario.setOnClickListener(v -> {
-            Intent intent3 = new Intent(getApplicationContext(), FuncionarioListActivity.class);
-            startActivity(intent3);
-        });
-
-        btnViewPedidos.setOnClickListener(v -> {
-            Intent intent4 = new Intent(getApplicationContext(), PedidoListActivity.class);
-            startActivity(intent4);
-        });
         btnViewSalgados.setOnClickListener(v -> {
             Intent intent5 = new Intent(getApplicationContext(), SalgadoListActivity.class);
             startActivity(intent5);
+        });
+
+        btnVoltar.setOnClickListener(v -> {
+            Intent intent6 = new Intent(getApplicationContext(), Home.class);
+            startActivity(intent6);
         });
 
     }

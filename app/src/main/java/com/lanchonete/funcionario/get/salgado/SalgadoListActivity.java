@@ -8,11 +8,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.lanchonete.R;
 
 
+import com.lanchonete.funcionario.MenuFuncionario;
 import com.lanchonete.funcionario.get.salgado.adapter.SalgadoAdapter;
 import com.lanchonete.funcionario.post.SalgadoActivity;
 import com.lanchonete.model.Salgado;
@@ -29,7 +31,7 @@ import retrofit2.Response;
 public class SalgadoListActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-
+    ImageView irInicio;
     Button buttonAddSalgado;
 
     @Override
@@ -47,6 +49,13 @@ public class SalgadoListActivity extends AppCompatActivity {
         carregarSalgados();
 
         buttonAddSalgado = findViewById(R.id.btnAdicionarNovoSalgado);
+        irInicio = findViewById(R.id.imageButtonVoltarInicioSalgado);
+
+        irInicio.setOnClickListener(v -> {
+            Intent intent1 = new Intent(getApplicationContext(), MenuFuncionario.class);
+            startActivity(intent1);
+        });
+
         buttonAddSalgado.setOnClickListener(v -> {
             Intent intentGoBebidaActivity = new Intent(getApplicationContext(), SalgadoActivity.class);
             startActivity(intentGoBebidaActivity);
