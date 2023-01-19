@@ -72,8 +72,7 @@ public class SalgadoActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         btnVoltar.setOnClickListener(view -> {
-            Intent intentGoSalgadoListActivity = new Intent(getApplicationContext(), SalgadoListActivity.class);
-            startActivity(intentGoSalgadoListActivity);
+            finish();
         });
 
 
@@ -158,18 +157,12 @@ public class SalgadoActivity extends AppCompatActivity {
         imagemXSaladaEgg.setOnClickListener(v -> radioXSaladaEgg.setChecked(true));
 
         btnBotao.setOnClickListener(view -> {
-            int radioId = radioGroup.getCheckedRadioButtonId();
-            radioButtonFinal = findViewById(radioId);
-            iniciandoComponentes();
+            if (compareInputNomeSalgado && compareInputValor && compareInputDescricao) {
+                int radioId = radioGroup.getCheckedRadioButtonId();
+                radioButtonFinal = findViewById(radioId);
+                iniciandoComponentes();
+            }
         });
-
-        //tentei o empty tbm mas n dava certo nunca
-
-        //tentei fazer isso com o switch, mas ele n compara boolean
-        if (compareInputNomeSalgado && compareInputValor && compareInputDescricao) { //retorna por padrão true
-            iniciandoComponentes();
-        }
-
     }
 
     public void checkButtonSalgado(View view) {
@@ -183,39 +176,35 @@ public class SalgadoActivity extends AppCompatActivity {
         RetrofitService retrofitService = new RetrofitService();
         SalgadoAPI salgadoAPI = retrofitService.getRetrofit().create(SalgadoAPI.class); //ele vai gerar uma nova requisição http, e nesse caso do tipo POST
 
-        btnBotao.setOnClickListener(v ->
-        {
-            String nomeSalgado = editTextNomeSalgado.getText().toString();
-            String descricao = editTextDescricao.getText().toString();
-            String strValor = editTextValor.getText().toString();
-            String imgSalgado = radioButtonFinal.getText().toString();// tentei com o to string e n deu certo
-            double valor = Double.parseDouble(strValor); // se ele ta dando erro vo botar ele aqui, só uso ele nesse objeto msm
 
-            //ele só vai receber alguma coisa se tiver algum ID rodando
+        String nomeSalgado = editTextNomeSalgado.getText().toString();
+        String descricao = editTextDescricao.getText().toString();
+        String strValor = editTextValor.getText().toString();
+        String imgSalgado = radioButtonFinal.getText().toString();// tentei com o to string e n deu certo
+        double valor = Double.parseDouble(strValor); // se ele ta dando erro vo botar ele aqui, só uso ele nesse objeto msm
 
-            Salgado salgado = new Salgado();
-            salgado.setNomeSalgado(nomeSalgado);
-            salgado.setValor(valor);
-            salgado.setDescricao(descricao);
-            salgado.setImagem(imgSalgado);
+        //ele só vai receber alguma coisa se tiver algum ID rodando
 
-            salgadoAPI.addSalgado(salgado) //chama o método POST
-                    .enqueue(new Callback<Salgado>() { //deixa as requisições em fila
-                        @Override
-                        public void onResponse(Call<Salgado> call, Response<Salgado> response) {
-                            Toast.makeText(getApplicationContext(), "Salvo com sucesso no banco", Toast.LENGTH_SHORT).show();
-                            Intent intentGoSalgadosListActivity = new Intent(getApplicationContext(), SalgadoActivity.class);
-                            startActivity(intentGoSalgadosListActivity);
-                        }
+        Salgado salgado = new Salgado();
+        salgado.setNomeSalgado(nomeSalgado);
+        salgado.setValor(valor);
+        salgado.setDescricao(descricao);
+        salgado.setImagem(imgSalgado);
 
-                        @Override
-                        public void onFailure(Call<Salgado> call, Throwable t) {
-                            Toast.makeText(getApplicationContext(), "Não salvou!!", Toast.LENGTH_SHORT).show();
-                            Logger.getLogger(SalgadoActivity.class.getName()).log(Level.SEVERE, "Um erro ocorreu", t);
-                        }
-                    });
+        salgadoAPI.addSalgado(salgado) //chama o método POST
+                .enqueue(new Callback<Salgado>() { //deixa as requisições em fila
+                    @Override
+                    public void onResponse(Call<Salgado> call, Response<Salgado> response) {
+                        Toast.makeText(getApplicationContext(), "Salvo com sucesso no banco", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
 
-        });
+                    @Override
+                    public void onFailure(Call<Salgado> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Não salvou!!", Toast.LENGTH_SHORT).show();
+                        Logger.getLogger(SalgadoActivity.class.getName()).log(Level.SEVERE, "Um erro ocorreu", t);
+                    }
+                });
     }
 
 }

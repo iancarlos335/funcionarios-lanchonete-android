@@ -112,7 +112,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="84dp"
-                android:onClick="checkButtonBebida"
+                android:onClick="checkRadioButtonBebida"
                 android:text="@string/link_coca_cola" />
 
             <ImageButton
@@ -129,7 +129,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="255dp"
-                android:onClick="checkButtonBebida"
+                android:onClick="checkRadioButtonBebida"
                 android:text="@string/link_fanta" />
 
             <ImageButton
@@ -146,7 +146,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="84dp"
-                android:onClick="checkButtonBebida"
+                android:onClick="checkRadioButtonBebida"
                 android:text="@string/link_guarana" />
 
 
@@ -164,7 +164,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="255dp"
-                android:onClick="checkButtonBebida"
+                android:onClick="checkRadioButtonBebida"
                 android:text="@string/link_pepsi" />
 
         </RadioGroup>

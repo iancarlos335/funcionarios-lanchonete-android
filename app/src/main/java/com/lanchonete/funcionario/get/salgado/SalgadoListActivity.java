@@ -41,8 +41,6 @@ public class SalgadoListActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        //Intent intentGoBebidaListActivity = getIntent();
-
         recyclerView = findViewById(R.id.salgadosList_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -52,16 +50,19 @@ public class SalgadoListActivity extends AppCompatActivity {
         irInicio = findViewById(R.id.imageButtonVoltarInicioSalgado);
 
         irInicio.setOnClickListener(v -> {
-            Intent intent1 = new Intent(getApplicationContext(), MenuFuncionario.class);
-            startActivity(intent1);
+            finish();
         });
 
         buttonAddSalgado.setOnClickListener(v -> {
             Intent intentGoBebidaActivity = new Intent(getApplicationContext(), SalgadoActivity.class);
             startActivity(intentGoBebidaActivity);
         });
+    }
 
-
+    @Override
+    protected void onRestart() {
+        carregarSalgados();
+        super.onRestart();
     }
 
     public void carregarSalgados() {

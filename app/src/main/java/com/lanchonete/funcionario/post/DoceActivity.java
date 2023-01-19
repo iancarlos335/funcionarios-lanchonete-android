@@ -12,11 +12,13 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.lanchonete.R;
 
+import com.lanchonete.funcionario.MenuFuncionario;
 import com.lanchonete.funcionario.get.doce.DoceListActivity;
 import com.lanchonete.model.Doce;
 import com.lanchonete.retrofit.RetrofitService;
@@ -41,6 +43,11 @@ public class DoceActivity extends AppCompatActivity {
     RadioButton radioPudim, radioBolo, radioDonuts, radioButtonFinal;
     RadioGroup radioGroup;
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +78,8 @@ public class DoceActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         btnVoltar.setOnClickListener(view -> {
-            Intent intentGoDoceListActivity = new Intent(getApplicationContext(), DoceListActivity.class);
-            startActivity(intentGoDoceListActivity);
+            Intent intent1 = new Intent(getApplicationContext(), MenuFuncionario.class);
+            startActivity(intent1);
         });
 
 
@@ -157,18 +164,12 @@ public class DoceActivity extends AppCompatActivity {
         imagemDonuts.setOnClickListener(v -> radioDonuts.setChecked(true));
 
         btnBotao.setOnClickListener(view -> {
-            int radioId = radioGroup.getCheckedRadioButtonId();
-            radioButtonFinal = findViewById(radioId);
-            iniciandoComponentes();
+            if (compareInputNomeDoce && compareInputValor && compareInputDescricao) {
+                int radioId = radioGroup.getCheckedRadioButtonId();
+                radioButtonFinal = findViewById(radioId);
+                iniciandoComponentes();
+            }
         });
-
-        //tentei o empty tbm mas n dava certo nunca
-
-        //tentei fazer isso com o switch, mas ele n compara boolean
-        if (compareInputNomeDoce && compareInputValor && compareInputDescricao) { //retorna por padrão true
-            iniciandoComponentes();
-        }
-
     }
 
     public void checkButtonDoce(View view) {
@@ -182,41 +183,36 @@ public class DoceActivity extends AppCompatActivity {
         RetrofitService retrofitService = new RetrofitService();
         DoceAPI doceAPI = retrofitService.getRetrofit().create(DoceAPI.class); //ele vai gerar uma nova requisição http, e nesse caso do tipo POST
 
-        btnBotao.setOnClickListener(v ->
-        {
-            String nomeDoce = editTextNomeDoce.getText().toString();
-            String descricao = editTextDescricao.getText().toString();
-            String strValor = editTextValor.getText().toString();
-            String imgDoce = radioButtonFinal.getText().toString();// tentei com o to string e n deu certo
-            double valor = Double.parseDouble(strValor); // se ele ta dando erro vo botar ele aqui, só uso ele nesse objeto msm
+        String nomeDoce = editTextNomeDoce.getText().toString();
+        String descricao = editTextDescricao.getText().toString();
+        String strValor = editTextValor.getText().toString();
+        String imgDoce = radioButtonFinal.getText().toString();// tentei com o to string e n deu certo
+        double valor = Double.parseDouble(strValor); // se ele ta dando erro vo botar ele aqui, só uso ele nesse objeto msm
 
-            //ele só vai receber alguma coisa se tiver algum ID rodando
+        //ele só vai receber alguma coisa se tiver algum ID rodando
 
-            Doce doce = new Doce();
-            doce.setNomeDoce(nomeDoce);
-            doce.setValor(valor);
-            doce.setDescricao(descricao);
-            doce.setImagem(imgDoce);
+        Doce doce = new Doce();
+        doce.setNomeDoce(nomeDoce);
+        doce.setValor(valor);
+        doce.setDescricao(descricao);
+        doce.setImagem(imgDoce);
 
-            doceAPI.addDoce(doce) //chama o método POST
-                    .enqueue(new Callback<Doce>() { //deixa as requisições em fila
-                        @Override
-                        public void onResponse(Call<Doce> call, Response<Doce> response) {
-                            Toast.makeText(getApplicationContext(), "Salvo com sucesso no banco", Toast.LENGTH_SHORT).show();
-                            Intent intentGoDoceListActivity = new Intent(getApplicationContext(), DoceActivity.class);
-                            startActivity(intentGoDoceListActivity);
-                        }
+        doceAPI.addDoce(doce) //chama o método POST
+                .enqueue(new Callback<Doce>() { //deixa as requisições em fila
+                    @Override
+                    public void onResponse(Call<Doce> call, Response<Doce> response) {
+                        Toast.makeText(getApplicationContext(), "Salvo com sucesso no banco", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
 
-                        @Override
-                        public void onFailure(Call<Doce> call, Throwable t) {
-                            Toast.makeText(getApplicationContext(), "Não salvou!!", Toast.LENGTH_SHORT).show();
-                            Logger.getLogger(DoceActivity.class.getName()).log(Level.SEVERE, "Um erro ocorreu", t);
-                        }
-                    });
+                    @Override
+                    public void onFailure(Call<Doce> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Não salvou!!", Toast.LENGTH_SHORT).show();
+                        Logger.getLogger(DoceActivity.class.getName()).log(Level.SEVERE, "Um erro ocorreu", t);
+                    }
+                });
 
-        });
     }
-
 }
 
 

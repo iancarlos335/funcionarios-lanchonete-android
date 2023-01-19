@@ -38,8 +38,6 @@ public class BebidaListActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        //Intent intentGoBebidaListActivity = getIntent();
-
         recyclerView = findViewById(R.id.bebidasList_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -49,16 +47,19 @@ public class BebidaListActivity extends AppCompatActivity {
         irInicio = findViewById(R.id.imageButtonVoltarInicioBebida);
 
         irInicio.setOnClickListener(v -> {
-            Intent intent1 = new Intent(getApplicationContext(), MenuFuncionario.class);
-            startActivity(intent1);
+            finish();
         });
 
         buttonAddBebida.setOnClickListener(v -> {
-           Intent intentGoBebidaActivity = new Intent(getApplicationContext(), BebidaActivity.class);
-           startActivity(intentGoBebidaActivity);
+            Intent intentGoBebidaActivity = new Intent(getApplicationContext(), BebidaActivity.class);
+            startActivity(intentGoBebidaActivity);
         });
+    }
 
-
+    @Override
+    protected void onRestart() {
+        carregarBebidas();
+        super.onRestart();
     }
 
     public void carregarBebidas() {

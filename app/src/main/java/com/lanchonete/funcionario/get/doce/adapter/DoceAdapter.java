@@ -37,6 +37,7 @@ public class DoceAdapter extends RecyclerView.Adapter<DoceHolder>{
         holder.nome_doce.setText(doce.getNomeDoce());
         holder.descricao_doce.setText(doce.getDescricao());
         holder.valor_doce.setText(strValue);
+
         //holder.imagem_bebida.setContentDescription(bebida.getImagem()); //talvez ele adicione tudo de acordo com a posição da imagem
         //coloquei isso pq eu acho q se eu n colocar ele n vai rodar novas imagens nesse ImageView
         // pensei aqui q talvez nem precise configurar isso, pq a img não vai estar no app de qualquer forma, isso é só pra nortear novas atualizações no banco

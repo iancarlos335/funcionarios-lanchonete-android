@@ -1,6 +1,7 @@
 package com.lanchonete.funcionario.get.doce;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,7 +39,6 @@ public class DoceListActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        //Intent intentGoBebidaListActivity = getIntent();
 
         recyclerView = findViewById(R.id.docesList_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -49,16 +49,19 @@ public class DoceListActivity extends AppCompatActivity {
         irInicio = findViewById(R.id.imageButtonVoltarInicioDoce);
 
         irInicio.setOnClickListener(v -> {
-            Intent intent1 = new Intent(getApplicationContext(), MenuFuncionario.class);
-            startActivity(intent1);
+            finish();
         });
 
         buttonAddDoce.setOnClickListener(v -> {
             Intent intentGoBebidaActivity = new Intent(getApplicationContext(), DoceActivity.class);
             startActivity(intentGoBebidaActivity);
         });
+    }
 
-
+    @Override
+    protected void onRestart() {
+        carregarDoces();
+        super.onRestart();
     }
 
     public void carregarDoces() {

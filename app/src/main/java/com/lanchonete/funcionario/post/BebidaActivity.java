@@ -73,8 +73,7 @@ public class BebidaActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         btnVoltar.setOnClickListener(view -> {
-            Intent intentGoBebidaListActivity = new Intent(getApplicationContext(), BebidaListActivity.class);
-            startActivity(intentGoBebidaListActivity);
+            finish();
         });
 
 
@@ -153,16 +152,10 @@ public class BebidaActivity extends AppCompatActivity {
         boolean compareInputValor = Objects.equals(inputLayoutValor.getHelperText(), inputLayoutValor.getError()); // a IDE que me ajudou a fazer essa construção de dados, eu ia deixar String.valueOf(obj).equals() msm
         boolean compareInputDescricao = Objects.equals(inputLayoutDescricao.getHelperText(), inputLayoutDescricao.getError());
 
-        imagemCoca.setOnClickListener(v -> {
-            radioCoca.setChecked(true);
-        });
+        imagemCoca.setOnClickListener(v -> radioCoca.setChecked(true));
         imagemFanta.setOnClickListener(v -> radioFanta.setChecked(true));
-        imagemGuarana.setOnClickListener(v -> {
-            radioGuarana.setChecked(true);
-        });
-        imagemPepsi.setOnClickListener(v -> {
-            radioPepsi.setChecked(true);
-        });
+        imagemGuarana.setOnClickListener(v -> radioGuarana.setChecked(true));
+        imagemPepsi.setOnClickListener(v -> radioPepsi.setChecked(true));
 
         btnBotao.setOnClickListener(view -> {
             int radioId = radioGroup.getCheckedRadioButtonId();
@@ -170,16 +163,12 @@ public class BebidaActivity extends AppCompatActivity {
             iniciandoComponentes();
         });
 
-        //tentei o empty tbm mas n dava certo nunca
-
-        //tentei fazer isso com o switch, mas ele n compara boolean
-        if (compareInputNomeBebida && compareInputValor && compareInputDescricao) { //retorna por padrão true
+        if (compareInputNomeBebida && compareInputValor && compareInputDescricao) {
             iniciandoComponentes();
         }
-
     }
 
-    public void checkButtonBebida(View view) {
+    public void checkRadioButtonBebida(View view) {
         int radioId = radioGroup.getCheckedRadioButtonId();
         radioButtonFinal = findViewById(radioId);
     }
@@ -190,39 +179,35 @@ public class BebidaActivity extends AppCompatActivity {
         RetrofitService retrofitService = new RetrofitService();
         BebidaAPI bebidaAPI = retrofitService.getRetrofit().create(BebidaAPI.class); //ele vai gerar uma nova requisição http, e nesse caso do tipo POST
 
-        btnBotao.setOnClickListener(v ->
-        {
-            String nomeBebida = editTextNomeBebida.getText().toString();
-            String descricao = editTextDescricao.getText().toString();
-            String strValor = editTextValor.getText().toString();
-            String imgBebida = radioButtonFinal.getText().toString();// tentei com o to string e n deu certo
-            double valor = Double.parseDouble(strValor); // se ele ta dando erro vo botar ele aqui, só uso ele nesse objeto msm
+        String nomeBebida = editTextNomeBebida.getText().toString();
+        String descricao = editTextDescricao.getText().toString();
+        String strValor = editTextValor.getText().toString();
+        String imgBebida = radioButtonFinal.getText().toString();
+        double valor = Double.parseDouble(strValor); // se ele ta dando erro vo botar ele aqui, só uso ele nesse objeto msm
 
-            //ele só vai receber alguma coisa se tiver algum ID rodando
+        //ele só vai receber alguma coisa se tiver algum ID rodando
 
-            Bebida bebida = new Bebida();
-            bebida.setNomeBebida(nomeBebida);
-            bebida.setValor(valor);
-            bebida.setDescricao(descricao);
-            bebida.setImagem(imgBebida);
+        Bebida bebida = new Bebida();
+        bebida.setNomeBebida(nomeBebida);
+        bebida.setValor(valor);
+        bebida.setDescricao(descricao);
+        bebida.setImagem(imgBebida);
 
-            bebidaAPI.addBebida(bebida) //chama o método POST
-                    .enqueue(new Callback<Bebida>() { //deixa as requisições em fila
-                        @Override
-                        public void onResponse(Call<Bebida> call, Response<Bebida> response) {
-                            Toast.makeText(getApplicationContext(), "Salvo com sucesso no banco", Toast.LENGTH_SHORT).show();
-                            Intent intentGoBebidaListActivity = new Intent(getApplicationContext(), BebidaListActivity.class);
-                            startActivity(intentGoBebidaListActivity);
-                        }
+        bebidaAPI.addBebida(bebida) //chama o método POST
+                .enqueue(new Callback<Bebida>() { //deixa as requisições em fila
+                    @Override
+                    public void onResponse(Call<Bebida> call, Response<Bebida> response) {
+                        Toast.makeText(getApplicationContext(), "Salvo com sucesso no banco", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
 
-                        @Override
-                        public void onFailure(Call<Bebida> call, Throwable t) {
-                            Toast.makeText(getApplicationContext(), "Não salvou!!", Toast.LENGTH_SHORT).show();
-                            Logger.getLogger(BebidaActivity.class.getName()).log(Level.SEVERE, "Um erro ocorreu", t);
-                        }
-                    });
+                    @Override
+                    public void onFailure(Call<Bebida> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Não salvou!!", Toast.LENGTH_SHORT).show();
+                        Logger.getLogger(BebidaActivity.class.getName()).log(Level.SEVERE, "Um erro ocorreu", t);
+                    }
+                });
 
-        });
     }
 
 }
