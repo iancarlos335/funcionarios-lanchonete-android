@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.lanchonete.R;
 import com.lanchonete.funcionario.MenuFuncionario;
 import com.lanchonete.funcionario.get.bebida.adapter.BebidaAdapter;
+import com.lanchonete.funcionario.get.bebida.adapter.BebidaHolder;
 import com.lanchonete.funcionario.post.BebidaActivity;
 import com.lanchonete.model.Bebida;
 import com.lanchonete.retrofit.RetrofitService;
@@ -50,6 +51,8 @@ public class BebidaListActivity extends AppCompatActivity {
             finish();
         });
 
+
+
         buttonAddBebida.setOnClickListener(v -> {
             Intent intentGoBebidaActivity = new Intent(getApplicationContext(), BebidaActivity.class);
             startActivity(intentGoBebidaActivity);
@@ -85,11 +88,15 @@ public class BebidaListActivity extends AppCompatActivity {
         recyclerView.setAdapter(bebidaAdapter);
     }
 
-    private void selecionarPeloId(List<Bebida> bebidaList) {
-        //View
-        //BebidaHolder bebidaHolder = new BebidaHolder();
-        BebidaAdapter bebidaAdapter = new BebidaAdapter(bebidaList);
-        //recyclerView.getChildItemId()
+    private void selecionarPeloId(List<Bebida> bebidaList, int position) {
+        preencherListView(bebidaList);
+
+        BebidaHolder holder = new BebidaHolder();
+        RecyclerView.Adapter adapter =  recyclerView.getAdapter();
+
+        adapter.onBindViewHolder(BebidaHolder holder, position);
+
+
     }
 
 }

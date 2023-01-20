@@ -78,8 +78,7 @@ public class DoceActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         btnVoltar.setOnClickListener(view -> {
-            Intent intent1 = new Intent(getApplicationContext(), MenuFuncionario.class);
-            startActivity(intent1);
+            finish();
         });
 
 

@@ -103,7 +103,6 @@ public class BebidaActivity extends AppCompatActivity {
         editTextValor.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -120,7 +119,6 @@ public class BebidaActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
 
@@ -143,7 +141,6 @@ public class BebidaActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
 
@@ -158,14 +155,12 @@ public class BebidaActivity extends AppCompatActivity {
         imagemPepsi.setOnClickListener(v -> radioPepsi.setChecked(true));
 
         btnBotao.setOnClickListener(view -> {
-            int radioId = radioGroup.getCheckedRadioButtonId();
-            radioButtonFinal = findViewById(radioId);
-            iniciandoComponentes();
+            if (compareInputNomeBebida && compareInputValor && compareInputDescricao) {
+                int radioId = radioGroup.getCheckedRadioButtonId();
+                radioButtonFinal = findViewById(radioId);
+                iniciandoComponentes();
+            }
         });
-
-        if (compareInputNomeBebida && compareInputValor && compareInputDescricao) {
-            iniciandoComponentes();
-        }
     }
 
     public void checkRadioButtonBebida(View view) {
