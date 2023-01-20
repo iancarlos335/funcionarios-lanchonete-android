@@ -4,9 +4,7 @@ import com.lanchonete.model.Bebida;
 
 import java.util.List;
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
+import retrofit2.http.*;
 
 public interface BebidaAPI { //N funciona se for uma classe
 
@@ -15,5 +13,9 @@ public interface BebidaAPI { //N funciona se for uma classe
 
     @POST("/bebidas")
     Call <Bebida> addBebida(@Body Bebida bebidaDto);
+
+
+    @DELETE("/bebidas/{id}")
+    Call <Bebida> delete(@Path("id") long id);
 
 }

@@ -163,7 +163,7 @@ public class DoceActivity extends AppCompatActivity {
         imagemDonuts.setOnClickListener(v -> radioDonuts.setChecked(true));
 
         btnBotao.setOnClickListener(view -> {
-            if (compareInputNomeDoce && compareInputValor && compareInputDescricao) {
+            if (!(compareInputNomeDoce && compareInputValor && compareInputDescricao)) {
                 int radioId = radioGroup.getCheckedRadioButtonId();
                 radioButtonFinal = findViewById(radioId);
                 iniciandoComponentes();

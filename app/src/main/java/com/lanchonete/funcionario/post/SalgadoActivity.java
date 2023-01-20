@@ -157,7 +157,7 @@ public class SalgadoActivity extends AppCompatActivity {
         imagemXSaladaEgg.setOnClickListener(v -> radioXSaladaEgg.setChecked(true));
 
         btnBotao.setOnClickListener(view -> {
-            if (compareInputNomeSalgado && compareInputValor && compareInputDescricao) {
+            if (!(compareInputNomeSalgado && compareInputValor && compareInputDescricao)) {
                 int radioId = radioGroup.getCheckedRadioButtonId();
                 radioButtonFinal = findViewById(radioId);
                 iniciandoComponentes();

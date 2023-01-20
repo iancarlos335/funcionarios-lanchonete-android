@@ -155,7 +155,7 @@ public class BebidaActivity extends AppCompatActivity {
         imagemPepsi.setOnClickListener(v -> radioPepsi.setChecked(true));
 
         btnBotao.setOnClickListener(view -> {
-            if (compareInputNomeBebida && compareInputValor && compareInputDescricao) {
+            if (!(compareInputNomeBebida && compareInputValor && compareInputDescricao)) {
                 int radioId = radioGroup.getCheckedRadioButtonId();
                 radioButtonFinal = findViewById(radioId);
                 iniciandoComponentes();
