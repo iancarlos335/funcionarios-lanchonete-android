@@ -79,12 +79,13 @@ public class BebidaListActivity extends AppCompatActivity {
         // Reading
         bebidaAPI.listBebida()
                 .enqueue(new Callback<List<Bebida>>() {
-                    @Override
-                    public void onResponse(@NonNull Call<List<Bebida>> call, @NonNull Response<List<Bebida>> response) {
-                        preencherListView(response.body());
-                    }
+                        @Override
+                        public void onResponse(@NonNull Call<List<Bebida>> call, @NonNull Response<List<Bebida>> response) {
+                            Toast.makeText(BebidaListActivity.this, "Foram carregados os dados", Toast.LENGTH_SHORT).show();
+                            preencherListView(response.body());
+                        }
 
-                    @Override
+                        @Override
                     public void onFailure(@NonNull Call<List<Bebida>> call, @NonNull Throwable t) {
                         Toast.makeText(BebidaListActivity.this, "Falha ao pegar do banco", Toast.LENGTH_SHORT).show();
                     }

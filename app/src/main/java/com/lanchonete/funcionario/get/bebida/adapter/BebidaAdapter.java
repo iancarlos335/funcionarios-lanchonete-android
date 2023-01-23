@@ -45,32 +45,32 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaHolder> {
         Bebida bebida = bebidaList.get(position);
         String strValue = Double.toString(bebida.getValor());
 
-        //String strImage = String.valueOf(new BebidaHolder.ImageDownloader().execute(bebida.getImagem())); //vo chamar a string completa do banco
-
         holder.nome_bebida.setText(bebida.getNomeBebida());
         holder.descricao_bebida.setText(bebida.getDescricao());
         holder.valor_bebida.setText(strValue);
-        holder.delete_item.setOnClickListener(view -> bebidaList.remove(position));
+        holder.delete_item.setOnClickListener(view -> {
+            bebidaList.remove(position);
 
+            //Deletando
+            RetrofitService retrofitService = new RetrofitService();
+            BebidaAPI bebidaAPI = retrofitService.getRetrofit().create(BebidaAPI.class);
 
-        //deletar bebidas
-        RetrofitService retrofitService = new RetrofitService();
-        BebidaAPI bebidaAPI = retrofitService.getRetrofit().create(BebidaAPI.class);
+            BebidaHolder bebidaHolder;
 
-        BebidaHolder bebidaHolder;
+            bebidaAPI.delete(bebida.getId())
+                    .enqueue(new Callback<Bebida>() {
+                        @Override
+                        public void onResponse(Call<Bebida> call, Response<Bebida> response) {
+                            Toast.makeText(context.getApplicationContext(), "Deletado com sucesso", Toast.LENGTH_SHORT).show();
+                        }
 
-        bebidaAPI.delete(bebida.getId())
-                .enqueue(new Callback<Bebida>() {
-                    @Override
-                    public void onResponse(Call<Bebida> call, Response<Bebida> response) {
-                        Toast.makeText(context.getApplicationContext(), "Deletado com sucesso", Toast.LENGTH_SHORT).show();
-                    }
+                        @Override
+                        public void onFailure(Call<Bebida> call, Throwable t) {
+                            Toast.makeText(context.getApplicationContext(), "Não deletou nada", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        });
 
-                    @Override
-                    public void onFailure(Call<Bebida> call, Throwable t) {
-                        Toast.makeText(context.getApplicationContext(), "Não deletou nada", Toast.LENGTH_SHORT).show();
-                    }
-                });
 
     }
 
@@ -84,6 +84,4 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaHolder> {
     public int getItemCount() { //vai adicionar novos items, dependendo de quantos itens estiverem no nosso contrutor
         return bebidaList.size();
     }
-
-
 }

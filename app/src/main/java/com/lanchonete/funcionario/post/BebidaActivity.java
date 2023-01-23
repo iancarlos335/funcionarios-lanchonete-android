@@ -70,8 +70,6 @@ public class BebidaActivity extends AppCompatActivity {
         inputLayoutValor = findViewById(R.id.valor_bebidaInputLayout);
         inputLayoutDescricao = findViewById(R.id.descricao_bebidaInputLayout);
 
-        Intent intent = getIntent();
-
         btnVoltar.setOnClickListener(view -> {
             finish();
         });
@@ -84,6 +82,7 @@ public class BebidaActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
                 String alertNomeBebida = s.toString();
                 if (alertNomeBebida.length() != 0) { //tem o matcher com o pattern pra verificar os intervalos no input, mas aqui não ficaria interessante
                     inputLayoutNomeBebida.setHelperText("");
