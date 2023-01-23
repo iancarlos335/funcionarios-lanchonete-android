@@ -35,11 +35,12 @@ public class BebidaActivity extends AppCompatActivity {
 
     TextInputLayout inputLayoutNomeBebida, inputLayoutValor, inputLayoutDescricao;
     EditText editTextNomeBebida, editTextValor, editTextDescricao;
-    Button btnBotao;
 
     ImageButton btnVoltar, imagemCoca, imagemFanta, imagemGuarana, imagemPepsi;
     RadioButton radioCoca, radioFanta, radioGuarana, radioPepsi, radioButtonFinal;
     RadioGroup radioGroup;
+
+    Button btnBotao;
 
 
     @Override
@@ -154,9 +155,8 @@ public class BebidaActivity extends AppCompatActivity {
         imagemPepsi.setOnClickListener(v -> radioPepsi.setChecked(true));
 
         btnBotao.setOnClickListener(view -> {
+            checkRadioButtonBebida(view);
             if (!(compareInputNomeBebida && compareInputValor && compareInputDescricao)) {
-                int radioId = radioGroup.getCheckedRadioButtonId();
-                radioButtonFinal = findViewById(radioId);
                 iniciandoComponentes();
             }
         });

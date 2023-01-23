@@ -14,17 +14,17 @@ import com.lanchonete.funcionario.get.bebida.BebidaListActivity;
 import com.lanchonete.model.Bebida;
 import com.lanchonete.retrofit.RetrofitService;
 import com.lanchonete.retrofit.api.BebidaAPI;
+import org.jetbrains.annotations.NotNull;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class BebidaAdapter extends RecyclerView.Adapter<BebidaHolder> {
-
-    private Context context;
 
     private final List<Bebida> bebidaList;
 
@@ -41,7 +41,7 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BebidaHolder holder, int position) { //É esse position que armazena cada item pelo id
+    public void onBindViewHolder(@NonNull @NotNull BebidaHolder holder, int position) {
         Bebida bebida = bebidaList.get(position);
         String strValue = Double.toString(bebida.getValor());
 
@@ -49,30 +49,32 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaHolder> {
         holder.descricao_bebida.setText(bebida.getDescricao());
         holder.valor_bebida.setText(strValue);
         holder.delete_item.setOnClickListener(view -> {
+
+            long id = bebidaList.get(position).getId();
+
             bebidaList.remove(position);
-
-            //Deletando
-            RetrofitService retrofitService = new RetrofitService();
-            BebidaAPI bebidaAPI = retrofitService.getRetrofit().create(BebidaAPI.class);
-
-            BebidaHolder bebidaHolder;
-
-            bebidaAPI.delete(bebida.getId())
-                    .enqueue(new Callback<Bebida>() {
-                        @Override
-                        public void onResponse(Call<Bebida> call, Response<Bebida> response) {
-                            Toast.makeText(context.getApplicationContext(), "Deletado com sucesso", Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void onFailure(Call<Bebida> call, Throwable t) {
-                            Toast.makeText(context.getApplicationContext(), "Não deletou nada", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+            deletarBebida(id, position);
         });
-
-
     }
+
+
+    //    @Override
+//    public void onBindViewHolder(@NonNull BebidaHolder holder, int position) { //É esse position que armazena cada item pelo id
+//        minhaPosition = position;
+//
+//
+//        Bebida bebida = bebidaList.get(position);
+//        String strValue = Double.toString(bebida.getValor());
+//
+//        holder.nome_bebida.setText(bebida.getNomeBebida());
+//        holder.descricao_bebida.setText(bebida.getDescricao());
+//        holder.valor_bebida.setText(strValue);
+//        holder.delete_item.setOnClickListener(view -> {
+//            bebidaList.remove(position);
+//            deletarBebida();
+//        });
+
+//    }
 
     @Override
     public long getItemId(int position) {
@@ -80,8 +82,40 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaHolder> {
         return bebida.getId();
     }
 
+
     @Override
     public int getItemCount() { //vai adicionar novos items, dependendo de quantos itens estiverem no nosso contrutor
         return bebidaList.size();
+    }
+
+
+    private final BebidaListActivity bebidaListActivity = new BebidaListActivity();
+
+    //Deletando
+    private void deletarBebida(long id, int position) {
+        RetrofitService retrofitService = new RetrofitService();
+        BebidaAPI bebidaAPI = retrofitService.getRetrofit().create(BebidaAPI.class);
+
+        int bebidaId = Integer.parseInt(String.valueOf(id));
+
+        bebidaAPI.delete(bebidaId)
+                .enqueue(new Callback<Bebida>() {
+                    @Override
+                    public void onResponse(Call<Bebida> call, Response<Bebida> response) {
+                        Bebida body = response.body();
+                        BebidaAdapter.this.notify();
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<Bebida> call, Throwable t) {
+                        boolean executed = call.isExecuted();
+                        notifyItemRemoved(position);
+                    }
+                });
+    }
+
+    private void preencherListView(List<Bebida> bebidas) {
+        bebidaList.addAll(bebidas);
     }
 }

@@ -3,6 +3,7 @@ package com.lanchonete.funcionario.get.bebida;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -64,7 +65,6 @@ public class BebidaListActivity extends AppCompatActivity {
             startActivity(intentGoBebidaActivity);
         });
 
-
     }
 
     @Override
@@ -73,7 +73,7 @@ public class BebidaListActivity extends AppCompatActivity {
         super.onRestart();
     }
 
-    public void carregarBebidas() { //esse método ta certo
+    public void carregarBebidas() { //TODO change to private
         RetrofitService retrofitService = new RetrofitService();
         BebidaAPI bebidaAPI = retrofitService.getRetrofit().create(BebidaAPI.class);
         // Reading
@@ -94,7 +94,7 @@ public class BebidaListActivity extends AppCompatActivity {
 
 
 
-    private void preencherListView(List<Bebida> bebidaList) {
+    public void preencherListView(List<Bebida> bebidaList) {
         bebidas.addAll(bebidaList);
         BebidaAdapter bebidaAdapter = new BebidaAdapter(bebidaList);
         recyclerView.setAdapter(bebidaAdapter);
@@ -102,8 +102,18 @@ public class BebidaListActivity extends AppCompatActivity {
 
     private void selecionarPeloId() {
         Bebida bebida = new Bebida();
+        BebidaHolder bebidaHolder = new BebidaHolder(recyclerView);
         BebidaAdapter adapter = new BebidaAdapter(bebidas);
-        int bebidaId = Integer.parseInt(String.valueOf(bebida.getId()));
+
+        int viewType = bebidaHolder.getItemViewType();
+
+        ViewGroup parent;
+
+//        adapter.onCreateViewHolder(parent, viewType);
+
+        long itemId = recyclerView.getChildItemId(bebidaHolder.itemView);
+
+        int bebidaId = Integer.parseInt(String.valueOf(itemId));
 
         adapter.getItemId(bebidaId);
         recyclerView.setAdapter(adapter);
