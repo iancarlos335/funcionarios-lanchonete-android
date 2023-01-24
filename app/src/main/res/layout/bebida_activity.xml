@@ -1,102 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.lanchonete.funcionario.post.BebidaActivity">
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.lanchonete.funcionario.post.BebidaActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
 
         <ImageButton
-            android:id="@+id/btnBebidaVoltar"
-            android:layout_width="54dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="28dp"
-            android:contentDescription="@string/imagem"
-            app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
+                android:id="@+id/btnBebidaVoltar"
+                android:layout_width="54dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="28dp"
+                android:contentDescription="@string/imagem"
+                app:srcCompat="@drawable/ic_baseline_arrow_back_24"/>
 
         <TextView
-            android:id="@+id/titulo_bebida"
-            android:layout_width="180dp"
-            android:layout_height="61dp"
-            android:layout_marginStart="98dp"
-            android:layout_marginTop="15dp"
-            android:text="@string/bebidas"
-            android:textColor="#2F5022"
-            android:textColorHint="#6CEA3A"
-            android:textSize="48sp" />
+                android:id="@+id/titulo_bebida"
+                android:layout_width="180dp"
+                android:layout_height="61dp"
+                android:layout_marginStart="98dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/bebidas"
+                android:textColor="#2F5022"
+                android:textColorHint="#6CEA3A"
+                android:textSize="48sp"/>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/nome_bebidaInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-            android:layout_width="300dp"
-            android:layout_height="70dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="30dp"
-            app:errorEnabled="true"
-            app:helperText="Campos Importantes"
-            app:helperTextTextColor="@color/blue">
+                android:id="@+id/nome_bebidaInputLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="300dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="30dp"
+                app:errorEnabled="true"
+                app:helperText="Campos Importantes"
+                app:helperTextTextColor="@color/blue">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/nome_bebida"
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:hint="@string/nome"
-                android:inputType="textPersonName" />
+                    android:id="@+id/nome_bebida"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:hint="@string/nome"
+                    android:inputType="textPersonName"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/valor_bebidaInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-            android:layout_width="230dp"
-            android:layout_height="70dp"
-            android:layout_marginStart="65dp"
-            android:layout_marginTop="24dp"
-            app:errorEnabled="true"
-            app:helperText="Campos Importantes"
-            app:helperTextTextColor="@color/blue">
+                android:id="@+id/valor_bebidaInputLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="230dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="65dp"
+                android:layout_marginTop="24dp"
+                app:errorEnabled="true"
+                app:helperText="Campos Importantes"
+                app:helperTextTextColor="@color/blue">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/valor_bebida"
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:hint="@string/valor"
-                android:inputType="numberDecimal" />
+                    android:id="@+id/valor_bebida"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:hint="@string/valor"
+                    android:inputType="numberDecimal"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/descricao_bebidaInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-            android:layout_width="300dp"
-            android:layout_height="74dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="24dp"
-            android:gravity="start|top"
-            app:errorEnabled="true"
-            app:helperText="Campos Importantes"
-            app:helperTextTextColor="@color/blue">
+                android:id="@+id/descricao_bebidaInputLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="300dp"
+                android:layout_height="74dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="24dp"
+                android:gravity="start|top"
+                app:errorEnabled="true"
+                app:helperText="Campos Importantes"
+                app:helperTextTextColor="@color/blue">
+
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/descricao_bebida"
-                android:layout_width="match_parent"
-                android:layout_height="54dp"
-                android:hint="@string/descricao"
-                android:inputType="textMultiLine" />
+                    android:id="@+id/descricao_bebida"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:hint="@string/descricao"
+                    android:inputType="textMultiLine"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <RadioGroup
-            android:id="@+id/radioBebida"
-            android:layout_width="match_parent"
-            android:layout_height="435dp"
-            android:layout_marginTop="20dp">
+                android:id="@+id/radioBebida"
+                android:layout_width="match_parent"
+                android:layout_height="435dp"
+                android:layout_marginTop="20dp">
 
             <ImageButton
                     android:id="@+id/imageButtonCoca"
@@ -108,76 +110,76 @@
                     app:srcCompat="@drawable/coca"/>
 
             <RadioButton
-                android:id="@+id/radioButtonCoca"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="84dp"
-                android:onClick="checkRadioButtonBebida"
-                android:text="@string/link_coca_cola" />
+                    android:id="@+id/radioButtonCoca"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="84dp"
+                    android:onClick="checkRadioButtonBebida"
+                    android:text="@string/link_coca_cola"/>
 
             <ImageButton
-                android:id="@+id/imageButtonFanta"
-                android:layout_width="135dp"
-                android:layout_height="150dp"
-                android:layout_marginStart="200dp"
-                android:layout_marginTop="-180dp"
-                android:scaleType="centerInside"
-                app:srcCompat="@drawable/fanta" />
+                    android:id="@+id/imageButtonFanta"
+                    android:layout_width="135dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="200dp"
+                    android:layout_marginTop="-180dp"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/fanta"/>
 
             <RadioButton
-                android:id="@+id/radioButtonFanta"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="255dp"
-                android:onClick="checkRadioButtonBebida"
-                android:text="@string/link_fanta" />
+                    android:id="@+id/radioButtonFanta"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="255dp"
+                    android:onClick="checkRadioButtonBebida"
+                    android:text="@string/link_fanta"/>
 
             <ImageButton
-                android:id="@+id/imageButtonGuarana"
-                android:layout_width="135dp"
-                android:layout_height="150dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="40dp"
-                android:scaleType="centerInside"
-                app:srcCompat="@drawable/guarana" />
+                    android:id="@+id/imageButtonGuarana"
+                    android:layout_width="135dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="40dp"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/guarana"/>
 
             <RadioButton
-                android:id="@+id/radioButtonGuarana"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="84dp"
-                android:onClick="checkRadioButtonBebida"
-                android:text="@string/link_guarana" />
+                    android:id="@+id/radioButtonGuarana"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="84dp"
+                    android:onClick="checkRadioButtonBebida"
+                    android:text="@string/link_guarana"/>
 
 
             <ImageButton
-                android:id="@+id/imageButtonPepsi"
-                android:layout_width="135dp"
-                android:layout_height="150dp"
-                android:layout_marginStart="200dp"
-                android:layout_marginTop="-180dp"
-                android:scaleType="centerInside"
-                app:srcCompat="@drawable/pepsi" />
+                    android:id="@+id/imageButtonPepsi"
+                    android:layout_width="135dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="200dp"
+                    android:layout_marginTop="-180dp"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/pepsi"/>
 
             <RadioButton
-                android:id="@+id/radioButtonPepsi"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="255dp"
-                android:onClick="checkRadioButtonBebida"
-                android:text="@string/link_pepsi" />
+                    android:id="@+id/radioButtonPepsi"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="255dp"
+                    android:onClick="checkRadioButtonBebida"
+                    android:text="@string/link_pepsi"/>
 
         </RadioGroup>
 
         <Button
-            android:id="@+id/botao_bebida"
-            android:layout_width="320dp"
-            android:layout_height="49dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginBottom="35dp"
-            android:backgroundTint="@color/green_foward"
-            android:text="@string/cadastrar" />
+                android:id="@+id/botao_bebida"
+                android:layout_width="320dp"
+                android:layout_height="49dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="35dp"
+                android:backgroundTint="@color/green_foward"
+                android:text="@string/cadastrar"/>
 
     </LinearLayout>
 

@@ -49,32 +49,12 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaHolder> {
         holder.descricao_bebida.setText(bebida.getDescricao());
         holder.valor_bebida.setText(strValue);
         holder.delete_item.setOnClickListener(view -> {
-
             long id = bebidaList.get(position).getId();
-
-            bebidaList.remove(position);
             deletarBebida(id, position);
+            bebidaList.remove(position);
+            notifyItemRemoved(position);
         });
     }
-
-
-    //    @Override
-//    public void onBindViewHolder(@NonNull BebidaHolder holder, int position) { //É esse position que armazena cada item pelo id
-//        minhaPosition = position;
-//
-//
-//        Bebida bebida = bebidaList.get(position);
-//        String strValue = Double.toString(bebida.getValor());
-//
-//        holder.nome_bebida.setText(bebida.getNomeBebida());
-//        holder.descricao_bebida.setText(bebida.getDescricao());
-//        holder.valor_bebida.setText(strValue);
-//        holder.delete_item.setOnClickListener(view -> {
-//            bebidaList.remove(position);
-//            deletarBebida();
-//        });
-
-//    }
 
     @Override
     public long getItemId(int position) {
@@ -89,8 +69,6 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaHolder> {
     }
 
 
-    private final BebidaListActivity bebidaListActivity = new BebidaListActivity();
-
     //Deletando
     private void deletarBebida(long id, int position) {
         RetrofitService retrofitService = new RetrofitService();
@@ -102,20 +80,13 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaHolder> {
                 .enqueue(new Callback<Bebida>() {
                     @Override
                     public void onResponse(Call<Bebida> call, Response<Bebida> response) {
-                        Bebida body = response.body();
-                        BebidaAdapter.this.notify();
-
                     }
 
                     @Override
                     public void onFailure(Call<Bebida> call, Throwable t) {
-                        boolean executed = call.isExecuted();
-                        notifyItemRemoved(position);
+                        //The code fall's here 'cause im trying to do something outside the activity
                     }
                 });
-    }
 
-    private void preencherListView(List<Bebida> bebidas) {
-        bebidaList.addAll(bebidas);
     }
 }

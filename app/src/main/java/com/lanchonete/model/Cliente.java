@@ -1,8 +1,9 @@
 package com.lanchonete.model;
 
 
-public class Cliente {
+import java.util.Objects;
 
+public class Cliente {
     private long id;
 
     private String nomeCliente;

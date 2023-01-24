@@ -81,7 +81,6 @@ public class BebidaListActivity extends AppCompatActivity {
                 .enqueue(new Callback<List<Bebida>>() {
                         @Override
                         public void onResponse(@NonNull Call<List<Bebida>> call, @NonNull Response<List<Bebida>> response) {
-                            Toast.makeText(BebidaListActivity.this, "Foram carregados os dados", Toast.LENGTH_SHORT).show();
                             preencherListView(response.body());
                         }
 
@@ -98,25 +97,6 @@ public class BebidaListActivity extends AppCompatActivity {
         bebidas.addAll(bebidaList);
         BebidaAdapter bebidaAdapter = new BebidaAdapter(bebidaList);
         recyclerView.setAdapter(bebidaAdapter);
-    }
-
-    private void selecionarPeloId() {
-        Bebida bebida = new Bebida();
-        BebidaHolder bebidaHolder = new BebidaHolder(recyclerView);
-        BebidaAdapter adapter = new BebidaAdapter(bebidas);
-
-        int viewType = bebidaHolder.getItemViewType();
-
-        ViewGroup parent;
-
-//        adapter.onCreateViewHolder(parent, viewType);
-
-        long itemId = recyclerView.getChildItemId(bebidaHolder.itemView);
-
-        int bebidaId = Integer.parseInt(String.valueOf(itemId));
-
-        adapter.getItemId(bebidaId);
-        recyclerView.setAdapter(adapter);
     }
 
 }

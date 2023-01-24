@@ -1,35 +1,23 @@
 package com.lanchonete.funcionario.post;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Toast;
-
+import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.textfield.TextInputLayout;
 import com.lanchonete.R;
-import com.lanchonete.funcionario.get.bebida.BebidaListActivity;
 import com.lanchonete.model.Bebida;
 import com.lanchonete.retrofit.RetrofitService;
 import com.lanchonete.retrofit.api.BebidaAPI;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class BebidaActivity extends AppCompatActivity {
 
@@ -41,6 +29,7 @@ public class BebidaActivity extends AppCompatActivity {
     RadioGroup radioGroup;
 
     Button btnBotao;
+
 
 
     @Override
@@ -144,22 +133,42 @@ public class BebidaActivity extends AppCompatActivity {
             }
         });
 
-        // A única forma de os dois serem iguais é se n houver erro nenhum. Pq desde o inicio da activity eles são diferentes
-        boolean compareInputNomeBebida = Objects.equals(inputLayoutNomeBebida.getHelperText(), inputLayoutNomeBebida.getError());
-        boolean compareInputValor = Objects.equals(inputLayoutValor.getHelperText(), inputLayoutValor.getError()); // a IDE que me ajudou a fazer essa construção de dados, eu ia deixar String.valueOf(obj).equals() msm
-        boolean compareInputDescricao = Objects.equals(inputLayoutDescricao.getHelperText(), inputLayoutDescricao.getError());
-
         imagemCoca.setOnClickListener(v -> radioCoca.setChecked(true));
         imagemFanta.setOnClickListener(v -> radioFanta.setChecked(true));
         imagemGuarana.setOnClickListener(v -> radioGuarana.setChecked(true));
         imagemPepsi.setOnClickListener(v -> radioPepsi.setChecked(true));
 
         btnBotao.setOnClickListener(view -> {
-            checkRadioButtonBebida(view);
-            if (!(compareInputNomeBebida && compareInputValor && compareInputDescricao)) {
+
+            boolean compareInputValor = true;
+            boolean compareInputNomeBebida = true;
+            boolean compareInputDescricao = true;;
+
+            if ((inputLayoutNomeBebida.getHelperText() != null) || (inputLayoutNomeBebida.getError() != null)) {
+                compareInputNomeBebida = false;
+            }
+            if ((inputLayoutValor.getHelperText() != null) || (inputLayoutValor.getError() != null)) {
+                compareInputValor = false;
+            }
+            if ((inputLayoutDescricao.getHelperText() != null) || (inputLayoutDescricao.getError() != null)) {
+                compareInputDescricao = false;
+            }
+
+            int radioId = radioGroup.getCheckedRadioButtonId();
+            radioButtonFinal = findViewById(radioId);
+
+            if (compareInputNomeBebida && compareInputValor && compareInputDescricao && (radioId != -1)) {
                 iniciandoComponentes();
+            } else {
+                Toast.makeText(getApplicationContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+                onRestart();
             }
         });
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
     }
 
     public void checkRadioButtonBebida(View view) {
