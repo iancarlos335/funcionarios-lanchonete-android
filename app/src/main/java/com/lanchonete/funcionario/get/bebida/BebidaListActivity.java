@@ -33,7 +33,7 @@ import retrofit2.Response;
 
 public class BebidaListActivity extends AppCompatActivity {
 
-    private List<Bebida> bebidas = new ArrayList<>();
+    private final List<Bebida> bebidas = new ArrayList<>();
 
     private RecyclerView recyclerView;
     ImageView irInicio;
@@ -45,26 +45,19 @@ public class BebidaListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bebida_list);
 
         recyclerView = findViewById(R.id.bebidasList_recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         buttonAddBebida = findViewById(R.id.btnAdicionarNovaBebida);
         irInicio = findViewById(R.id.imageButtonVoltarInicioBebida);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         carregarBebidas();
 
-        //mto zika
+        irInicio.setOnClickListener(v -> finish());
 
-        irInicio.setOnClickListener(v -> {
-            finish();
-        });
-
-        //has to be here
 
         buttonAddBebida.setOnClickListener(v -> {
             Intent intentGoBebidaActivity = new Intent(getApplicationContext(), BebidaActivity.class);
             startActivity(intentGoBebidaActivity);
         });
-
     }
 
     @Override
@@ -73,24 +66,23 @@ public class BebidaListActivity extends AppCompatActivity {
         super.onRestart();
     }
 
-    public void carregarBebidas() { //TODO change to private
+    private void carregarBebidas() { //TODO change object method (from another class)
         RetrofitService retrofitService = new RetrofitService();
         BebidaAPI bebidaAPI = retrofitService.getRetrofit().create(BebidaAPI.class);
         // Reading
         bebidaAPI.listBebida()
                 .enqueue(new Callback<List<Bebida>>() {
-                        @Override
-                        public void onResponse(@NonNull Call<List<Bebida>> call, @NonNull Response<List<Bebida>> response) {
-                            preencherListView(response.body());
-                        }
+                    @Override
+                    public void onResponse(@NonNull Call<List<Bebida>> call, @NonNull Response<List<Bebida>> response) {
+                        preencherListView(response.body());
+                    }
 
-                        @Override
+                    @Override
                     public void onFailure(@NonNull Call<List<Bebida>> call, @NonNull Throwable t) {
                         Toast.makeText(BebidaListActivity.this, "Falha ao pegar do banco", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
-
 
 
     public void preencherListView(List<Bebida> bebidaList) {

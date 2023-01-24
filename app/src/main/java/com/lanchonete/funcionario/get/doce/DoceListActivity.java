@@ -16,10 +16,12 @@ import com.lanchonete.R;
 import com.lanchonete.funcionario.MenuFuncionario;
 import com.lanchonete.funcionario.get.doce.adapter.DoceAdapter;
 import com.lanchonete.funcionario.post.DoceActivity;
+import com.lanchonete.model.Bebida;
 import com.lanchonete.model.Doce;
 import com.lanchonete.retrofit.RetrofitService;
 import com.lanchonete.retrofit.api.DoceAPI;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -27,6 +29,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DoceListActivity extends AppCompatActivity {
+
+    private final List<Doce> doces = new ArrayList<>();
 
     private RecyclerView recyclerView;
     ImageView irInicio;
@@ -37,20 +41,14 @@ public class DoceListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doce_list);
 
-        Intent intent = getIntent();
-
-
         recyclerView = findViewById(R.id.docesList_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        carregarDoces();
-
         buttonAddDoce = findViewById(R.id.btnAdicionarNovoDoce);
         irInicio = findViewById(R.id.imageButtonVoltarInicioDoce);
 
-        irInicio.setOnClickListener(v -> {
-            finish();
-        });
+        carregarDoces();
+
+        irInicio.setOnClickListener(v -> finish());
 
         buttonAddDoce.setOnClickListener(v -> {
             Intent intentGoBebidaActivity = new Intent(getApplicationContext(), DoceActivity.class);
@@ -64,9 +62,10 @@ public class DoceListActivity extends AppCompatActivity {
         super.onRestart();
     }
 
-    public void carregarDoces() {
+    private void carregarDoces() {
         RetrofitService retrofitService = new RetrofitService();
         DoceAPI doceAPI = retrofitService.getRetrofit().create(DoceAPI.class);
+
         doceAPI.listDoce()
                 .enqueue(new Callback<List<Doce>>() {
                     @Override
