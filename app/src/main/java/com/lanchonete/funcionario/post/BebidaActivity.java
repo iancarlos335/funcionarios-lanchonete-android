@@ -15,7 +15,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -161,14 +160,12 @@ public class BebidaActivity extends AppCompatActivity {
                 iniciandoComponentes();
             } else {
                 Toast.makeText(getApplicationContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+                editTextNomeBebida.setText("");
+                editTextValor.setText("");
+                editTextDescricao.setText("");
                 onRestart();
             }
         });
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
     }
 
     public void checkRadioButtonBebida(View view) {
