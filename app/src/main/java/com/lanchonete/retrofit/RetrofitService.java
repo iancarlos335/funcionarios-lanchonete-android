@@ -2,8 +2,11 @@ package com.lanchonete.retrofit;
 
 import com.google.gson.Gson;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import java.util.concurrent.TimeUnit;
 
 public class RetrofitService {
 
@@ -14,14 +17,14 @@ public class RetrofitService {
     }
 
     public void iniciarRetrofit() {
-        retrofit = new Retrofit.Builder() //podem ser adiocionadas mais configurações dps desse Retrofit
+        retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.20.118:8080/") //É na porta 8080 q o TomCat sobe, só vai funcionar as inserções se a api tiver rodando na porta 8080
                 .addConverterFactory(GsonConverterFactory.create(new Gson())) //Se for necessário definir parâmetros pra esse Gson dps, é só mdificar o objeto(Gson)
                 .build();
     }
 
     public Retrofit getRetrofit() {
-        return  retrofit;
+        return retrofit;
     }
 
 }

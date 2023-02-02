@@ -17,7 +17,6 @@ public class DoceHolder extends RecyclerView.ViewHolder {
     public DoceHolder(@NonNull View itemView) {
         super(itemView);
 
-        //N vai ser necessário as imagens nesse recycler view
         nome_doce = itemView.findViewById(R.id.docesListItem_nome);
         descricao_doce = itemView.findViewById(R.id.docesListItem_descricao);
         valor_doce = itemView.findViewById(R.id.docesListItem_valor);

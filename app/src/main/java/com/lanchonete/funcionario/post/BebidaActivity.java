@@ -70,7 +70,7 @@ public class BebidaActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 String alertNomeBebida = s.toString();
-                if (alertNomeBebida.length() != 0) { //tem o matcher com o pattern pra verificar os intervalos no input, mas aqui não ficaria interessante
+                if (alertNomeBebida.length() != 0) { //tem o matcher para validar intevalos de inserção regex
                     inputLayoutNome.setHelperText("");
                     inputLayoutNome.setError("");
                 } else {

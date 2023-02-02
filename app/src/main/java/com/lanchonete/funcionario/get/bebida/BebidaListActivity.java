@@ -2,38 +2,26 @@ package com.lanchonete.funcionario.get.bebida;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.lanchonete.R;
-import com.lanchonete.funcionario.MenuFuncionario;
-import com.lanchonete.funcionario.get.bebida.adapter.BebidaAdapter;
-import com.lanchonete.funcionario.get.bebida.adapter.BebidaHolder;
 import com.lanchonete.funcionario.post.BebidaActivity;
 import com.lanchonete.model.Bebida;
 import com.lanchonete.retrofit.RetrofitService;
 import com.lanchonete.retrofit.api.BebidaAPI;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BebidaListActivity extends AppCompatActivity {
+import java.util.LinkedList;
+import java.util.List;
 
-    private final List<Bebida> bebidas = new ArrayList<>();
+public class BebidaListActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     ImageView irInicio;
@@ -74,7 +62,9 @@ public class BebidaListActivity extends AppCompatActivity {
                 .enqueue(new Callback<List<Bebida>>() {
                     @Override
                     public void onResponse(@NonNull Call<List<Bebida>> call, @NonNull Response<List<Bebida>> response) {
-                        preencherListView(response.body());
+                        assert response.body() != null;
+                        LinkedList<Bebida> bebidas = new LinkedList<>(response.body());
+                        preencherListView(bebidas);
                     }
 
                     @Override
@@ -85,8 +75,7 @@ public class BebidaListActivity extends AppCompatActivity {
     }
 
 
-    public void preencherListView(List<Bebida> bebidaList) {
-        bebidas.addAll(bebidaList);
+    public void preencherListView(LinkedList<Bebida> bebidaList) {
         BebidaAdapter bebidaAdapter = new BebidaAdapter(bebidaList);
         recyclerView.setAdapter(bebidaAdapter);
     }
