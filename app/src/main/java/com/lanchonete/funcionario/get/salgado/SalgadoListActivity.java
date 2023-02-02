@@ -1,34 +1,25 @@
 package com.lanchonete.funcionario.get.salgado;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import com.lanchonete.R;
-
-
-import com.lanchonete.funcionario.MenuFuncionario;
-import com.lanchonete.funcionario.get.salgado.adapter.SalgadoAdapter;
 import com.lanchonete.funcionario.post.SalgadoActivity;
-import com.lanchonete.model.Doce;
 import com.lanchonete.model.Salgado;
 import com.lanchonete.retrofit.RetrofitService;
 import com.lanchonete.retrofit.api.SalgadoAPI;
-
-
-import java.util.LinkedList;
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class SalgadoListActivity extends AppCompatActivity {
 
@@ -44,7 +35,7 @@ public class SalgadoListActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.salgadosList_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        carregarSalgados();
+        carregar();
 
         buttonAddSalgado = findViewById(R.id.btnAdicionarNovoSalgado);
         irInicio = findViewById(R.id.imageButtonVoltarInicioSalgado);
@@ -59,11 +50,11 @@ public class SalgadoListActivity extends AppCompatActivity {
 
     @Override
     protected void onRestart() {
-        carregarSalgados();
+        carregar();
         super.onRestart();
     }
 
-    public void carregarSalgados() {
+    public void carregar() {
         RetrofitService retrofitService = new RetrofitService();
         SalgadoAPI salgadoAPI = retrofitService.getRetrofit().create(SalgadoAPI.class);
         salgadoAPI.listSalgado()

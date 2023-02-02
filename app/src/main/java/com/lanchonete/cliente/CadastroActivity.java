@@ -1,6 +1,7 @@
 package com.lanchonete.cliente;
 //O android Studio não adiciona activities em diretórios que não pertencem ao pacote raiz. Nesse caso é o com.lanchonete
 //eu movi, mas se der erro eu vou ter q colocar eles de volta no lugar de origem
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -22,12 +23,7 @@ public class CadastroActivity extends AppCompatActivity {
 
         btnSair = findViewById(R.id.btnSairCliente);
 
-        btnSair.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(intent);
-        });
-
-
+        btnSair.setOnClickListener(v -> finish());
     }
 
 }

@@ -42,7 +42,7 @@ public class DoceListActivity extends AppCompatActivity {
         buttonAddDoce = findViewById(R.id.btnAdicionarNovoDoce);
         irInicio = findViewById(R.id.imageButtonVoltarInicioDoce);
 
-        carregarDoces();
+        carregar();
 
         irInicio.setOnClickListener(v -> finish());
 
@@ -54,11 +54,11 @@ public class DoceListActivity extends AppCompatActivity {
 
     @Override
     protected void onRestart() {
-        carregarDoces();
+        carregar();
         super.onRestart();
     }
 
-    private void carregarDoces() {
+    private void carregar() {
         RetrofitService retrofitService = new RetrofitService();
         DoceAPI doceAPI = retrofitService.getRetrofit().create(DoceAPI.class);
 

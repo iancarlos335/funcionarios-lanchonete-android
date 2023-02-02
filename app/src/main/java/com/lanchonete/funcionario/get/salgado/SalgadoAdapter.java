@@ -1,4 +1,4 @@
-package com.lanchonete.funcionario.get.salgado.adapter;
+package com.lanchonete.funcionario.get.salgado;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,10 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lanchonete.R;
-import com.lanchonete.model.Doce;
 import com.lanchonete.model.Salgado;
 import com.lanchonete.retrofit.RetrofitService;
-import com.lanchonete.retrofit.api.DoceAPI;
 import com.lanchonete.retrofit.api.SalgadoAPI;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,7 +21,6 @@ import retrofit2.Response;
 
 
 import java.util.LinkedList;
-import java.util.List;
 
 public class SalgadoAdapter extends RecyclerView.Adapter<SalgadoAdapter.SalgadoHolder> {
 

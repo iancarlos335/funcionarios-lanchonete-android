@@ -37,7 +37,7 @@ public class BebidaListActivity extends AppCompatActivity {
         buttonAddBebida = findViewById(R.id.btnAdicionarNovaBebida);
         irInicio = findViewById(R.id.imageButtonVoltarInicioBebida);
 
-        carregarBebidas();
+        carregar();
 
         irInicio.setOnClickListener(v -> finish());
 
@@ -50,11 +50,11 @@ public class BebidaListActivity extends AppCompatActivity {
 
     @Override
     protected void onRestart() {
-        carregarBebidas();
+        carregar();
         super.onRestart();
     }
 
-    private void carregarBebidas() { //TODO change object method (from another class)
+    private void carregar() { //TODO change object method (from another class)
         RetrofitService retrofitService = new RetrofitService();
         BebidaAPI bebidaAPI = retrofitService.getRetrofit().create(BebidaAPI.class);
         // Reading

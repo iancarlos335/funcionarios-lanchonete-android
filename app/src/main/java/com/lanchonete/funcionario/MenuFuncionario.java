@@ -21,8 +21,6 @@ public class MenuFuncionario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_funcionario);
 
-        Intent intent = getIntent();
-
         btnViewBebidas = findViewById(R.id.btnMenuBebidas);
         btnViewDoce = findViewById(R.id.btnMenuDoce);
         btnViewSalgados = findViewById(R.id.btnMenuSalgados);
@@ -44,8 +42,7 @@ public class MenuFuncionario extends AppCompatActivity {
         });
 
         btnVoltar.setOnClickListener(v -> {
-            Intent intent6 = new Intent(getApplicationContext(), Home.class);
-            startActivity(intent6);
+            finish();
         });
 
     }
