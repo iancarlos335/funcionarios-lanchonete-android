@@ -112,7 +112,6 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="84dp"
-                android:onClick="checkButtonSalgado"
                 android:text="@string/link_hamburguer" />
 
             <ImageButton
@@ -129,7 +128,6 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="255dp"
-                android:onClick="checkButtonSalgado"
                 android:text="@string/link_triplo_hamburguer" />
 
             <ImageButton
@@ -146,7 +144,6 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="184dp"
-                android:onClick="checkButtonSalgado"
                 android:text="@string/link_xsaladaegg" />
 
         </RadioGroup>

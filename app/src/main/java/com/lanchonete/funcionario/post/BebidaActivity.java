@@ -3,7 +3,6 @@ package com.lanchonete.funcionario.post;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputLayout;
@@ -27,7 +26,7 @@ public class BebidaActivity extends AppCompatActivity {
     RadioButton radioCoca, radioFanta, radioGuarana, radioPepsi;
     RadioGroup radioGroup;
 
-    Button btnBotao;
+    Button btnCadastrar;
 
 
     @Override
@@ -36,10 +35,10 @@ public class BebidaActivity extends AppCompatActivity {
         setContentView(R.layout.bebida_activity);
 
         btnVoltar = findViewById(R.id.btnBebidaVoltar);
-        btnBotao = findViewById(R.id.botao_bebida);
+        btnCadastrar = findViewById(R.id.botao_bebida);
         editTextNome = findViewById(R.id.nome_bebida);
         editTextValor = findViewById(R.id.valor_bebida);
-        editTextDescricao = findViewById(R.id.descricao_bebida); //adicionar input direito
+        editTextDescricao = findViewById(R.id.descricao_bebida);
 
         btnCoca = findViewById(R.id.imageButtonCoca);
         btnFanta = findViewById(R.id.imageButtonFanta);
@@ -70,7 +69,7 @@ public class BebidaActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 String alertNomeBebida = s.toString();
-                if (alertNomeBebida.length() != 0) { //tem o matcher para validar intevalos de inserção regex
+                if (alertNomeBebida.length() != 0) { //pode ser feita a validação de intervalos regex
                     inputLayoutNome.setHelperText("");
                     inputLayoutNome.setError("");
                 } else {
@@ -134,7 +133,7 @@ public class BebidaActivity extends AppCompatActivity {
         btnGuarana.setOnClickListener(v -> radioGuarana.setChecked(true));
         btnPepsi.setOnClickListener(v -> radioPepsi.setChecked(true));
 
-        btnBotao.setOnClickListener(view -> {
+        btnCadastrar.setOnClickListener(view -> {
             int radioId = radioGroup.getCheckedRadioButtonId();
 
             boolean nomeEmpty = editTextNome.toString().isEmpty();
@@ -153,13 +152,13 @@ public class BebidaActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                 onRestart();
             } else {
-                iniciandoComponentes();
+                cadastrar();
             }
         });
     }
 
 
-    private void iniciandoComponentes() {
+    private void cadastrar() {
 
         RetrofitService retrofitService = new RetrofitService();
         BebidaAPI bebidaAPI = retrofitService.getRetrofit().create(BebidaAPI.class);
@@ -167,7 +166,7 @@ public class BebidaActivity extends AppCompatActivity {
         String nomeBebida = editTextNome.getText().toString();
         String descricao = editTextDescricao.getText().toString();
         String strValor = editTextValor.getText().toString();
-        String imgBebida = ((RadioButton) findViewById(radioGroup.getCheckedRadioButtonId())).getText().toString(); // esse q é o paranaue loko que o Jonas encontrou na internet
+        String imgBebida = ((RadioButton) findViewById(radioGroup.getCheckedRadioButtonId())).getText().toString(); // esse q é o casting loko que o Jonas encontrou na internet
         double valor = Double.parseDouble(strValor);
 
         Bebida bebida = new Bebida();
@@ -190,7 +189,6 @@ public class BebidaActivity extends AppCompatActivity {
                         Logger.getLogger(BebidaActivity.class.getName()).log(Level.SEVERE, "Um erro ocorreu", t);
                     }
                 });
-
     }
 
 }

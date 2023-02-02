@@ -18,8 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputLayout;
 import com.lanchonete.R;
 
-import com.lanchonete.funcionario.MenuFuncionario;
-import com.lanchonete.funcionario.get.doce.DoceListActivity;
 import com.lanchonete.model.Doce;
 import com.lanchonete.retrofit.RetrofitService;
 import com.lanchonete.retrofit.api.DoceAPI;
@@ -35,13 +33,14 @@ import retrofit2.Response;
 
 public class DoceActivity extends AppCompatActivity {
 
-    TextInputLayout inputLayoutNomeDoce, inputLayoutValor, inputLayoutDescricao;
-    EditText editTextNomeDoce, editTextValor, editTextDescricao;
-    Button btnBotao;
+    TextInputLayout inputLayoutNome, inputLayoutValor, inputLayoutDescricao;
+    EditText editTextNome, editTextValor, editTextDescricao;
 
-    ImageButton btnVoltar, imagemPudim, imagemBolo, imagemDonuts;
+    ImageButton btnVoltar, btnPudim, btnBolo, btnDonuts;
     RadioButton radioPudim, radioBolo, radioDonuts, radioButtonFinal;
     RadioGroup radioGroup;
+
+    Button btnCadastrar;
 
 
     @Override
@@ -55,14 +54,14 @@ public class DoceActivity extends AppCompatActivity {
         setContentView(R.layout.doce_activity);
 
         btnVoltar = findViewById(R.id.btnDoceVoltar);
-        btnBotao = findViewById(R.id.botao_doce);
-        editTextNomeDoce = findViewById(R.id.nome_doce);
+        btnCadastrar = findViewById(R.id.botao_doce);
+        editTextNome = findViewById(R.id.nome_doce);
         editTextValor = findViewById(R.id.valor_doce);
-        editTextDescricao = findViewById(R.id.descricao_doce); //adicionar input direito
+        editTextDescricao = findViewById(R.id.descricao_doce);
 
-        imagemPudim = findViewById(R.id.imageButtonPudim);
-        imagemBolo = findViewById(R.id.imageButtonBolo);
-        imagemDonuts = findViewById(R.id.imageButtonDonuts);
+        btnPudim = findViewById(R.id.imageButtonPudim);
+        btnBolo = findViewById(R.id.imageButtonBolo);
+        btnDonuts = findViewById(R.id.imageButtonDonuts);
 
         radioPudim = findViewById(R.id.radioButtonPudim);
         radioBolo = findViewById(R.id.radioButtonBolo);
@@ -71,7 +70,7 @@ public class DoceActivity extends AppCompatActivity {
         radioGroup = findViewById(R.id.radioDoce);
 
         //Aaaaaaa mannnnnnnn
-        inputLayoutNomeDoce = findViewById(R.id.nome_doceInputLayout);
+        inputLayoutNome = findViewById(R.id.nome_doceInputLayout);
         inputLayoutValor = findViewById(R.id.valor_doceInputLayout);
         inputLayoutDescricao = findViewById(R.id.descricao_doceInputLayout);
 
@@ -82,7 +81,7 @@ public class DoceActivity extends AppCompatActivity {
         });
 
 
-        editTextNomeDoce.addTextChangedListener(new TextWatcher() {
+        editTextNome.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -90,12 +89,12 @@ public class DoceActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String alertNomeDoce = s.toString();
-                if (alertNomeDoce.length() != 0) { //tem o matcher com o pattern pra verificar os intervalos no input, mas aqui não ficaria interessante
-                    inputLayoutNomeDoce.setHelperText("");
-                    inputLayoutNomeDoce.setError("");
+                if (alertNomeDoce.length() != 0) { //pode ser feita a validação de intervalos regex
+                    inputLayoutNome.setHelperText("");
+                    inputLayoutNome.setError("");
                 } else {
-                    inputLayoutNomeDoce.setHelperText("");
-                    inputLayoutNomeDoce.setError("Campo Obrigatório");
+                    inputLayoutNome.setHelperText("");
+                    inputLayoutNome.setError("Campo Obrigatório");
                 }
             }
 
@@ -153,42 +152,44 @@ public class DoceActivity extends AppCompatActivity {
             }
         });
 
-        // A única forma de os dois serem iguais é se n houver erro nenhum. Pq desde o inicio da activity eles são diferentes
-        boolean compareInputNomeDoce = Objects.equals(inputLayoutNomeDoce.getHelperText(), inputLayoutNomeDoce.getError());
-        boolean compareInputValor = Objects.equals(inputLayoutValor.getHelperText(), inputLayoutValor.getError()); // a IDE que me ajudou a fazer essa construção de dados, eu ia deixar String.valueOf(obj).equals() msm
-        boolean compareInputDescricao = Objects.equals(inputLayoutDescricao.getHelperText(), inputLayoutDescricao.getError());
+        btnPudim.setOnClickListener(v -> radioPudim.setChecked(true));
+        btnBolo.setOnClickListener(v -> radioBolo.setChecked(true));
+        btnDonuts.setOnClickListener(v -> radioDonuts.setChecked(true));
 
-        imagemPudim.setOnClickListener(v -> radioPudim.setChecked(true)); //ativa radio pela imagem
-        imagemBolo.setOnClickListener(v -> radioBolo.setChecked(true));
-        imagemDonuts.setOnClickListener(v -> radioDonuts.setChecked(true));
+        btnCadastrar.setOnClickListener(view -> {
+            int radioId = radioGroup.getCheckedRadioButtonId();
 
-        btnBotao.setOnClickListener(view -> {
-            if (!(compareInputNomeDoce && compareInputValor && compareInputDescricao)) {
-                int radioId = radioGroup.getCheckedRadioButtonId();
-                radioButtonFinal = findViewById(radioId);
+            boolean nomeEmpty = editTextNome.toString().isEmpty();
+            boolean valorEmpty = editTextValor.toString().isEmpty();
+            boolean descricaoEmpty = editTextDescricao.toString().isEmpty();
+
+            if (nomeEmpty) {
+                inputLayoutNome.requestFocus();
+            } else if (valorEmpty) {
+                inputLayoutValor.requestFocus();
+            } else if (descricaoEmpty) {
+                inputLayoutDescricao.requestFocus();
+            }
+
+            if (nomeEmpty && valorEmpty && descricaoEmpty && (radioId != -1)) {
+                Toast.makeText(getApplicationContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+                onRestart();
+            } else {
                 iniciandoComponentes();
             }
         });
     }
 
-    public void checkButtonDoce(View view) {
-        int radioId = radioGroup.getCheckedRadioButtonId();
-        radioButtonFinal = findViewById(radioId);
-    }
-
-
     private void iniciandoComponentes() {
 
         RetrofitService retrofitService = new RetrofitService();
-        DoceAPI doceAPI = retrofitService.getRetrofit().create(DoceAPI.class); //ele vai gerar uma nova requisição http, e nesse caso do tipo POST
+        DoceAPI doceAPI = retrofitService.getRetrofit().create(DoceAPI.class);
 
-        String nomeDoce = editTextNomeDoce.getText().toString();
+        String nomeDoce = editTextNome.getText().toString();
         String descricao = editTextDescricao.getText().toString();
         String strValor = editTextValor.getText().toString();
-        String imgDoce = radioButtonFinal.getText().toString();// tentei com o to string e n deu certo
-        double valor = Double.parseDouble(strValor); // se ele ta dando erro vo botar ele aqui, só uso ele nesse objeto msm
-
-        //ele só vai receber alguma coisa se tiver algum ID rodando
+        String imgDoce = ((RadioButton) findViewById(radioGroup.getCheckedRadioButtonId())).getText().toString(); // esse q é o casting loko que o Jonas encontrou na internet
+        double valor = Double.parseDouble(strValor);
 
         Doce doce = new Doce();
         doce.setNomeDoce(nomeDoce);
@@ -196,8 +197,9 @@ public class DoceActivity extends AppCompatActivity {
         doce.setDescricao(descricao);
         doce.setImagem(imgDoce);
 
-        doceAPI.addDoce(doce) //chama o método POST
-                .enqueue(new Callback<Doce>() { //deixa as requisições em fila
+        // Creating
+        doceAPI.addDoce(doce)
+                .enqueue(new Callback<Doce>() {
                     @Override
                     public void onResponse(Call<Doce> call, Response<Doce> response) {
                         Toast.makeText(getApplicationContext(), "Salvo com sucesso no banco", Toast.LENGTH_SHORT).show();
@@ -210,7 +212,6 @@ public class DoceActivity extends AppCompatActivity {
                         Logger.getLogger(DoceActivity.class.getName()).log(Level.SEVERE, "Um erro ocorreu", t);
                     }
                 });
-
     }
 }
 
