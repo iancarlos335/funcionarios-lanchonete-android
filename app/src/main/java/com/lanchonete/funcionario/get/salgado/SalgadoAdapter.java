@@ -46,10 +46,7 @@ public class SalgadoAdapter extends RecyclerView.Adapter<SalgadoAdapter.SalgadoH
         holder.nome.setText(salgado.getNomeSalgado());
         holder.descricao.setText(salgado.getDescricao());
         holder.valor.setText(strValue);
-        holder.delete_item.setOnClickListener(view -> {
-            deletar(salgado.getId(), view.getContext());
-            removeItem(position);
-        });
+        holder.delete_item.setOnClickListener(view -> deletar(salgado.getId(), view.getContext(), position));
     }
 
     private void removeItem(int position) {
@@ -69,7 +66,7 @@ public class SalgadoAdapter extends RecyclerView.Adapter<SalgadoAdapter.SalgadoH
         return salgado.getId();
     }
 
-    private void deletar(long id, Context context) {
+    private void deletar(long id, Context context, int position) {
         RetrofitService retrofitService = new RetrofitService();
         SalgadoAPI salgadoAPI = retrofitService.getRetrofit().create(SalgadoAPI.class);
 
@@ -77,12 +74,12 @@ public class SalgadoAdapter extends RecyclerView.Adapter<SalgadoAdapter.SalgadoH
                 .enqueue(new Callback<Salgado>() {
                     @Override
                     public void onResponse(Call<Salgado> call, Response<Salgado> response) {
-                        Toast.makeText(context, "Deletou do jeito certo", Toast.LENGTH_SHORT).show();
+                        removeItem(position);
                     }
 
                     @Override
                     public void onFailure(Call<Salgado> call, Throwable t) {
-                        Toast.makeText(context, "Deletou rápido dms", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Vai devagar, o item não foi removido", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

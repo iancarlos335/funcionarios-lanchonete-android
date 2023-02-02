@@ -37,6 +37,8 @@ public class BebidaListActivity extends AppCompatActivity {
         buttonAddBebida = findViewById(R.id.btnAdicionarNovaBebida);
         irInicio = findViewById(R.id.imageButtonVoltarInicioBebida);
 
+        //recyclerView.addOnItemTouchListener();
+
         carregar();
 
         irInicio.setOnClickListener(v -> finish());

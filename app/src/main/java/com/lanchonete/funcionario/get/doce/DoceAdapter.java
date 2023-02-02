@@ -23,7 +23,7 @@ import retrofit2.Response;
 import java.util.LinkedList;
 import java.util.List;
 
-public class DoceAdapter extends RecyclerView.Adapter<DoceAdapter.DoceHolder>{
+public class DoceAdapter extends RecyclerView.Adapter<DoceAdapter.DoceHolder> {
 
     private final LinkedList<Doce> doceList;
 
@@ -47,10 +47,7 @@ public class DoceAdapter extends RecyclerView.Adapter<DoceAdapter.DoceHolder>{
         holder.nome.setText(doce.getNomeDoce());
         holder.descricao.setText(doce.getDescricao());
         holder.valor.setText(strValue);
-        holder.delete_item.setOnClickListener(view -> {
-            deletar(doce.getId(), view.getContext());
-            removeItem(position);
-        });
+        holder.delete_item.setOnClickListener(view -> deletar(doce.getId(), view.getContext(), position));
 
 
     }
@@ -72,7 +69,7 @@ public class DoceAdapter extends RecyclerView.Adapter<DoceAdapter.DoceHolder>{
         notifyItemRangeChanged(position, doceList.size()); //Esse cara que atualiza o recycler
     }
 
-    private void deletar(long id, Context context) {
+    private void deletar(long id, Context context, int position) {
         RetrofitService retrofitService = new RetrofitService();
         DoceAPI doceAPI = retrofitService.getRetrofit().create(DoceAPI.class);
 
@@ -80,12 +77,12 @@ public class DoceAdapter extends RecyclerView.Adapter<DoceAdapter.DoceHolder>{
                 .enqueue(new Callback<Doce>() {
                     @Override
                     public void onResponse(Call<Doce> call, Response<Doce> response) {
-                        Toast.makeText(context, "Deletou do jeito certo", Toast.LENGTH_SHORT).show();
+                        removeItem(position);
                     }
 
                     @Override
                     public void onFailure(Call<Doce> call, Throwable t) {
-                        Toast.makeText(context, "Deletou rápido dms", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Vai devagar, o item não foi removido", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -107,7 +104,6 @@ public class DoceAdapter extends RecyclerView.Adapter<DoceAdapter.DoceHolder>{
 
         }
     }
-
 
 
 }

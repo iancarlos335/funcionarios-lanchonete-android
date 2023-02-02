@@ -46,10 +46,7 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
         holder.nome_bebida.setText(bebida.getNomeBebida());
         holder.descricao_bebida.setText(bebida.getDescricao());
         holder.valor_bebida.setText(strValue);
-        holder.delete_item.setOnClickListener(view -> {
-            deletar(bebida.getId(), view.getContext());
-            removeItem(position);
-        });
+        holder.delete_item.setOnClickListener(view -> deletar(bebida.getId(), view.getContext(), position));
 
 
     }
@@ -72,7 +69,7 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
         return bebidaList.size();
     }
 
-    private void deletar(long id, Context context) {
+    private void deletar(long id, Context context, int position) {
         RetrofitService retrofitService = new RetrofitService();
         BebidaAPI bebidaAPI = retrofitService.getRetrofit().create(BebidaAPI.class);
 
@@ -80,12 +77,12 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
                 .enqueue(new Callback<Bebida>() {
                     @Override
                     public void onResponse(Call<Bebida> call, Response<Bebida> response) {
-                        Toast.makeText(context, "Deletou do jeito certo", Toast.LENGTH_SHORT).show();
+                        removeItem(position);
                     }
 
                     @Override
                     public void onFailure(Call<Bebida> call, Throwable t) {
-                        Toast.makeText(context, "Deletou rápido dms", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Vai devagar, o item não foi removido", Toast.LENGTH_SHORT).show();
                     }
                 });
 
