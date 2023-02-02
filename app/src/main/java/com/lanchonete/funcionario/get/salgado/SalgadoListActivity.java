@@ -17,11 +17,13 @@ import com.lanchonete.R;
 import com.lanchonete.funcionario.MenuFuncionario;
 import com.lanchonete.funcionario.get.salgado.adapter.SalgadoAdapter;
 import com.lanchonete.funcionario.post.SalgadoActivity;
+import com.lanchonete.model.Doce;
 import com.lanchonete.model.Salgado;
 import com.lanchonete.retrofit.RetrofitService;
 import com.lanchonete.retrofit.api.SalgadoAPI;
 
 
+import java.util.LinkedList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -39,8 +41,6 @@ public class SalgadoListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_salgado_list);
 
-        Intent intent = getIntent();
-
         recyclerView = findViewById(R.id.salgadosList_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -49,9 +49,7 @@ public class SalgadoListActivity extends AppCompatActivity {
         buttonAddSalgado = findViewById(R.id.btnAdicionarNovoSalgado);
         irInicio = findViewById(R.id.imageButtonVoltarInicioSalgado);
 
-        irInicio.setOnClickListener(v -> {
-            finish();
-        });
+        irInicio.setOnClickListener(v -> finish());
 
         buttonAddSalgado.setOnClickListener(v -> {
             Intent intentGoBebidaActivity = new Intent(getApplicationContext(), SalgadoActivity.class);
@@ -72,7 +70,9 @@ public class SalgadoListActivity extends AppCompatActivity {
                 .enqueue(new Callback<List<Salgado>>() {
                     @Override
                     public void onResponse(@NonNull Call<List<Salgado>> call, @NonNull Response<List<Salgado>> response) {
-                        preencherListView(response.body());
+                        assert response.body() != null;
+                        LinkedList<Salgado> salgados = new LinkedList<>(response.body());
+                        preencherListView(salgados);
                     }
 
                     @Override
@@ -83,16 +83,9 @@ public class SalgadoListActivity extends AppCompatActivity {
 
     }
 
-    private void preencherListView(List<Salgado> salgadoList) {
+    private void preencherListView(LinkedList<Salgado> salgadoList) {
         SalgadoAdapter salgadoAdapter = new SalgadoAdapter(salgadoList);
         recyclerView.setAdapter(salgadoAdapter);
-    }
-
-    private void selecionarPeloId(List<Salgado> salgadoList) {
-        //View
-        //BebidaHolder bebidaHolder = new BebidaHolder();
-        SalgadoAdapter salgadoAdapter = new SalgadoAdapter(salgadoList);
-        //recyclerView.getChildItemId()
     }
 
 }

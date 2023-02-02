@@ -47,7 +47,7 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
         holder.descricao_bebida.setText(bebida.getDescricao());
         holder.valor_bebida.setText(strValue);
         holder.delete_item.setOnClickListener(view -> {
-            deletarBebida(bebida.getId(), view.getContext(), position);
+            deletar(bebida.getId(), view.getContext());
             removeItem(position);
         });
 
@@ -57,7 +57,7 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
     private void removeItem(int position) {
         bebidaList.remove(position);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position, bebidaList.size()); //Esse cara que atualiza minha Lista no android
+        notifyItemRangeChanged(position, bebidaList.size()); //Esse cara que atualiza o recycler
     }
 
     @Override
@@ -72,19 +72,15 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
         return bebidaList.size();
     }
 
-    //Deletando
-    private void deletarBebida(long id, Context context, int position) {
+    private void deletar(long id, Context context) {
         RetrofitService retrofitService = new RetrofitService();
         BebidaAPI bebidaAPI = retrofitService.getRetrofit().create(BebidaAPI.class);
-
-        //int bebidaId = Integer.parseInt(String.valueOf(id));
 
         bebidaAPI.delete(id)
                 .enqueue(new Callback<Bebida>() {
                     @Override
                     public void onResponse(Call<Bebida> call, Response<Bebida> response) {
                         Toast.makeText(context, "Deletou do jeito certo", Toast.LENGTH_SHORT).show();
-
                     }
 
                     @Override
@@ -95,7 +91,7 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
 
     }
 
-    public class BebidaHolder extends RecyclerView.ViewHolder {
+    public static class BebidaHolder extends RecyclerView.ViewHolder {
 
         final TextView nome_bebida;
         final TextView descricao_bebida;
@@ -105,11 +101,10 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
         public BebidaHolder(@NonNull View itemView) {
             super(itemView);
 
-            //N vai ser necessário as imagens nesse recycler view
             nome_bebida = itemView.findViewById(R.id.bebidasListItem_nome);
             descricao_bebida = itemView.findViewById(R.id.bebidasListItem_descricao);
             valor_bebida = itemView.findViewById(R.id.bebidasListItem_valor);
-            delete_item = itemView.findViewById(R.id.btnDelete);
+            delete_item = itemView.findViewById(R.id.btnDeleteBebidas);
 
         }
     }
