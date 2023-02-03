@@ -97,7 +97,7 @@ public class SalgadoAdapter extends RecyclerView.Adapter<SalgadoAdapter.SalgadoH
             nome = itemView.findViewById(R.id.salgadoListItem_nome);
             descricao = itemView.findViewById(R.id.salgadoListItem_descricao);
             valor = itemView.findViewById(R.id.salgadoListItem_valor);
-            delete_item = itemView.findViewById(R.id.doceDeleteBtn);
+            delete_item = itemView.findViewById(R.id.salgadoDeleteBtn);
         }
 
     }

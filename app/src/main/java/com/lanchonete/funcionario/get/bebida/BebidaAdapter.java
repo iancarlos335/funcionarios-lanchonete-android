@@ -1,6 +1,7 @@
 package com.lanchonete.funcionario.get.bebida;
 
 import android.content.Context;
+import android.provider.DocumentsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ import retrofit2.Response;
 
 import java.util.LinkedList;
 
-public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHolder> {
+public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHolder> implements View.OnClickListener, View.OnLongClickListener {
 
 
     private final LinkedList<Bebida> bebidaList;
@@ -40,27 +41,38 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull BebidaHolder holder, int position) {
-
         Bebida bebida = bebidaList.get(position);
         String strValue = Double.toString(bebida.getValor());
+
+        holder.itemView.setOnLongClickListener(this);
+
         holder.nome_bebida.setText(bebida.getNomeBebida());
         holder.descricao_bebida.setText(bebida.getDescricao());
         holder.valor_bebida.setText(strValue);
         holder.delete_item.setOnClickListener(view -> deletar(bebida.getId(), view.getContext(), position));
-
-
-    }
-
-    private void removeItem(int position) {
-        bebidaList.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, bebidaList.size()); //Esse cara que atualiza o recycler
     }
 
     @Override
     public long getItemId(int position) {
         Bebida bebida = bebidaList.get(position);
         return bebida.getId();
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        return false;
+    }
+
+
+    private void removeItem(int position) {
+        bebidaList.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, bebidaList.size()); //Esse cara que atualiza o recycler
     }
 
 
@@ -88,12 +100,15 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
 
     }
 
-    public static class BebidaHolder extends RecyclerView.ViewHolder {
+
+    public static class BebidaHolder extends RecyclerView.ViewHolder{
 
         final TextView nome_bebida;
+
         final TextView descricao_bebida;
         final TextView valor_bebida;
         final Button delete_item;
+
 
         public BebidaHolder(@NonNull View itemView) {
             super(itemView);
@@ -102,7 +117,6 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
             descricao_bebida = itemView.findViewById(R.id.bebidasListItem_descricao);
             valor_bebida = itemView.findViewById(R.id.bebidasListItem_valor);
             delete_item = itemView.findViewById(R.id.btnDeleteBebidas);
-
         }
     }
 }

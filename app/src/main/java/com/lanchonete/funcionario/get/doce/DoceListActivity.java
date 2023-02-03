@@ -1,5 +1,7 @@
 package com.lanchonete.funcionario.get.doce;
 
+import android.view.View;
+import android.widget.AdapterView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,13 +14,13 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.lanchonete.R;
+import com.lanchonete.funcionario.MenuFuncionario;
+import com.lanchonete.funcionario.get.helper.RecyclerItemClickListener;
 import com.lanchonete.funcionario.post.DoceActivity;
-import com.lanchonete.model.Bebida;
 import com.lanchonete.model.Doce;
 import com.lanchonete.retrofit.RetrofitService;
 import com.lanchonete.retrofit.api.DoceAPI;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -82,6 +84,21 @@ public class DoceListActivity extends AppCompatActivity {
     private void preencherListView(LinkedList<Doce> doceList) {
         DoceAdapter doceAdapter = new DoceAdapter(doceList);
         recyclerView.setAdapter(doceAdapter);
+
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(getApplicationContext(), recyclerView, new RecyclerItemClickListener.OnLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onItemLongClick(View view, int position) {
+                        Intent intent = new Intent(getApplicationContext(), MenuFuncionario.class);
+                        startActivity(intent);
+                    }
+                })
+        );
     }
 
 }

@@ -2,6 +2,8 @@ package com.lanchonete.funcionario.get.bebida;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -10,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.lanchonete.R;
+import com.lanchonete.funcionario.MenuFuncionario;
+import com.lanchonete.funcionario.get.helper.RecyclerItemClickListener;
 import com.lanchonete.funcionario.post.BebidaActivity;
 import com.lanchonete.model.Bebida;
 import com.lanchonete.retrofit.RetrofitService;
@@ -36,8 +40,6 @@ public class BebidaListActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         buttonAddBebida = findViewById(R.id.btnAdicionarNovaBebida);
         irInicio = findViewById(R.id.imageButtonVoltarInicioBebida);
-
-        //recyclerView.addOnItemTouchListener();
 
         carregar();
 
@@ -80,6 +82,21 @@ public class BebidaListActivity extends AppCompatActivity {
     public void preencherListView(LinkedList<Bebida> bebidaList) {
         BebidaAdapter bebidaAdapter = new BebidaAdapter(bebidaList);
         recyclerView.setAdapter(bebidaAdapter);
+
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(getApplicationContext(), recyclerView, new RecyclerItemClickListener.OnLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onItemLongClick(View view, int position) {
+                        Intent intent = new Intent(getApplicationContext(), MenuFuncionario.class);
+                        startActivity(intent);
+                    }
+                })
+        );
     }
 
 }

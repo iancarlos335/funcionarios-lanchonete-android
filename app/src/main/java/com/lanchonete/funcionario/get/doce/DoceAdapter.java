@@ -49,7 +49,6 @@ public class DoceAdapter extends RecyclerView.Adapter<DoceAdapter.DoceHolder> {
         holder.valor.setText(strValue);
         holder.delete_item.setOnClickListener(view -> deletar(doce.getId(), view.getContext(), position));
 
-
     }
 
     @Override
