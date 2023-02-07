@@ -17,8 +17,6 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        Intent intent = getIntent();
-
         btnGoMenu = findViewById(R.id.btnGoMenu);
         btnSair = findViewById(R.id.btnSairFuncionarios);
 

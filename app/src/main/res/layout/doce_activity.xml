@@ -112,7 +112,6 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="84dp"
-                android:onClick="checkButtonDoce"
                 android:text="@string/link_pudim" />
 
             <ImageButton
@@ -129,7 +128,6 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="255dp"
-                android:onClick="checkButtonDoce"
                 android:text="@string/link_bolo" />
 
             <ImageButton
@@ -146,7 +144,6 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="184dp"
-                android:onClick="checkButtonDoce"
                 android:text="@string/link_donuts" />
 
         </RadioGroup>

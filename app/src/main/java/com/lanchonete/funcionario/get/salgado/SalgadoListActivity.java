@@ -1,32 +1,29 @@
 package com.lanchonete.funcionario.get.salgado;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Toast;
-
 import com.lanchonete.R;
-
-
 import com.lanchonete.funcionario.MenuFuncionario;
-import com.lanchonete.funcionario.get.salgado.adapter.SalgadoAdapter;
+import com.lanchonete.funcionario.get.helper.RecyclerItemClickListener;
 import com.lanchonete.funcionario.post.SalgadoActivity;
 import com.lanchonete.model.Salgado;
 import com.lanchonete.retrofit.RetrofitService;
 import com.lanchonete.retrofit.api.SalgadoAPI;
-
-
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class SalgadoListActivity extends AppCompatActivity {
 
@@ -39,19 +36,15 @@ public class SalgadoListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_salgado_list);
 
-        Intent intent = getIntent();
-
         recyclerView = findViewById(R.id.salgadosList_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        carregarSalgados();
+        carregar();
 
         buttonAddSalgado = findViewById(R.id.btnAdicionarNovoSalgado);
         irInicio = findViewById(R.id.imageButtonVoltarInicioSalgado);
 
-        irInicio.setOnClickListener(v -> {
-            finish();
-        });
+        irInicio.setOnClickListener(v -> finish());
 
         buttonAddSalgado.setOnClickListener(v -> {
             Intent intentGoBebidaActivity = new Intent(getApplicationContext(), SalgadoActivity.class);
@@ -61,18 +54,20 @@ public class SalgadoListActivity extends AppCompatActivity {
 
     @Override
     protected void onRestart() {
-        carregarSalgados();
+        carregar();
         super.onRestart();
     }
 
-    public void carregarSalgados() {
+    public void carregar() {
         RetrofitService retrofitService = new RetrofitService();
         SalgadoAPI salgadoAPI = retrofitService.getRetrofit().create(SalgadoAPI.class);
         salgadoAPI.listSalgado()
                 .enqueue(new Callback<List<Salgado>>() {
                     @Override
                     public void onResponse(@NonNull Call<List<Salgado>> call, @NonNull Response<List<Salgado>> response) {
-                        preencherListView(response.body());
+                        assert response.body() != null;
+                        LinkedList<Salgado> salgados = new LinkedList<>(response.body());
+                        preencherListView(salgados);
                     }
 
                     @Override
@@ -83,16 +78,24 @@ public class SalgadoListActivity extends AppCompatActivity {
 
     }
 
-    private void preencherListView(List<Salgado> salgadoList) {
+    private void preencherListView(LinkedList<Salgado> salgadoList) {
         SalgadoAdapter salgadoAdapter = new SalgadoAdapter(salgadoList);
         recyclerView.setAdapter(salgadoAdapter);
-    }
 
-    private void selecionarPeloId(List<Salgado> salgadoList) {
-        //View
-        //BebidaHolder bebidaHolder = new BebidaHolder();
-        SalgadoAdapter salgadoAdapter = new SalgadoAdapter(salgadoList);
-        //recyclerView.getChildItemId()
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(getApplicationContext(), recyclerView, new RecyclerItemClickListener.OnLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onItemLongClick(View view, int position) {
+                        Intent intent = new Intent(getApplicationContext(), MenuFuncionario.class);
+                        startActivity(intent);
+                    }
+                })
+        );
     }
 
 }

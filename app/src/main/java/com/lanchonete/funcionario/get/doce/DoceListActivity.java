@@ -1,7 +1,8 @@
 package com.lanchonete.funcionario.get.doce;
 
+import android.view.View;
+import android.widget.AdapterView;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,14 +15,13 @@ import android.widget.Toast;
 
 import com.lanchonete.R;
 import com.lanchonete.funcionario.MenuFuncionario;
-import com.lanchonete.funcionario.get.doce.adapter.DoceAdapter;
+import com.lanchonete.funcionario.get.helper.RecyclerItemClickListener;
 import com.lanchonete.funcionario.post.DoceActivity;
-import com.lanchonete.model.Bebida;
 import com.lanchonete.model.Doce;
 import com.lanchonete.retrofit.RetrofitService;
 import com.lanchonete.retrofit.api.DoceAPI;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -29,8 +29,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DoceListActivity extends AppCompatActivity {
-
-    private final List<Doce> doces = new ArrayList<>();
 
     private RecyclerView recyclerView;
     ImageView irInicio;
@@ -46,7 +44,7 @@ public class DoceListActivity extends AppCompatActivity {
         buttonAddDoce = findViewById(R.id.btnAdicionarNovoDoce);
         irInicio = findViewById(R.id.imageButtonVoltarInicioDoce);
 
-        carregarDoces();
+        carregar();
 
         irInicio.setOnClickListener(v -> finish());
 
@@ -58,11 +56,11 @@ public class DoceListActivity extends AppCompatActivity {
 
     @Override
     protected void onRestart() {
-        carregarDoces();
+        carregar();
         super.onRestart();
     }
 
-    private void carregarDoces() {
+    private void carregar() {
         RetrofitService retrofitService = new RetrofitService();
         DoceAPI doceAPI = retrofitService.getRetrofit().create(DoceAPI.class);
 
@@ -70,7 +68,9 @@ public class DoceListActivity extends AppCompatActivity {
                 .enqueue(new Callback<List<Doce>>() {
                     @Override
                     public void onResponse(@NonNull Call<List<Doce>> call, @NonNull Response<List<Doce>> response) {
-                        preencherListView(response.body());
+                        assert response.body() != null;
+                        LinkedList<Doce> doces = new LinkedList<>(response.body());
+                        preencherListView(doces);
                     }
 
                     @Override
@@ -81,16 +81,24 @@ public class DoceListActivity extends AppCompatActivity {
 
     }
 
-    private void preencherListView(List<Doce> doceList) {
+    private void preencherListView(LinkedList<Doce> doceList) {
         DoceAdapter doceAdapter = new DoceAdapter(doceList);
         recyclerView.setAdapter(doceAdapter);
-    }
 
-    private void selecionarPeloId(List<Doce> doceList) {
-        //View
-        //BebidaHolder bebidaHolder = new BebidaHolder();
-        DoceAdapter bebidaAdapter = new DoceAdapter(doceList);
-        //recyclerView.getChildItemId()
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(getApplicationContext(), recyclerView, new RecyclerItemClickListener.OnLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onItemLongClick(View view, int position) {
+                        Intent intent = new Intent(getApplicationContext(), MenuFuncionario.class);
+                        startActivity(intent);
+                    }
+                })
+        );
     }
 
 }

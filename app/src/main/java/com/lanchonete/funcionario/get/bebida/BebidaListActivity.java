@@ -3,37 +3,29 @@ package com.lanchonete.funcionario.get.bebida;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.lanchonete.R;
 import com.lanchonete.funcionario.MenuFuncionario;
-import com.lanchonete.funcionario.get.bebida.adapter.BebidaAdapter;
-import com.lanchonete.funcionario.get.bebida.adapter.BebidaHolder;
+import com.lanchonete.funcionario.get.helper.RecyclerItemClickListener;
 import com.lanchonete.funcionario.post.BebidaActivity;
 import com.lanchonete.model.Bebida;
 import com.lanchonete.retrofit.RetrofitService;
 import com.lanchonete.retrofit.api.BebidaAPI;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BebidaListActivity extends AppCompatActivity {
+import java.util.LinkedList;
+import java.util.List;
 
-    private final List<Bebida> bebidas = new ArrayList<>();
+public class BebidaListActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     ImageView irInicio;
@@ -49,7 +41,7 @@ public class BebidaListActivity extends AppCompatActivity {
         buttonAddBebida = findViewById(R.id.btnAdicionarNovaBebida);
         irInicio = findViewById(R.id.imageButtonVoltarInicioBebida);
 
-        carregarBebidas();
+        carregar();
 
         irInicio.setOnClickListener(v -> finish());
 
@@ -62,11 +54,11 @@ public class BebidaListActivity extends AppCompatActivity {
 
     @Override
     protected void onRestart() {
-        carregarBebidas();
+        carregar();
         super.onRestart();
     }
 
-    private void carregarBebidas() { //TODO change object method (from another class)
+    private void carregar() { //TODO change object method (from another class)
         RetrofitService retrofitService = new RetrofitService();
         BebidaAPI bebidaAPI = retrofitService.getRetrofit().create(BebidaAPI.class);
         // Reading
@@ -74,7 +66,9 @@ public class BebidaListActivity extends AppCompatActivity {
                 .enqueue(new Callback<List<Bebida>>() {
                     @Override
                     public void onResponse(@NonNull Call<List<Bebida>> call, @NonNull Response<List<Bebida>> response) {
-                        preencherListView(response.body());
+                        assert response.body() != null;
+                        LinkedList<Bebida> bebidas = new LinkedList<>(response.body());
+                        preencherListView(bebidas);
                     }
 
                     @Override
@@ -85,10 +79,24 @@ public class BebidaListActivity extends AppCompatActivity {
     }
 
 
-    public void preencherListView(List<Bebida> bebidaList) {
-        bebidas.addAll(bebidaList);
+    public void preencherListView(LinkedList<Bebida> bebidaList) {
         BebidaAdapter bebidaAdapter = new BebidaAdapter(bebidaList);
         recyclerView.setAdapter(bebidaAdapter);
+
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(getApplicationContext(), recyclerView, new RecyclerItemClickListener.OnLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onItemLongClick(View view, int position) {
+                        Intent intent = new Intent(getApplicationContext(), MenuFuncionario.class);
+                        startActivity(intent);
+                    }
+                })
+        );
     }
 
 }

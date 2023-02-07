@@ -1,13 +1,12 @@
 package com.lanchonete.retrofit.api;
 
+import com.lanchonete.model.Doce;
 import com.lanchonete.model.Salgado;
 
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
+import retrofit2.http.*;
 
 public interface SalgadoAPI {
     @GET("/salgados")
@@ -15,4 +14,7 @@ public interface SalgadoAPI {
 
     @POST("/salgados")
     Call <Salgado> addSalgado(@Body Salgado salgadoDto);
+
+    @DELETE("/salgados/{id}")
+    Call <Salgado> delete(@Path("id") long id);
 }

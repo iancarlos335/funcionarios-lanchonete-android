@@ -3,7 +3,6 @@ package com.lanchonete.funcionario.post;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputLayout;
@@ -20,15 +19,14 @@ import java.util.logging.Logger;
 
 public class BebidaActivity extends AppCompatActivity {
 
-    TextInputLayout inputLayoutNomeBebida, inputLayoutValor, inputLayoutDescricao;
-    EditText editTextNomeBebida, editTextValor, editTextDescricao;
+    TextInputLayout inputLayoutNome, inputLayoutValor, inputLayoutDescricao;
+    EditText editTextNome, editTextValor, editTextDescricao;
 
-    ImageButton btnVoltar, imagemCoca, imagemFanta, imagemGuarana, imagemPepsi;
-    RadioButton radioCoca, radioFanta, radioGuarana, radioPepsi, radioButtonFinal;
+    ImageButton btnVoltar, btnCoca, btnFanta, btnGuarana, btnPepsi;
+    RadioButton radioCoca, radioFanta, radioGuarana, radioPepsi;
     RadioGroup radioGroup;
 
-    Button btnBotao;
-
+    Button btnCadastrar;
 
 
     @Override
@@ -37,15 +35,15 @@ public class BebidaActivity extends AppCompatActivity {
         setContentView(R.layout.bebida_activity);
 
         btnVoltar = findViewById(R.id.btnBebidaVoltar);
-        btnBotao = findViewById(R.id.botao_bebida);
-        editTextNomeBebida = findViewById(R.id.nome_bebida);
+        btnCadastrar = findViewById(R.id.botao_bebida);
+        editTextNome = findViewById(R.id.nome_bebida);
         editTextValor = findViewById(R.id.valor_bebida);
-        editTextDescricao = findViewById(R.id.descricao_bebida); //adicionar input direito
+        editTextDescricao = findViewById(R.id.descricao_bebida);
 
-        imagemCoca = findViewById(R.id.imageButtonCoca);
-        imagemFanta = findViewById(R.id.imageButtonFanta);
-        imagemGuarana = findViewById(R.id.imageButtonGuarana);
-        imagemPepsi = findViewById(R.id.imageButtonPepsi);
+        btnCoca = findViewById(R.id.imageButtonCoca);
+        btnFanta = findViewById(R.id.imageButtonFanta);
+        btnGuarana = findViewById(R.id.imageButtonGuarana);
+        btnPepsi = findViewById(R.id.imageButtonPepsi);
 
         radioCoca = findViewById(R.id.radioButtonCoca);
         radioFanta = findViewById(R.id.radioButtonFanta);
@@ -55,16 +53,14 @@ public class BebidaActivity extends AppCompatActivity {
         radioGroup = findViewById(R.id.radioBebida);
 
         //Aaaaaaa mannnnnnnn
-        inputLayoutNomeBebida = findViewById(R.id.nome_bebidaInputLayout);
+        inputLayoutNome = findViewById(R.id.nome_bebidaInputLayout);
         inputLayoutValor = findViewById(R.id.valor_bebidaInputLayout);
         inputLayoutDescricao = findViewById(R.id.descricao_bebidaInputLayout);
 
-        btnVoltar.setOnClickListener(view -> {
-            finish();
-        });
+        btnVoltar.setOnClickListener(view -> finish());
 
 
-        editTextNomeBebida.addTextChangedListener(new TextWatcher() {
+        editTextNome.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -73,12 +69,12 @@ public class BebidaActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 String alertNomeBebida = s.toString();
-                if (alertNomeBebida.length() != 0) { //tem o matcher com o pattern pra verificar os intervalos no input, mas aqui não ficaria interessante
-                    inputLayoutNomeBebida.setHelperText("");
-                    inputLayoutNomeBebida.setError("");
+                if (alertNomeBebida.length() != 0) { //pode ser feita a validação de intervalos regex
+                    inputLayoutNome.setHelperText("");
+                    inputLayoutNome.setError("");
                 } else {
-                    inputLayoutNomeBebida.setHelperText("");
-                    inputLayoutNomeBebida.setError("Campo Obrigatório");
+                    inputLayoutNome.setHelperText("");
+                    inputLayoutNome.setError("Campo Obrigatório");
                 }
             }
 
@@ -132,60 +128,46 @@ public class BebidaActivity extends AppCompatActivity {
             }
         });
 
-        imagemCoca.setOnClickListener(v -> radioCoca.setChecked(true));
-        imagemFanta.setOnClickListener(v -> radioFanta.setChecked(true));
-        imagemGuarana.setOnClickListener(v -> radioGuarana.setChecked(true));
-        imagemPepsi.setOnClickListener(v -> radioPepsi.setChecked(true));
+        btnCoca.setOnClickListener(v -> radioCoca.setChecked(true));
+        btnFanta.setOnClickListener(v -> radioFanta.setChecked(true));
+        btnGuarana.setOnClickListener(v -> radioGuarana.setChecked(true));
+        btnPepsi.setOnClickListener(v -> radioPepsi.setChecked(true));
 
-        btnBotao.setOnClickListener(view -> {
-
-            boolean compareInputValor = true;
-            boolean compareInputNomeBebida = true;
-            boolean compareInputDescricao = true;;
-
-            if ((inputLayoutNomeBebida.getHelperText() != null) || (inputLayoutNomeBebida.getError() != null)) {
-                compareInputNomeBebida = false;
-            }
-            if ((inputLayoutValor.getHelperText() != null) || (inputLayoutValor.getError() != null)) {
-                compareInputValor = false;
-            }
-            if ((inputLayoutDescricao.getHelperText() != null) || (inputLayoutDescricao.getError() != null)) {
-                compareInputDescricao = false;
-            }
-
+        btnCadastrar.setOnClickListener(view -> {
             int radioId = radioGroup.getCheckedRadioButtonId();
-            radioButtonFinal = findViewById(radioId);
 
-            if (compareInputNomeBebida && compareInputValor && compareInputDescricao && (radioId != -1)) {
-                iniciandoComponentes();
-            } else {
+            boolean nomeEmpty = editTextNome.toString().isEmpty();
+            boolean valorEmpty = editTextValor.toString().isEmpty();
+            boolean descricaoEmpty = editTextDescricao.toString().isEmpty();
+
+            if (nomeEmpty) {
+                inputLayoutNome.requestFocus();
+            } else if (valorEmpty) {
+                inputLayoutValor.requestFocus();
+            } else if (descricaoEmpty) {
+                inputLayoutDescricao.requestFocus();
+            }
+
+            if (nomeEmpty && valorEmpty && descricaoEmpty && (radioId != -1)) {
                 Toast.makeText(getApplicationContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
-                editTextNomeBebida.setText("");
-                editTextValor.setText("");
-                editTextDescricao.setText("");
                 onRestart();
+            } else {
+                cadastrar();
             }
         });
     }
 
-    public void checkRadioButtonBebida(View view) {
-        int radioId = radioGroup.getCheckedRadioButtonId();
-        radioButtonFinal = findViewById(radioId);
-    }
 
-
-    private void iniciandoComponentes() {
+    private void cadastrar() {
 
         RetrofitService retrofitService = new RetrofitService();
-        BebidaAPI bebidaAPI = retrofitService.getRetrofit().create(BebidaAPI.class); //ele vai gerar uma nova requisição http, e nesse caso do tipo POST
+        BebidaAPI bebidaAPI = retrofitService.getRetrofit().create(BebidaAPI.class);
 
-        String nomeBebida = editTextNomeBebida.getText().toString();
+        String nomeBebida = editTextNome.getText().toString();
         String descricao = editTextDescricao.getText().toString();
         String strValor = editTextValor.getText().toString();
-        String imgBebida = radioButtonFinal.getText().toString();
-        double valor = Double.parseDouble(strValor); // se ele ta dando erro vo botar ele aqui, só uso ele nesse objeto msm
-
-        //ele só vai receber alguma coisa se tiver algum ID rodando
+        String imgBebida = ((RadioButton) findViewById(radioGroup.getCheckedRadioButtonId())).getText().toString(); // esse q é o casting loko que o Jonas encontrou na internet
+        double valor = Double.parseDouble(strValor);
 
         Bebida bebida = new Bebida();
         bebida.setNomeBebida(nomeBebida);
@@ -193,8 +175,8 @@ public class BebidaActivity extends AppCompatActivity {
         bebida.setDescricao(descricao);
         bebida.setImagem(imgBebida);
 
-        bebidaAPI.addBebida(bebida) //chama o método POST
-                .enqueue(new Callback<Bebida>() { //deixa as requisições em fila
+        bebidaAPI.addBebida(bebida)
+                .enqueue(new Callback<Bebida>() {
                     @Override
                     public void onResponse(Call<Bebida> call, Response<Bebida> response) {
                         Toast.makeText(getApplicationContext(), "Salvo com sucesso no banco", Toast.LENGTH_SHORT).show();
@@ -207,7 +189,6 @@ public class BebidaActivity extends AppCompatActivity {
                         Logger.getLogger(BebidaActivity.class.getName()).log(Level.SEVERE, "Um erro ocorreu", t);
                     }
                 });
-
     }
 
 }
