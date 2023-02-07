@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.lanchonete.R;
@@ -18,12 +19,12 @@ import com.lanchonete.funcionario.post.BebidaActivity;
 import com.lanchonete.model.Bebida;
 import com.lanchonete.retrofit.RetrofitService;
 import com.lanchonete.retrofit.api.BebidaAPI;
+import org.jetbrains.annotations.NotNull;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class BebidaListActivity extends AppCompatActivity {
 
@@ -38,6 +39,7 @@ public class BebidaListActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.bebidasList_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         buttonAddBebida = findViewById(R.id.btnAdicionarNovaBebida);
         irInicio = findViewById(R.id.imageButtonVoltarInicioBebida);
 
@@ -58,7 +60,8 @@ public class BebidaListActivity extends AppCompatActivity {
         super.onRestart();
     }
 
-    private void carregar() { //TODO change object method (from another class)
+    private void carregar() {
+
         RetrofitService retrofitService = new RetrofitService();
         BebidaAPI bebidaAPI = retrofitService.getRetrofit().create(BebidaAPI.class);
         // Reading
@@ -67,7 +70,7 @@ public class BebidaListActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(@NonNull Call<List<Bebida>> call, @NonNull Response<List<Bebida>> response) {
                         assert response.body() != null;
-                        LinkedList<Bebida> bebidas = new LinkedList<>(response.body());
+                        LinkedList<Bebida> bebidas = new LinkedList<>(response.body()); //todo popular aqui, vai dar doidera
                         preencherListView(bebidas);
                     }
 
@@ -97,6 +100,14 @@ public class BebidaListActivity extends AppCompatActivity {
                     }
                 })
         );
+
+
+        if (bebidaList.size() == 0) {
+            Toast.makeText(getApplicationContext(), "Não tem nenhuma bebida no banco", Toast.LENGTH_SHORT).show();
+        } else {
+            //int position = bebidaList.indexOf(bebidaList.getFirst());
+            bebidaAdapter.notifyDataSetChanged();
+        }
     }
 
 }

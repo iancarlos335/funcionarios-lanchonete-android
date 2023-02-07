@@ -54,8 +54,7 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
 
     @Override
     public long getItemId(int position) {
-        Bebida bebida = bebidaList.get(position);
-        return bebida.getId();
+        return super.getItemId(position);
     }
 
     @Override
