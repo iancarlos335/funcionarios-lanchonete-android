@@ -122,8 +122,12 @@ public class BebidaListActivity extends AppCompatActivity {
                 @Override
                 public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
                     if (item.getItemId() == R.id.action_delete) {
-                        if (adapter.selectedItems.get(position)) {
-                            adapter.deletar(bebidas.get(position).getId(), position);
+                        LinkedList<Bebida> bebidaList = adapter.getBebidas();
+                        for (Bebida bebida : bebidaList) {
+                            if (bebida.isSelected()) {
+                                adapter.deletar(bebida.getId(), bebidaList.indexOf(bebida));
+                                adapter.removeItem(bebidaList.indexOf(bebida));
+                            }
                         }
                         mode.finish();
                         return true;
@@ -136,8 +140,9 @@ public class BebidaListActivity extends AppCompatActivity {
                     adapter.selectedItems.clear();
                     LinkedList<Bebida> bebidaList = adapter.getBebidas();
                     for (Bebida bebida : bebidaList) {
-                        if (bebida.isSelected())
+                        if (bebida.isSelected()) {
                             bebida.setSelected(false);
+                        }
                     }
 
                     adapter.notifyItemRangeChanged(bebidaList.indexOf(bebidaList.getFirst()), bebidaList.size());

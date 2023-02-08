@@ -115,8 +115,6 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
     }
 
     public void deletar(long id, int position) {
-
-
         RetrofitService retrofitService = new RetrofitService();
         BebidaAPI bebidaAPI = retrofitService.getRetrofit().create(BebidaAPI.class);
 
