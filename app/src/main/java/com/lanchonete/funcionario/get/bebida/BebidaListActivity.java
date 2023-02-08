@@ -57,7 +57,6 @@ public class BebidaListActivity extends AppCompatActivity {
             Intent intentGoBebidaActivity = new Intent(getApplicationContext(), BebidaActivity.class);
             startActivity(intentGoBebidaActivity);
         });
-
     }
 
     @Override
@@ -78,7 +77,19 @@ public class BebidaListActivity extends AppCompatActivity {
                         assert response.body() != null;
                         bebidas.addAll(response.body());
                         bebidaAdapter = new BebidaAdapter(bebidas);
-                        preencherListView(bebidaAdapter);
+
+                        recyclerView.setAdapter(bebidaAdapter); // Eu não encontrei lugar melhor infelizamente
+                        bebidaAdapter.setListener(new BebidaAdapter.BebidaAdapterListener() {
+                            @Override
+                            public void onItemClick(int position) {
+                                enableActionMode(position);
+                            }
+
+                            @Override
+                            public void onItemLongClick(int position) {
+                                enableActionMode(position);
+                            }
+                        });
                     }
 
                     @Override
@@ -88,24 +99,7 @@ public class BebidaListActivity extends AppCompatActivity {
                 });
     }
 
-
-    private void preencherListView(BebidaAdapter adapter) {
-        recyclerView.setAdapter(adapter);
-
-        adapter.setListener(new BebidaAdapter.BebidaAdapterListener() {
-            @Override
-            public void onItemClick(int position) {
-                enableActionMode(position, adapter);
-            }
-
-            @Override
-            public void onItemLongClick(int position) {
-                enableActionMode(position, adapter);
-            }
-        });
-    }
-
-    public void enableActionMode(int position, BebidaAdapter adapter) {
+    public void enableActionMode(int position) {
         if (actionMode == null) { // that if without brackets annoyed we very well
             actionMode = startSupportActionMode(new ActionMode.Callback() {
                 @Override
@@ -122,11 +116,11 @@ public class BebidaListActivity extends AppCompatActivity {
                 @Override
                 public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
                     if (item.getItemId() == R.id.action_delete) {
-                        LinkedList<Bebida> bebidaList = adapter.getBebidas();
+                        LinkedList<Bebida> bebidaList = bebidaAdapter.getBebidas();
                         for (Bebida bebida : bebidaList) {
                             if (bebida.isSelected()) {
-                                adapter.deletar(bebida.getId(), bebidaList.indexOf(bebida));
-                                adapter.removeItem(bebidaList.indexOf(bebida));
+                                bebida.setSelected(false);
+                                bebidaAdapter.deletar(bebida.getId(), bebidaList.indexOf(bebida));
                             }
                         }
                         mode.finish();
@@ -137,24 +131,24 @@ public class BebidaListActivity extends AppCompatActivity {
 
                 @Override
                 public void onDestroyActionMode(ActionMode mode) {
-                    adapter.selectedItems.clear();
-                    LinkedList<Bebida> bebidaList = adapter.getBebidas();
+                    bebidaAdapter.selectedItems.clear();
+                    LinkedList<Bebida> bebidaList = bebidaAdapter.getBebidas();
                     for (Bebida bebida : bebidaList) {
                         if (bebida.isSelected()) {
                             bebida.setSelected(false);
                         }
                     }
 
-                    adapter.notifyItemRangeChanged(bebidaList.indexOf(bebidaList.getFirst()), bebidaList.size());
+                    bebidaAdapter.notifyItemRangeChanged(bebidaList.indexOf(bebidaList.getFirst()), bebidaList.size());
                     actionMode = null;
                 }
 
             });
         }
 
-        adapter.toggleSelection(position);
+        bebidaAdapter.toggleSelection(position);
 
-        final int size = adapter.selectedItems.size();
+        final int size = bebidaAdapter.selectedItems.size();
         if (size == 0) {
             actionMode.finish();
         } else {

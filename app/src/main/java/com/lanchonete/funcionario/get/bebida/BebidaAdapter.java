@@ -75,7 +75,6 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
         holder.nome_bebida.setText(bebida.getNomeBebida());
         holder.descricao_bebida.setText(bebida.getDescricao());
         holder.valor_bebida.setText(strValue);
-        //holder.delete_item.setOnClickListener(view -> deletar(bebida.getId(), view.getContext(), position));
 
         if (currentSelectedPosition == position) {
             currentSelectedPosition = -1;
@@ -107,7 +106,6 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
         notifyItemChanged(position);
     }
 
-
     public void removeItem(int position) {
         bebidaList.remove(position);
         notifyItemRemoved(position);
@@ -123,7 +121,6 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
                     @Override
                     public void onResponse(Call<Bebida> call, Response<Bebida> response) {
                         removeItem(position); //TODO esse método precisa de TIMEOUT porque o usuário pode bugar tudo.
-                        notifyItemRemoved(position);
                     }
 
                     @Override
@@ -132,10 +129,6 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
                     }
                 });
 
-    }
-
-    public void deleteTest() {
-        Log.i("Teste", "Excluindo...");
     }
 
     public static class BebidaHolder extends RecyclerView.ViewHolder {
