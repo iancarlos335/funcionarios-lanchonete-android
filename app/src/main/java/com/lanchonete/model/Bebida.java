@@ -12,6 +12,8 @@ public class Bebida { //interessante
 
     private String imagem;
 
+    private boolean selected;
+
     public Bebida() {
     }
 
@@ -64,5 +66,11 @@ public class Bebida { //interessante
         this.id = id;
     }
 
+    public boolean isSelected() {
+        return selected;
+    }
 
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
 }
