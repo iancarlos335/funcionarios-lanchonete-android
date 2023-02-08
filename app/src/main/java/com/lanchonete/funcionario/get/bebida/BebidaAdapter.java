@@ -22,6 +22,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHolder> {
 
@@ -37,6 +38,10 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
 
     public void setListener(BebidaAdapterListener listener) {
         this.listener = listener;
+    }
+
+    public LinkedList<Bebida> getBebidas() {
+        return bebidaList;
     }
 
 
@@ -72,8 +77,11 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
         holder.valor_bebida.setText(strValue);
         //holder.delete_item.setOnClickListener(view -> deletar(bebida.getId(), view.getContext(), position));
 
-        if (currentSelectedPosition == position)
+        if (currentSelectedPosition == position) {
             currentSelectedPosition = -1;
+        }
+
+
     }
 
     @Override
@@ -107,6 +115,8 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
     }
 
     public void deletar(long id, int position) {
+
+
         RetrofitService retrofitService = new RetrofitService();
         BebidaAPI bebidaAPI = retrofitService.getRetrofit().create(BebidaAPI.class);
 

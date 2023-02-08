@@ -106,34 +106,46 @@ public class BebidaListActivity extends AppCompatActivity {
     }
 
     public void enableActionMode(int position, BebidaAdapter adapter) {
-//        if (actionMode == null) { // pq q isso n funciona vei?
-        actionMode = startSupportActionMode(new ActionMode.Callback() {
-            @Override
-            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-                mode.getMenuInflater().inflate(R.menu.menu_delete, menu);
-                return true;
-            }
-
-            @Override
-            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-                return false;
-            }
-
-            @Override
-            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                if (item.getItemId() == R.id.action_delete) {
-                    adapter.deletar(bebidaAdapter.getItemId(position), position);
-                    mode.finish();
+        if (actionMode == null) { // that if without brackets annoyed we very well
+            actionMode = startSupportActionMode(new ActionMode.Callback() {
+                @Override
+                public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                    mode.getMenuInflater().inflate(R.menu.menu_delete, menu);
                     return true;
                 }
-                return false;
-            }
 
-            @Override
-            public void onDestroyActionMode(ActionMode mode) {
+                @Override
+                public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                    return false;
+                }
 
-            }
-        });
+                @Override
+                public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                    if (item.getItemId() == R.id.action_delete) {
+                        if (adapter.selectedItems.get(position)) {
+                            adapter.deletar(bebidas.get(position).getId(), position);
+                        }
+                        mode.finish();
+                        return true;
+                    }
+                    return false;
+                }
+
+                @Override
+                public void onDestroyActionMode(ActionMode mode) {
+                    adapter.selectedItems.clear();
+                    LinkedList<Bebida> bebidaList = adapter.getBebidas();
+                    for (Bebida bebida : bebidaList) {
+                        if (bebida.isSelected())
+                            bebida.setSelected(false);
+                    }
+
+                    adapter.notifyItemRangeChanged(bebidaList.indexOf(bebidaList.getFirst()), bebidaList.size());
+                    actionMode = null;
+                }
+
+            });
+        }
 
         adapter.toggleSelection(position);
 
@@ -144,9 +156,8 @@ public class BebidaListActivity extends AppCompatActivity {
             actionMode.setTitle(size + "");
             actionMode.invalidate();
         }
-    }
 
-//    }
+    }
 
 
 }
