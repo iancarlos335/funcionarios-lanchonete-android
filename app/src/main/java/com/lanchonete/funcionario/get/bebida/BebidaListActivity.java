@@ -126,7 +126,7 @@ public class BebidaListActivity extends AppCompatActivity {
                         for (Bebida bebida : adapterList) {
                             if (bebida.isSelected()) {
                                 deletedItems.add(bebida);
-                                bebidaAdapter.deletar(bebida.getId(), position, deletedItems); //isso é uma mega evolução
+                                bebidaAdapter.deletar(bebida.getId(), deletedItems); //isso é uma mega evolução
                             }
                         }
 

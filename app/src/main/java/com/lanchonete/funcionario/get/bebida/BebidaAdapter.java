@@ -104,13 +104,13 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
         notifyItemChanged(position);
     }
 
-    public void removeItem(int position, LinkedList<Bebida> deletedItems) {
+    public void removeItem(LinkedList<Bebida> deletedItems) {
         bebidaList.removeAll(deletedItems);
-        notifyItemRangeRemoved(position, deletedItems.size());
-        notifyItemRangeChanged(position, bebidaList.size()); //Esse cara que atualiza o recycler
+        notifyItemRangeRemoved(bebidaList.indexOf(bebidaList.getFirst()), bebidaList.size());
+        notifyItemRangeChanged(bebidaList.indexOf(bebidaList.getFirst()), bebidaList.size()); //Esse cara que atualiza o recycler
     }
 
-    public void deletar(long id, int position, LinkedList<Bebida> deletedItems) {
+    public void deletar(long id, LinkedList<Bebida> deletedItems) {
         RetrofitService retrofitService = new RetrofitService();
         BebidaAPI bebidaAPI = retrofitService.getRetrofit().create(BebidaAPI.class);
 
@@ -118,7 +118,7 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
                 .enqueue(new Callback<Bebida>() {
                     @Override
                     public void onResponse(Call<Bebida> call, Response<Bebida> response) {
-                        removeItem(position, deletedItems);
+                        removeItem(deletedItems);
                     }
 
                     @Override
