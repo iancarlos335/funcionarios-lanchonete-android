@@ -1,6 +1,8 @@
 package com.lanchonete.funcionario.get.bebida;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.provider.DocumentsContract;
 import android.util.Log;
 import android.util.SparseBooleanArray;
@@ -59,17 +61,18 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
         Bebida bebida = bebidaList.get(position);
         String strValue = Double.toString(bebida.getValor());
 
+        holder.tintBackground(bebida);
+
         holder.itemView.setOnClickListener(v -> {
             if (selectedItems.size() > 0 && listener != null) { //não pode ser instanciado fora do método retrofit
                 listener.onItemClick(holder.getAdapterPosition());
             }
         });
-
         holder.itemView.setOnLongClickListener(v -> {
-            if (listener != null)
+            if (listener != null) {
                 listener.onItemLongClick(holder.getAdapterPosition());
+            }
             return true;
-
         });
 
         holder.nome_bebida.setText(bebida.getNomeBebida());
@@ -106,8 +109,11 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
 
     public void removeItem(LinkedList<Bebida> deletedItems) {
         bebidaList.removeAll(deletedItems);
-        notifyItemRangeRemoved(bebidaList.indexOf(bebidaList.getFirst()), bebidaList.size());
-        notifyItemRangeChanged(bebidaList.indexOf(bebidaList.getFirst()), bebidaList.size()); //Esse cara que atualiza o recycler
+        if (bebidaList.size() > 0) {
+            notifyItemRangeRemoved(bebidaList.indexOf(bebidaList.getFirst()), bebidaList.size());
+            notifyItemRangeChanged(bebidaList.indexOf(bebidaList.getFirst()), bebidaList.size()); //Esse cara que atualiza o recycler
+
+        }
     }
 
     public void deletar(long id, LinkedList<Bebida> deletedItems) {
@@ -145,6 +151,23 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
             descricao_bebida = itemView.findViewById(R.id.bebidasListItem_descricao);
             valor_bebida = itemView.findViewById(R.id.bebidasListItem_valor);
             delete_item = itemView.findViewById(R.id.btnDeleteBebidas);
+        }
+
+        public void tintBackground(Bebida bebida) {
+
+            if (bebida.isSelected()) {
+                GradientDrawable gradientDrawable = new GradientDrawable();
+                gradientDrawable.setShape(GradientDrawable.RECTANGLE);
+                gradientDrawable.setCornerRadius(32f);
+                gradientDrawable.setColor(Color.rgb(232, 240, 253));
+                itemView.setBackground(gradientDrawable);
+            } else {
+                GradientDrawable gradientDrawable = new GradientDrawable();
+                gradientDrawable.setShape(GradientDrawable.RECTANGLE);
+                gradientDrawable.setCornerRadius(32f);
+                gradientDrawable.setColor(Color.WHITE);
+                itemView.setBackground(gradientDrawable);
+            }
         }
     }
 
