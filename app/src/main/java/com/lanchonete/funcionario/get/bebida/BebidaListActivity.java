@@ -54,16 +54,38 @@ public class BebidaListActivity extends AppCompatActivity {
         irInicio.setOnClickListener(v -> finish());
 
         buttonAddBebida.setOnClickListener(v -> {
-            Intent intentGoBebidaActivity = new Intent(getApplicationContext(), BebidaActivity.class);
-            startActivity(intentGoBebidaActivity);
+            Intent intent = new Intent(getApplicationContext(), BebidaActivity.class);
+            startActivity(intent);
+            //startActivityForResult(new Intent(this, BebidaActivity.class), 1); //TODO enfim, n funciona o retorno dos dados
         });
     }
 
     @Override
     protected void onRestart() {
         carregar();
+        bebidaAdapter.notifyItemInserted(bebidas.indexOf(bebidas.getLast()));
         super.onRestart();
     }
+
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        Bebida bebida = new Bebida();
+//        String[] bebidaArray;           //se der certo seria incrível
+//
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == 1 && resultCode == RESULT_OK) {
+//            bebidaArray = data.getStringArrayExtra("bebidaArray");
+//
+//
+//            bebida.setId(Integer.parseInt(bebidaArray[0]));
+//            bebida.setNomeBebida(bebidaArray[1]);
+//            bebida.setValor(Double.parseDouble(bebidaArray[2]));
+//            bebida.setDescricao(bebidaArray[3]);
+//            bebida.setImagem(bebidaArray[4]);
+//            bebida.setSelected(Boolean.getBoolean(bebidaArray[5]));
+//
+//            bebidaAdapter.notifyItemInserted(bebidas.indexOf(bebida));
+//        }
+//    }
 
 
     private void carregar() {
