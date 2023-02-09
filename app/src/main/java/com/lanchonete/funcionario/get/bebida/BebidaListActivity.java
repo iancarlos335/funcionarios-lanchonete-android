@@ -121,10 +121,12 @@ public class BebidaListActivity extends AppCompatActivity {
                 @Override
                 public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
                     if (item.getItemId() == R.id.action_delete) {
+                        LinkedList<Bebida> deletedItems = new LinkedList<>();
                         LinkedList<Bebida> adapterList = new LinkedList<>(bebidaAdapter.getBebidas());
                         for (Bebida bebida : adapterList) {
                             if (bebida.isSelected()) {
-                                bebidaAdapter.deletar(bebida.getId(), position);
+                                deletedItems.add(bebida);
+                                bebidaAdapter.deletar(bebida.getId(), position, deletedItems); //isso é uma mega evolução
                             }
                         }
 
