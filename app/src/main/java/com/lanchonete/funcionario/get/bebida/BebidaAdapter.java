@@ -79,8 +79,6 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
         if (currentSelectedPosition == position) {
             currentSelectedPosition = -1;
         }
-
-
     }
 
     @Override
@@ -107,9 +105,9 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
     }
 
     public void removeItem(int position) {
-        bebidaList.remove(position);
+        bebidaList.remove(position); //Esse cara que atualiza o recycler
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position, bebidaList.size()); //Esse cara que atualiza o recycler
+        notifyItemRangeChanged(position, bebidaList.size());
     }
 
     public void deletar(long id, int position) {
@@ -120,7 +118,7 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
                 .enqueue(new Callback<Bebida>() {
                     @Override
                     public void onResponse(Call<Bebida> call, Response<Bebida> response) {
-                        removeItem(position); //TODO esse método precisa de TIMEOUT porque o usuário pode bugar tudo.
+                        removeItem(position);
                     }
 
                     @Override

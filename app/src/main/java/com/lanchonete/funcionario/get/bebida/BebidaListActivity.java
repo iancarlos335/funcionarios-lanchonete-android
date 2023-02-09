@@ -44,6 +44,7 @@ public class BebidaListActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.bebidasList_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
 
         buttonAddBebida = findViewById(R.id.btnAdicionarNovaBebida);
         irInicio = findViewById(R.id.imageButtonVoltarInicioBebida);
@@ -51,7 +52,6 @@ public class BebidaListActivity extends AppCompatActivity {
         carregar();
 
         irInicio.setOnClickListener(v -> finish());
-
 
         buttonAddBebida.setOnClickListener(v -> {
             Intent intentGoBebidaActivity = new Intent(getApplicationContext(), BebidaActivity.class);
@@ -65,8 +65,8 @@ public class BebidaListActivity extends AppCompatActivity {
         super.onRestart();
     }
 
-    private void carregar() {
 
+    private void carregar() {
         RetrofitService retrofitService = new RetrofitService();
         BebidaAPI bebidaAPI = retrofitService.getRetrofit().create(BebidaAPI.class);
         // Reading
@@ -77,19 +77,7 @@ public class BebidaListActivity extends AppCompatActivity {
                         assert response.body() != null;
                         bebidas.addAll(response.body());
                         bebidaAdapter = new BebidaAdapter(bebidas);
-
-                        recyclerView.setAdapter(bebidaAdapter); // Eu não encontrei lugar melhor infelizamente
-                        bebidaAdapter.setListener(new BebidaAdapter.BebidaAdapterListener() {
-                            @Override
-                            public void onItemClick(int position) {
-                                enableActionMode(position);
-                            }
-
-                            @Override
-                            public void onItemLongClick(int position) {
-                                enableActionMode(position);
-                            }
-                        });
+                        preencheRecyclerView();
                     }
 
                     @Override
@@ -99,8 +87,25 @@ public class BebidaListActivity extends AppCompatActivity {
                 });
     }
 
+    private void preencheRecyclerView() {
+        recyclerView.setAdapter(bebidaAdapter);
+
+        bebidaAdapter.setListener(new BebidaAdapter.BebidaAdapterListener() {
+            @Override
+            public void onItemClick(int position) {
+                enableActionMode(position);
+            }
+
+            @Override
+            public void onItemLongClick(int position) {
+                enableActionMode(position);
+            }
+        });
+    }
+
     public void enableActionMode(int position) {
-        if (actionMode == null) { // that if without brackets annoyed we very well
+        if (actionMode == null) { // that if was without brackets, and annoyed we a little
+
             actionMode = startSupportActionMode(new ActionMode.Callback() {
                 @Override
                 public boolean onCreateActionMode(ActionMode mode, Menu menu) {
@@ -116,13 +121,13 @@ public class BebidaListActivity extends AppCompatActivity {
                 @Override
                 public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
                     if (item.getItemId() == R.id.action_delete) {
-                        LinkedList<Bebida> bebidaList = bebidaAdapter.getBebidas();
-                        for (Bebida bebida : bebidaList) {
+                        LinkedList<Bebida> adapterList = new LinkedList<>(bebidaAdapter.getBebidas());
+                        for (Bebida bebida : adapterList) {
                             if (bebida.isSelected()) {
-                                bebida.setSelected(false);
-                                bebidaAdapter.deletar(bebida.getId(), bebidaList.indexOf(bebida));
+                                bebidaAdapter.deletar(bebida.getId(), position);
                             }
                         }
+
                         mode.finish();
                         return true;
                     }
@@ -132,17 +137,16 @@ public class BebidaListActivity extends AppCompatActivity {
                 @Override
                 public void onDestroyActionMode(ActionMode mode) {
                     bebidaAdapter.selectedItems.clear();
-                    LinkedList<Bebida> bebidaList = bebidaAdapter.getBebidas();
-                    for (Bebida bebida : bebidaList) {
+                    LinkedList<Bebida> adapterList = new LinkedList<>(bebidaAdapter.getBebidas());
+                    for (Bebida bebida : adapterList) {
                         if (bebida.isSelected()) {
                             bebida.setSelected(false);
                         }
                     }
 
-                    bebidaAdapter.notifyItemRangeChanged(bebidaList.indexOf(bebidaList.getFirst()), bebidaList.size());
+                    bebidaAdapter.notifyItemRangeChanged(position, adapterList.size());
                     actionMode = null;
                 }
-
             });
         }
 
