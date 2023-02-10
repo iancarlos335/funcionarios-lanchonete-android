@@ -183,6 +183,21 @@ public class BebidaActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Bebida> call, Response<Bebida> response) {
                         Toast.makeText(getApplicationContext(), "Salvo com sucesso no banco", Toast.LENGTH_SHORT).show();
+
+                        Intent returnIntent = new Intent();
+                        String[] bebidaArray = new String[6];
+
+                        bebida.setSelected(false);
+
+                        bebidaArray[0] = String.valueOf(bebida.getId());
+                        bebidaArray[1] = bebida.getNomeBebida();
+                        bebidaArray[2] = String.valueOf(bebida.getValor());
+                        bebidaArray[3] = bebida.getDescricao();
+                        bebidaArray[4] = bebida.getImagem();
+                        bebidaArray[5] = String.valueOf(bebida.isSelected());
+
+                        returnIntent.putExtra("bebidaArray", bebidaArray);
+                        setResult(RESULT_OK, returnIntent); //se o resultado não for OK, o dado que for retornado no parâmetro vai estar vazio.
                         finish();
                     }
 
@@ -192,24 +207,5 @@ public class BebidaActivity extends AppCompatActivity {
                         Logger.getLogger(BebidaActivity.class.getName()).log(Level.SEVERE, "Um erro ocorreu", t);
                     }
                 });
-    }
-
-    @Override
-    public void finish() {
-        Intent returnIntent = new Intent();
-        String[] bebidaArray = new String[6];
-
-        bebida.setSelected(false);
-
-        bebidaArray[0] = String.valueOf(bebida.getId());
-        bebidaArray[1] = bebida.getNomeBebida();
-        bebidaArray[2] = String.valueOf(bebida.getValor());
-        bebidaArray[3] = bebida.getDescricao();
-        bebidaArray[4] = bebida.getImagem();
-        bebidaArray[5] = String.valueOf(bebida.isSelected());
-
-        returnIntent.putExtra("bebidaArray", bebidaArray);
-        setResult(RESULT_OK, returnIntent); //se o resultado não for OK, o dado que for retornado no parâmetro vai estar vazio.
-        super.finish();
     }
 }
