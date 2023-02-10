@@ -4,7 +4,7 @@ public class Salgado {
 
     private long id;
 
-    private String nomeSalgado;
+    private String nome;
 
     private double valor;
 
@@ -12,31 +12,10 @@ public class Salgado {
 
     private String imagem;
 
+    private boolean selected;
+
     public Salgado() {}
 
-    public Salgado(String nomeSalgado, double valor, String descricao, String imagem) {
-        super();
-        this.nomeSalgado = nomeSalgado;
-        this.valor = valor;
-        this.descricao = descricao;
-        this.imagem = imagem;
-    }
-
-    public String getImagem() {
-        return imagem;
-    }
-
-    public void setImagem(String imagem) {
-        this.imagem = imagem;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
 
     public long getId() {
         return id;
@@ -46,12 +25,12 @@ public class Salgado {
         this.id = id;
     }
 
-    public String getNomeSalgado() {
-        return nomeSalgado;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeSalgado(String nomeSalgado) {
-        this.nomeSalgado = nomeSalgado;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public double getValor() {
@@ -62,4 +41,27 @@ public class Salgado {
         this.valor = valor;
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
 }

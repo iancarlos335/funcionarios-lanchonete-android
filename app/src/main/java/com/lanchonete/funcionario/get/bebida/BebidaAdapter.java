@@ -59,12 +59,10 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
     @Override
     public void onBindViewHolder(@NonNull @NotNull BebidaHolder holder, int position) {
         Bebida bebida = bebidaList.get(position);
-        String strValue = Double.toString(bebida.getValor());
-
-        holder.tintBackground(bebida);
+        holder.bindHolder(bebida);
 
         holder.itemView.setOnClickListener(v -> {
-            if (selectedItems.size() > 0 && listener != null) { //não pode ser instanciado fora do método retrofit
+            if (selectedItems.size() > 0 && listener != null) {
                 listener.onItemClick(holder.getAdapterPosition());
             }
         });
@@ -74,10 +72,6 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
             }
             return true;
         });
-
-        holder.nome_bebida.setText(bebida.getNomeBebida());
-        holder.descricao_bebida.setText(bebida.getDescricao());
-        holder.valor_bebida.setText(strValue);
 
         if (currentSelectedPosition == position) {
             currentSelectedPosition = -1;
@@ -111,12 +105,12 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
         bebidaList.removeAll(deletedItems);
         if (bebidaList.size() > 0) {
             notifyItemRangeRemoved(bebidaList.indexOf(bebidaList.getFirst()), bebidaList.size());
-            notifyItemRangeChanged(bebidaList.indexOf(bebidaList.getFirst()), bebidaList.size()); //Esse cara que atualiza o recycler
+            notifyItemRangeChanged(bebidaList.indexOf(bebidaList.getFirst()), bebidaList.size());
 
         }
     }
 
-    public void deletar(long id, LinkedList<Bebida> deletedItems) {
+    protected void deletar(long id, LinkedList<Bebida> deletedItems) {
         RetrofitService retrofitService = new RetrofitService();
         BebidaAPI bebidaAPI = retrofitService.getRetrofit().create(BebidaAPI.class);
 
@@ -141,7 +135,6 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
 
         final TextView descricao_bebida;
         final TextView valor_bebida;
-        final Button delete_item;
 
 
         public BebidaHolder(@NonNull View itemView) {
@@ -150,10 +143,14 @@ public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHold
             nome_bebida = itemView.findViewById(R.id.bebidasListItem_nome);
             descricao_bebida = itemView.findViewById(R.id.bebidasListItem_descricao);
             valor_bebida = itemView.findViewById(R.id.bebidasListItem_valor);
-            delete_item = itemView.findViewById(R.id.btnDeleteBebidas);
         }
 
-        public void tintBackground(Bebida bebida) {
+        public void bindHolder(Bebida bebida) {
+            String strValue = Double.toString(bebida.getValor());
+
+            nome_bebida.setText(bebida.getNome());
+            descricao_bebida.setText(bebida.getDescricao());
+            valor_bebida.setText(strValue);
 
             if (bebida.isSelected()) {
                 GradientDrawable gradientDrawable = new GradientDrawable();

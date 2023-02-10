@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -15,8 +13,6 @@ import androidx.appcompat.view.ActionMode;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.lanchonete.R;
-import com.lanchonete.funcionario.MenuFuncionario;
-import com.lanchonete.funcionario.get.helper.RecyclerItemClickListener;
 import com.lanchonete.funcionario.post.BebidaActivity;
 import com.lanchonete.model.Bebida;
 import com.lanchonete.retrofit.RetrofitService;
@@ -29,13 +25,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class BebidaListActivity extends AppCompatActivity {
-
-    LinkedList<Bebida> bebidas = new LinkedList<>();
     private RecyclerView recyclerView;
     ImageView irInicio;
     Button buttonAddBebida;
+    LinkedList<Bebida> bebidas = new LinkedList<>();
     private ActionMode actionMode;
     private BebidaAdapter bebidaAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +49,7 @@ public class BebidaListActivity extends AppCompatActivity {
 
         irInicio.setOnClickListener(v -> finish());
 
-        buttonAddBebida.setOnClickListener(v -> {
-            startActivityForResult(new Intent(this, BebidaActivity.class), 1); //TODO enfim, n funciona o retorno dos dados
-        });
+        buttonAddBebida.setOnClickListener(v -> startActivityForResult(new Intent(this, BebidaActivity.class), 1));
     }
 
     @Override
@@ -65,7 +59,7 @@ public class BebidaListActivity extends AppCompatActivity {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Bebida bebida = new Bebida();
-        String[] bebidaArray;           //se der certo seria incrível
+        String[] bebidaArray;
 
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == RESULT_OK) {
@@ -73,7 +67,7 @@ public class BebidaListActivity extends AppCompatActivity {
 
 
             bebida.setId(Integer.parseInt(bebidaArray[0]));
-            bebida.setNomeBebida(bebidaArray[1]);
+            bebida.setNome(bebidaArray[1]);
             bebida.setValor(Double.parseDouble(bebidaArray[2]));
             bebida.setDescricao(bebidaArray[3]);
             bebida.setImagem(bebidaArray[4]);
@@ -97,7 +91,7 @@ public class BebidaListActivity extends AppCompatActivity {
                         assert response.body() != null;
                         bebidas.addAll(response.body());
                         bebidaAdapter = new BebidaAdapter(bebidas);
-                        preencheRecyclerView();
+                        preencherRecyclerView();
                     }
 
                     @Override
@@ -107,7 +101,7 @@ public class BebidaListActivity extends AppCompatActivity {
                 });
     }
 
-    private void preencheRecyclerView() {
+    private void preencherRecyclerView() {
         recyclerView.setAdapter(bebidaAdapter);
 
         bebidaAdapter.setListener(new BebidaAdapter.BebidaAdapterListener() {
@@ -123,7 +117,7 @@ public class BebidaListActivity extends AppCompatActivity {
         });
     }
 
-    public void enableActionMode(int position) {
+    private void enableActionMode(int position) {
         if (actionMode == null) { // that if was without brackets, and annoyed we a little
 
             actionMode = startSupportActionMode(new ActionMode.Callback() {
@@ -181,8 +175,5 @@ public class BebidaListActivity extends AppCompatActivity {
             actionMode.setTitle(size + "");
             actionMode.invalidate();
         }
-
     }
-
-
 }

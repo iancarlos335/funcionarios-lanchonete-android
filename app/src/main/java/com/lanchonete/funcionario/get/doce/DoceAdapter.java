@@ -1,18 +1,16 @@
 package com.lanchonete.funcionario.get.doce;
 
-import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.lanchonete.R;
-import com.lanchonete.model.Bebida;
 import com.lanchonete.model.Doce;
 import com.lanchonete.retrofit.RetrofitService;
 import com.lanchonete.retrofit.api.DoceAPI;
@@ -21,15 +19,26 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import java.util.LinkedList;
-import java.util.List;
 
 public class DoceAdapter extends RecyclerView.Adapter<DoceAdapter.DoceHolder> {
 
     private final LinkedList<Doce> doceList;
+    private DoceAdapterListener listener;
+    final SparseBooleanArray selectedItems = new SparseBooleanArray();
+    private int currentSelectedPosition;
 
     public DoceAdapter(LinkedList<Doce> doceList) {
         this.doceList = doceList;
     }
+
+    public void setListener(DoceAdapterListener listener) {
+        this.listener = listener;
+    }
+
+    public LinkedList<Doce> getDoces() {
+        return doceList;
+    }
+
 
     @NonNull
     @Override
@@ -40,15 +49,25 @@ public class DoceAdapter extends RecyclerView.Adapter<DoceAdapter.DoceHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DoceHolder holder, int position) { //É esse position que armazena cada item pelo id
+    public void onBindViewHolder(@NonNull DoceHolder holder, int position) {
         Doce doce = doceList.get(position);
-        String strValue = Double.toString(doce.getValor());
+        holder.bindHolder(doce);
 
-        holder.nome.setText(doce.getNomeDoce());
-        holder.descricao.setText(doce.getDescricao());
-        holder.valor.setText(strValue);
-        holder.delete_item.setOnClickListener(view -> deletar(doce.getId(), view.getContext(), position));
+        holder.itemView.setOnClickListener(v -> {
+            if (selectedItems.size() > 0 && listener != null) {
+                listener.onItemClick(holder.getAdapterPosition());
+            }
+        });
+        holder.itemView.setOnLongClickListener(v -> {
+            if (listener != null) {
+                listener.onItemLongClick(holder.getAdapterPosition());
+            }
+            return true;
+        });
 
+        if (currentSelectedPosition == position) {
+            currentSelectedPosition = -1;
+        }
     }
 
     @Override
@@ -62,13 +81,27 @@ public class DoceAdapter extends RecyclerView.Adapter<DoceAdapter.DoceHolder> {
         return doce.getId();
     }
 
-    private void removeItem(int position) {
-        doceList.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, doceList.size()); //Esse cara que atualiza o recycler
+    public void toggleSelection(int position) {
+        currentSelectedPosition = position;
+        if (selectedItems.get(position)) {
+            selectedItems.delete(position);
+            doceList.get(position).setSelected(false);
+        } else {
+            doceList.get(position).setSelected(true);
+            selectedItems.put(position, true);
+        }
+        notifyItemChanged(position);
     }
 
-    private void deletar(long id, Context context, int position) {
+    private void removeItem(LinkedList<Doce> deletedItems) {
+        doceList.removeAll(deletedItems);
+        if (doceList.size() > 0) {
+            notifyItemRangeRemoved(doceList.indexOf(doceList.getFirst()), doceList.size());
+            notifyItemRangeChanged(doceList.indexOf(doceList.getFirst()), doceList.size());
+        }
+    }
+
+    protected void deletar(long id, LinkedList<Doce> deletedItems) {
         RetrofitService retrofitService = new RetrofitService();
         DoceAPI doceAPI = retrofitService.getRetrofit().create(DoceAPI.class);
 
@@ -76,12 +109,12 @@ public class DoceAdapter extends RecyclerView.Adapter<DoceAdapter.DoceHolder> {
                 .enqueue(new Callback<Doce>() {
                     @Override
                     public void onResponse(Call<Doce> call, Response<Doce> response) {
-                        removeItem(position);
+                        removeItem(deletedItems);
                     }
 
                     @Override
                     public void onFailure(Call<Doce> call, Throwable t) {
-                        Toast.makeText(context, "Vai devagar, o item não foi removido", Toast.LENGTH_SHORT).show();
+                        Log.i("SEVERE", "Não deletou");
                     }
                 });
     }
@@ -91,7 +124,6 @@ public class DoceAdapter extends RecyclerView.Adapter<DoceAdapter.DoceHolder> {
         final TextView nome;
         final TextView descricao;
         final TextView valor;
-        final Button delete_item;
 
         public DoceHolder(@NonNull View itemView) {
             super(itemView);
@@ -99,10 +131,34 @@ public class DoceAdapter extends RecyclerView.Adapter<DoceAdapter.DoceHolder> {
             nome = itemView.findViewById(R.id.doceListItem_nome);
             descricao = itemView.findViewById(R.id.doceListItem_descricao);
             valor = itemView.findViewById(R.id.doceListItem_valor);
-            delete_item = itemView.findViewById(R.id.doceDeleteBtn);
+        }
 
+        public void bindHolder(Doce doce) {
+            String strValue = Double.toString(doce.getValor());
+
+            nome.setText(doce.getNome());
+            descricao.setText(doce.getDescricao());
+            valor.setText(strValue);
+
+            if (doce.isSelected()) {
+                GradientDrawable gradientDrawable = new GradientDrawable();
+                gradientDrawable.setShape(GradientDrawable.RECTANGLE);
+                gradientDrawable.setCornerRadius(32f);
+                gradientDrawable.setColor(Color.rgb(232, 240, 253));
+                itemView.setBackground(gradientDrawable);
+            } else {
+                GradientDrawable gradientDrawable = new GradientDrawable();
+                gradientDrawable.setShape(GradientDrawable.RECTANGLE);
+                gradientDrawable.setCornerRadius(32f);
+                gradientDrawable.setColor(Color.WHITE);
+                itemView.setBackground(gradientDrawable);
+            }
         }
     }
 
+    interface DoceAdapterListener {
+        void onItemClick(int position);
 
+        void onItemLongClick(int position);
+    }
 }

@@ -8,7 +8,6 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputLayout;
 import com.lanchonete.R;
-import com.lanchonete.funcionario.get.bebida.BebidaAdapter;
 import com.lanchonete.model.Bebida;
 import com.lanchonete.retrofit.RetrofitService;
 import com.lanchonete.retrofit.api.BebidaAPI;
@@ -16,7 +15,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,8 +28,6 @@ public class BebidaActivity extends AppCompatActivity {
     RadioGroup radioGroup;
 
     Button btnCadastrar;
-
-    private final Bebida bebida = new Bebida();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +52,6 @@ public class BebidaActivity extends AppCompatActivity {
 
         radioGroup = findViewById(R.id.radioBebida);
 
-        //Aaaaaaa mannnnnnnn
         inputLayoutNome = findViewById(R.id.nome_bebidaInputLayout);
         inputLayoutValor = findViewById(R.id.valor_bebidaInputLayout);
         inputLayoutDescricao = findViewById(R.id.descricao_bebidaInputLayout);
@@ -162,7 +157,6 @@ public class BebidaActivity extends AppCompatActivity {
     }
 
     private void cadastrar() {
-
         RetrofitService retrofitService = new RetrofitService();
         BebidaAPI bebidaAPI = retrofitService.getRetrofit().create(BebidaAPI.class);
 
@@ -172,12 +166,14 @@ public class BebidaActivity extends AppCompatActivity {
         String imgBebida = ((RadioButton) findViewById(radioGroup.getCheckedRadioButtonId())).getText().toString(); // esse q é o casting loko que o Jonas encontrou na internet
         double valor = Double.parseDouble(strValor);
 
+        Bebida bebida = new Bebida();
 
-        bebida.setNomeBebida(nomeBebida);
+        bebida.setNome(nomeBebida);
         bebida.setValor(valor);
         bebida.setDescricao(descricao);
         bebida.setImagem(imgBebida);
-
+        
+        // Creating
         bebidaAPI.addBebida(bebida)
                 .enqueue(new Callback<Bebida>() {
                     @Override
@@ -190,14 +186,14 @@ public class BebidaActivity extends AppCompatActivity {
                         bebida.setSelected(false);
 
                         bebidaArray[0] = String.valueOf(bebida.getId());
-                        bebidaArray[1] = bebida.getNomeBebida();
+                        bebidaArray[1] = bebida.getNome();
                         bebidaArray[2] = String.valueOf(bebida.getValor());
                         bebidaArray[3] = bebida.getDescricao();
                         bebidaArray[4] = bebida.getImagem();
                         bebidaArray[5] = String.valueOf(bebida.isSelected());
 
                         returnIntent.putExtra("bebidaArray", bebidaArray);
-                        setResult(RESULT_OK, returnIntent); //se o resultado não for OK, o dado que for retornado no parâmetro vai estar vazio.
+                        setResult(RESULT_OK, returnIntent); //se o resultado não for OK, os dados não serão recebidos
                         finish();
                     }
 

@@ -4,32 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Toast;
-
+import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.textfield.TextInputLayout;
 import com.lanchonete.R;
-
-
 import com.lanchonete.model.Salgado;
 import com.lanchonete.retrofit.RetrofitService;
 import com.lanchonete.retrofit.api.SalgadoAPI;
-
-
-import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SalgadoActivity extends AppCompatActivity {
 
@@ -37,7 +24,7 @@ public class SalgadoActivity extends AppCompatActivity {
     EditText editTextNome, editTextValor, editTextDescricao;
 
     ImageButton btnVoltar, btnHamburguer, btnTriploHamburguer, btnXSaladaEgg;
-    RadioButton radioHamburguer, radioTriploHamburguer, radioXSaladaEgg, radioButtonFinal;
+    RadioButton radioHamburguer, radioTriploHamburguer, radioXSaladaEgg;
     RadioGroup radioGroup;
 
     Button btnCadastrar;
@@ -64,7 +51,6 @@ public class SalgadoActivity extends AppCompatActivity {
 
         radioGroup = findViewById(R.id.radioSalgado);
 
-        //Aaaaaaa mannnnnnnn
         inputLayoutNome = findViewById(R.id.nome_salgadoInputLayout);
         inputLayoutValor = findViewById(R.id.valor_salgadoInputLayout);
         inputLayoutDescricao = findViewById(R.id.descricao_salgadoInputLayout);
@@ -143,7 +129,7 @@ public class SalgadoActivity extends AppCompatActivity {
             }
         });
 
-        btnHamburguer.setOnClickListener(v -> radioHamburguer.setChecked(true)); //ativa radio pela imagem
+        btnHamburguer.setOnClickListener(v -> radioHamburguer.setChecked(true));
         btnTriploHamburguer.setOnClickListener(v -> radioTriploHamburguer.setChecked(true));
         btnXSaladaEgg.setOnClickListener(v -> radioXSaladaEgg.setChecked(true));
 
@@ -174,7 +160,7 @@ public class SalgadoActivity extends AppCompatActivity {
 
     private void cadastrar() {
         RetrofitService retrofitService = new RetrofitService();
-        SalgadoAPI salgadoAPI = retrofitService.getRetrofit().create(SalgadoAPI.class); //ele vai gerar uma nova requisição http, e nesse caso do tipo POST
+        SalgadoAPI salgadoAPI = retrofitService.getRetrofit().create(SalgadoAPI.class);
 
 
         String nomeSalgado = editTextNome.getText().toString();
@@ -184,7 +170,7 @@ public class SalgadoActivity extends AppCompatActivity {
         double valor = Double.parseDouble(strValor);
 
         Salgado salgado = new Salgado();
-        salgado.setNomeSalgado(nomeSalgado);
+        salgado.setNome(nomeSalgado);
         salgado.setValor(valor);
         salgado.setDescricao(descricao);
         salgado.setImagem(imgSalgado);
@@ -194,6 +180,21 @@ public class SalgadoActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Salgado> call, Response<Salgado> response) {
                         Toast.makeText(getApplicationContext(), "Salvo com sucesso no banco", Toast.LENGTH_SHORT).show();
+
+                        Intent returnIntent = new Intent();
+                        String[] salgadoArray = new String[6];
+
+                        salgado.setSelected(false);
+
+                        salgadoArray[0] = String.valueOf(salgado.getId());
+                        salgadoArray[1] = salgado.getNome();
+                        salgadoArray[2] = String.valueOf(salgado.getValor());
+                        salgadoArray[3] = salgado.getDescricao();
+                        salgadoArray[4] = salgado.getImagem();
+                        salgadoArray[5] = String.valueOf(salgado.isSelected());
+
+                        returnIntent.putExtra("salgadoArray", salgadoArray);
+                        setResult(RESULT_OK, returnIntent); //se o resultado não for OK, os dados não serão recebidos
                         finish();
                     }
 

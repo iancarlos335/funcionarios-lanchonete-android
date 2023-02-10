@@ -1,16 +1,15 @@
 package com.lanchonete.funcionario.get.salgado;
 
-import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.lanchonete.R;
 import com.lanchonete.model.Salgado;
 import com.lanchonete.retrofit.RetrofitService;
@@ -19,15 +18,26 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
 import java.util.LinkedList;
 
 public class SalgadoAdapter extends RecyclerView.Adapter<SalgadoAdapter.SalgadoHolder> {
 
     private final LinkedList<Salgado> salgadoList;
+    private SalgadoAdapterListener listener;
+    private int currentSelectedPosition;
+    final SparseBooleanArray selectedItems = new SparseBooleanArray();
+
 
     public SalgadoAdapter(LinkedList<Salgado> salgadoList) {
         this.salgadoList = salgadoList;
+    }
+
+    public void setListener(SalgadoAdapterListener listener) {
+        this.listener = listener;
+    }
+
+    public LinkedList<Salgado> getSalgados() {
+        return salgadoList;
     }
 
     @NonNull
@@ -41,18 +51,23 @@ public class SalgadoAdapter extends RecyclerView.Adapter<SalgadoAdapter.SalgadoH
     @Override
     public void onBindViewHolder(@NonNull SalgadoHolder holder, int position) {
         Salgado salgado = salgadoList.get(position);
-        String strValue = Double.toString(salgado.getValor());
+        holder.bindHolder(salgado);
 
-        holder.nome.setText(salgado.getNomeSalgado());
-        holder.descricao.setText(salgado.getDescricao());
-        holder.valor.setText(strValue);
-        holder.delete_item.setOnClickListener(view -> deletar(salgado.getId(), view.getContext(), position));
-    }
+        holder.itemView.setOnClickListener(v -> {
+            if (salgadoList.size() > 0 && listener != null) {
+                listener.onItemClick(holder.getAdapterPosition());
+            }
+        });
+        holder.itemView.setOnLongClickListener(v -> {
+            if (listener != null) {
+                listener.onItemLongClick(holder.getAdapterPosition());
+            }
+            return true;
+        });
 
-    private void removeItem(int position) {
-        salgadoList.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, salgadoList.size()); //Esse cara que atualiza o recycler
+        if (currentSelectedPosition == position) {
+            currentSelectedPosition = -1;
+        }
     }
 
     @Override
@@ -66,7 +81,27 @@ public class SalgadoAdapter extends RecyclerView.Adapter<SalgadoAdapter.SalgadoH
         return salgado.getId();
     }
 
-    private void deletar(long id, Context context, int position) {
+    public void toggleSelection(int position) {
+        currentSelectedPosition = position;
+        if (selectedItems.get(position)) {
+            selectedItems.delete(position);
+            salgadoList.get(position).setSelected(false);
+        } else {
+            salgadoList.get(position).setSelected(true);
+            selectedItems.put(position, true);
+        }
+        notifyItemChanged(position);
+    }
+
+    private void removeItem(LinkedList<Salgado> deletedItems) {
+        salgadoList.removeAll(deletedItems);
+        if (salgadoList.size() > 0) {
+            notifyItemRangeRemoved(salgadoList.indexOf(salgadoList.getFirst()), salgadoList.size());
+            notifyItemRangeChanged(salgadoList.indexOf(salgadoList.getFirst()), salgadoList.size());
+        }
+    }
+
+    protected void deletar(long id, LinkedList<Salgado> deletedItems) {
         RetrofitService retrofitService = new RetrofitService();
         SalgadoAPI salgadoAPI = retrofitService.getRetrofit().create(SalgadoAPI.class);
 
@@ -74,12 +109,12 @@ public class SalgadoAdapter extends RecyclerView.Adapter<SalgadoAdapter.SalgadoH
                 .enqueue(new Callback<Salgado>() {
                     @Override
                     public void onResponse(Call<Salgado> call, Response<Salgado> response) {
-                        removeItem(position);
+                        removeItem(deletedItems);
                     }
 
                     @Override
                     public void onFailure(Call<Salgado> call, Throwable t) {
-                        Toast.makeText(context, "Vai devagar, o item não foi removido", Toast.LENGTH_SHORT).show();
+                        Log.i("SEVERE", "Não deletou");
                     }
                 });
     }
@@ -89,7 +124,6 @@ public class SalgadoAdapter extends RecyclerView.Adapter<SalgadoAdapter.SalgadoH
         final TextView nome;
         final TextView descricao;
         final TextView valor;
-        final Button delete_item;
 
         public SalgadoHolder(@NonNull View itemView) {
             super(itemView);
@@ -97,8 +131,35 @@ public class SalgadoAdapter extends RecyclerView.Adapter<SalgadoAdapter.SalgadoH
             nome = itemView.findViewById(R.id.salgadoListItem_nome);
             descricao = itemView.findViewById(R.id.salgadoListItem_descricao);
             valor = itemView.findViewById(R.id.salgadoListItem_valor);
-            delete_item = itemView.findViewById(R.id.salgadoDeleteBtn);
         }
 
+        public void bindHolder(Salgado salgado) {
+            String strValue = Double.toString(salgado.getValor());
+
+            nome.setText(salgado.getNome());
+            descricao.setText(salgado.getDescricao());
+            valor.setText(strValue);
+
+            if (salgado.isSelected()) {
+                GradientDrawable gradientDrawable = new GradientDrawable();
+                gradientDrawable.setShape(GradientDrawable.RECTANGLE);
+                gradientDrawable.setCornerRadius(32f);
+                gradientDrawable.setColor(Color.rgb(232, 240, 253));
+                itemView.setBackground(gradientDrawable);
+            } else {
+                GradientDrawable gradientDrawable = new GradientDrawable();
+                gradientDrawable.setShape(GradientDrawable.RECTANGLE);
+                gradientDrawable.setCornerRadius(32f);
+                gradientDrawable.setColor(Color.WHITE);
+                itemView.setBackground(gradientDrawable);
+            }
+        }
+
+    }
+
+    interface SalgadoAdapterListener {
+        void onItemClick(int position);
+
+        void onItemLongClick(int position);
     }
 }

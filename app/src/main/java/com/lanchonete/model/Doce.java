@@ -4,7 +4,7 @@ public class Doce {
 
 	private long id;
 
-	private String nomeDoce;
+	private String nome;
 
 	private double valor;
 
@@ -12,31 +12,9 @@ public class Doce {
 
 	private String imagem;
 
+	private boolean selected;
+
 	public Doce() {}
-
-	public Doce(String nomeDoce, double valor, String descricao, String imagem) {
-		super();
-		this.nomeDoce = nomeDoce;
-		this.valor = valor;
-		this.descricao = descricao;
-		this.imagem = imagem;
-	}
-
-	public String getImagem() {
-		return imagem;
-	}
-
-	public void setImagem(String imagem) {
-		this.imagem = imagem;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
 
 	public long getId() {
 		return id;
@@ -46,12 +24,12 @@ public class Doce {
 		this.id = id;
 	}
 
-	public String getNomeDoce() {
-		return nomeDoce;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNomeDoce(String nomeDoce) {
-		this.nomeDoce = nomeDoce;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public double getValor() {
@@ -62,4 +40,27 @@ public class Doce {
 		this.valor = valor;
 	}
 
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public String getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
+	}
+
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
 }

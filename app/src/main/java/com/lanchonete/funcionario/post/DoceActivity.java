@@ -4,32 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Toast;
-
-import androidx.annotation.Nullable;
+import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.textfield.TextInputLayout;
 import com.lanchonete.R;
-
 import com.lanchonete.model.Doce;
 import com.lanchonete.retrofit.RetrofitService;
 import com.lanchonete.retrofit.api.DoceAPI;
-
-
-import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DoceActivity extends AppCompatActivity {
 
@@ -37,16 +24,10 @@ public class DoceActivity extends AppCompatActivity {
     EditText editTextNome, editTextValor, editTextDescricao;
 
     ImageButton btnVoltar, btnPudim, btnBolo, btnDonuts;
-    RadioButton radioPudim, radioBolo, radioDonuts, radioButtonFinal;
+    RadioButton radioPudim, radioBolo, radioDonuts;
     RadioGroup radioGroup;
 
     Button btnCadastrar;
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,16 +50,11 @@ public class DoceActivity extends AppCompatActivity {
 
         radioGroup = findViewById(R.id.radioDoce);
 
-        //Aaaaaaa mannnnnnnn
         inputLayoutNome = findViewById(R.id.nome_doceInputLayout);
         inputLayoutValor = findViewById(R.id.valor_doceInputLayout);
         inputLayoutDescricao = findViewById(R.id.descricao_doceInputLayout);
 
-        Intent intent = getIntent();
-
-        btnVoltar.setOnClickListener(view -> {
-            finish();
-        });
+        btnVoltar.setOnClickListener(view -> finish());
 
 
         editTextNome.addTextChangedListener(new TextWatcher() {
@@ -175,13 +151,12 @@ public class DoceActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                 onRestart();
             } else {
-                iniciandoComponentes();
+                cadastrar();
             }
         });
     }
 
-    private void iniciandoComponentes() {
-
+    private void cadastrar() {
         RetrofitService retrofitService = new RetrofitService();
         DoceAPI doceAPI = retrofitService.getRetrofit().create(DoceAPI.class);
 
@@ -192,7 +167,7 @@ public class DoceActivity extends AppCompatActivity {
         double valor = Double.parseDouble(strValor);
 
         Doce doce = new Doce();
-        doce.setNomeDoce(nomeDoce);
+        doce.setNome(nomeDoce);
         doce.setValor(valor);
         doce.setDescricao(descricao);
         doce.setImagem(imgDoce);
@@ -203,6 +178,21 @@ public class DoceActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Doce> call, Response<Doce> response) {
                         Toast.makeText(getApplicationContext(), "Salvo com sucesso no banco", Toast.LENGTH_SHORT).show();
+
+                        Intent returnIntent = new Intent();
+                        String[] doceArray = new String[6];
+
+                        doce.setSelected(false);
+
+                        doceArray[0] = String.valueOf(doce.getId());
+                        doceArray[1] = doce.getNome();
+                        doceArray[2] = String.valueOf(doce.getValor());
+                        doceArray[3] = doce.getDescricao();
+                        doceArray[4] = doce.getImagem();
+                        doceArray[5] = String.valueOf(doce.isSelected());
+
+                        returnIntent.putExtra("doceArray", doceArray);
+                        setResult(RESULT_OK, returnIntent); //se o resultado não for OK, os dados não serão recebidos
                         finish();
                     }
 
