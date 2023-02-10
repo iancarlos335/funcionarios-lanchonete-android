@@ -20,14 +20,14 @@
 
 
         <activity
-            android:name=".funcionario.get.salgado.SalgadoListActivity"
+            android:name=".funcionario.read_delete.salgado.SalgadoListActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".funcionario.get.doce.DoceListActivity"
+            android:name=".funcionario.read_delete.doce.DoceListActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -48,7 +48,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".funcionario.get.bebida.BebidaListActivity"
+            android:name=".funcionario.read_delete.bebida.BebidaListActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -75,21 +75,21 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".funcionario.post.DoceActivity"
+            android:name=".funcionario.create_update.DoceActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".funcionario.post.SalgadoActivity"
+            android:name=".funcionario.create_update.SalgadoActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".funcionario.post.BebidaActivity"
+            android:name=".funcionario.create_update.BebidaActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

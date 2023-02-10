@@ -1,4 +1,4 @@
-package com.lanchonete.funcionario.get.salgado;
+package com.lanchonete.funcionario.read_delete.doce;
 
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -11,50 +11,50 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.lanchonete.R;
-import com.lanchonete.model.Salgado;
+import com.lanchonete.model.Doce;
 import com.lanchonete.retrofit.RetrofitService;
-import com.lanchonete.retrofit.api.SalgadoAPI;
+import com.lanchonete.retrofit.api.DoceAPI;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 import java.util.LinkedList;
 
-public class SalgadoAdapter extends RecyclerView.Adapter<SalgadoAdapter.SalgadoHolder> {
+public class DoceAdapter extends RecyclerView.Adapter<DoceAdapter.DoceHolder> {
 
-    private final LinkedList<Salgado> salgadoList;
-    private SalgadoAdapterListener listener;
-    private int currentSelectedPosition;
+    private final LinkedList<Doce> doceList;
+    private DoceAdapterListener listener;
     final SparseBooleanArray selectedItems = new SparseBooleanArray();
+    private int currentSelectedPosition;
 
-
-    public SalgadoAdapter(LinkedList<Salgado> salgadoList) {
-        this.salgadoList = salgadoList;
+    public DoceAdapter(LinkedList<Doce> doceList) {
+        this.doceList = doceList;
     }
 
-    public void setListener(SalgadoAdapterListener listener) {
+    public void setListener(DoceAdapterListener listener) {
         this.listener = listener;
     }
 
-    public LinkedList<Salgado> getSalgados() {
-        return salgadoList;
+    public LinkedList<Doce> getDoces() {
+        return doceList;
     }
+
 
     @NonNull
     @Override
-    public SalgadoHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public DoceHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_salgados_itens, parent, false);
-        return new SalgadoHolder(view);
+                .inflate(R.layout.list_doces_itens, parent, false);
+        return new DoceHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SalgadoHolder holder, int position) {
-        Salgado salgado = salgadoList.get(position);
-        holder.bindHolder(salgado);
+    public void onBindViewHolder(@NonNull DoceHolder holder, int position) {
+        Doce doce = doceList.get(position);
+        holder.bindHolder(doce);
 
         holder.itemView.setOnClickListener(v -> {
-            if (salgadoList.size() > 0 && listener != null) {
+            if (selectedItems.size() > 0 && listener != null) {
                 listener.onItemClick(holder.getAdapterPosition());
             }
         });
@@ -71,76 +71,76 @@ public class SalgadoAdapter extends RecyclerView.Adapter<SalgadoAdapter.SalgadoH
     }
 
     @Override
-    public int getItemCount() { //vai adicionar novos items, dependendo de quantos itens estiverem no nosso contrutor
-        return salgadoList.size();
+    public int getItemCount() {
+        return doceList.size();
     }
 
     @Override
     public long getItemId(int position) {
-        Salgado salgado = salgadoList.get(position);
-        return salgado.getId();
+        Doce doce = doceList.get(position);
+        return doce.getId();
     }
 
     public void toggleSelection(int position) {
         currentSelectedPosition = position;
         if (selectedItems.get(position)) {
             selectedItems.delete(position);
-            salgadoList.get(position).setSelected(false);
+            doceList.get(position).setSelected(false);
         } else {
-            salgadoList.get(position).setSelected(true);
+            doceList.get(position).setSelected(true);
             selectedItems.put(position, true);
         }
         notifyItemChanged(position);
     }
 
-    private void removeItem(LinkedList<Salgado> deletedItems) {
-        salgadoList.removeAll(deletedItems);
-        if (salgadoList.size() > 0) {
-            notifyItemRangeRemoved(salgadoList.indexOf(salgadoList.getFirst()), salgadoList.size());
-            notifyItemRangeChanged(salgadoList.indexOf(salgadoList.getFirst()), salgadoList.size());
+    private void removeItem(LinkedList<Doce> deletedItems) {
+        doceList.removeAll(deletedItems);
+        if (doceList.size() > 0) {
+            notifyItemRangeRemoved(doceList.indexOf(doceList.getFirst()), doceList.size());
+            notifyItemRangeChanged(doceList.indexOf(doceList.getFirst()), doceList.size());
         }
     }
 
-    protected void deletar(long id, LinkedList<Salgado> deletedItems) {
+    protected void deletar(long id, LinkedList<Doce> deletedItems) {
         RetrofitService retrofitService = new RetrofitService();
-        SalgadoAPI salgadoAPI = retrofitService.getRetrofit().create(SalgadoAPI.class);
+        DoceAPI doceAPI = retrofitService.getRetrofit().create(DoceAPI.class);
 
-        salgadoAPI.delete(id)
-                .enqueue(new Callback<Salgado>() {
+        doceAPI.delete(id)
+                .enqueue(new Callback<Doce>() {
                     @Override
-                    public void onResponse(Call<Salgado> call, Response<Salgado> response) {
+                    public void onResponse(Call<Doce> call, Response<Doce> response) {
                         removeItem(deletedItems);
                     }
 
                     @Override
-                    public void onFailure(Call<Salgado> call, Throwable t) {
+                    public void onFailure(Call<Doce> call, Throwable t) {
                         Log.i("SEVERE", "Não deletou");
                     }
                 });
     }
 
-    public static class SalgadoHolder extends RecyclerView.ViewHolder {
+    public static class DoceHolder extends RecyclerView.ViewHolder {
 
         final TextView nome;
         final TextView descricao;
         final TextView valor;
 
-        public SalgadoHolder(@NonNull View itemView) {
+        public DoceHolder(@NonNull View itemView) {
             super(itemView);
 
-            nome = itemView.findViewById(R.id.salgadoListItem_nome);
-            descricao = itemView.findViewById(R.id.salgadoListItem_descricao);
-            valor = itemView.findViewById(R.id.salgadoListItem_valor);
+            nome = itemView.findViewById(R.id.docesListItem_nome);
+            descricao = itemView.findViewById(R.id.docesListItem_descricao);
+            valor = itemView.findViewById(R.id.docesListItem_valor);
         }
 
-        public void bindHolder(Salgado salgado) {
-            String strValue = Double.toString(salgado.getValor());
+        public void bindHolder(Doce doce) {
+            String strValue = Double.toString(doce.getValor());
 
-            nome.setText(salgado.getNome());
-            descricao.setText(salgado.getDescricao());
+            nome.setText(doce.getNome());
+            descricao.setText(doce.getDescricao());
             valor.setText(strValue);
 
-            if (salgado.isSelected()) {
+            if (doce.isSelected()) {
                 GradientDrawable gradientDrawable = new GradientDrawable();
                 gradientDrawable.setShape(GradientDrawable.RECTANGLE);
                 gradientDrawable.setCornerRadius(32f);
@@ -154,10 +154,9 @@ public class SalgadoAdapter extends RecyclerView.Adapter<SalgadoAdapter.SalgadoH
                 itemView.setBackground(gradientDrawable);
             }
         }
-
     }
 
-    interface SalgadoAdapterListener {
+    interface DoceAdapterListener {
         void onItemClick(int position);
 
         void onItemLongClick(int position);

@@ -1,17 +1,13 @@
-package com.lanchonete.funcionario.get.bebida;
+package com.lanchonete.funcionario.read_delete.bebida;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.provider.DocumentsContract;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.lanchonete.R;
@@ -24,7 +20,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import java.util.LinkedList;
-import java.util.List;
 
 public class BebidaAdapter extends RecyclerView.Adapter<BebidaAdapter.BebidaHolder> {
 

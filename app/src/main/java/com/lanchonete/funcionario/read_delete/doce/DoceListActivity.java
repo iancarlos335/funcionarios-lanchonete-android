@@ -1,4 +1,4 @@
-package com.lanchonete.funcionario.get.bebida;
+package com.lanchonete.funcionario.read_delete.doce;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,10 +13,10 @@ import androidx.appcompat.view.ActionMode;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.lanchonete.R;
-import com.lanchonete.funcionario.post.BebidaActivity;
-import com.lanchonete.model.Bebida;
+import com.lanchonete.funcionario.create_update.DoceActivity;
+import com.lanchonete.model.Doce;
 import com.lanchonete.retrofit.RetrofitService;
-import com.lanchonete.retrofit.api.BebidaAPI;
+import com.lanchonete.retrofit.api.DoceAPI;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,32 +24,31 @@ import retrofit2.Response;
 import java.util.LinkedList;
 import java.util.List;
 
-public class BebidaListActivity extends AppCompatActivity {
+public class DoceListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     ImageView irInicio;
-    Button buttonAddBebida;
-    LinkedList<Bebida> bebidas = new LinkedList<>();
+    Button buttonAddDoce;
+    LinkedList<Doce> doces = new LinkedList<>();
     private ActionMode actionMode;
-    private BebidaAdapter bebidaAdapter;
-
+    private DoceAdapter doceAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bebida_list);
+        setContentView(R.layout.activity_doce_list);
 
-        recyclerView = findViewById(R.id.bebidasList_recyclerView);
+        recyclerView = findViewById(R.id.docesList_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
-        buttonAddBebida = findViewById(R.id.btnAdicionarNovaBebida);
-        irInicio = findViewById(R.id.imageButtonVoltarInicioBebida);
+        buttonAddDoce = findViewById(R.id.btnAdicionarNovoDoce);
+        irInicio = findViewById(R.id.imageButtonVoltarInicioDoce);
 
         carregar();
 
         irInicio.setOnClickListener(v -> finish());
 
-        buttonAddBebida.setOnClickListener(v -> startActivityForResult(new Intent(this, BebidaActivity.class), 1));
+        buttonAddDoce.setOnClickListener(v -> startActivityForResult(new Intent(this, DoceActivity.class), 1));
     }
 
     @Override
@@ -58,53 +57,53 @@ public class BebidaListActivity extends AppCompatActivity {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Bebida bebida = new Bebida();
-        String[] bebidaArray;
+        Doce doce = new Doce();
+        String[] doceArray;
 
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == RESULT_OK) {
-            bebidaArray = data.getStringArrayExtra("bebidaArray");
+            doceArray = data.getStringArrayExtra("doceArray");
 
 
-            bebida.setId(Integer.parseInt(bebidaArray[0]));
-            bebida.setNome(bebidaArray[1]);
-            bebida.setValor(Double.parseDouble(bebidaArray[2]));
-            bebida.setDescricao(bebidaArray[3]);
-            bebida.setImagem(bebidaArray[4]);
-            bebida.setSelected(Boolean.getBoolean(bebidaArray[5]));
+            doce.setId(Integer.parseInt(doceArray[0]));
+            doce.setNome(doceArray[1]);
+            doce.setValor(Double.parseDouble(doceArray[2]));
+            doce.setDescricao(doceArray[3]);
+            doce.setImagem(doceArray[4]);
+            doce.setSelected(Boolean.getBoolean(doceArray[5]));
 
-            bebidaAdapter.getBebidas().add(bebida);
-            bebidaAdapter.notifyItemInserted(bebidaAdapter.getBebidas().indexOf(bebidaAdapter.getBebidas().getLast()));
+            doceAdapter.getDoces().add(doce);
+            doceAdapter.notifyItemInserted(doceAdapter.getDoces().indexOf(doceAdapter.getDoces().getLast()));
             onRestart();
         }
     }
 
-
     private void carregar() {
         RetrofitService retrofitService = new RetrofitService();
-        BebidaAPI bebidaAPI = retrofitService.getRetrofit().create(BebidaAPI.class);
-        // Reading
-        bebidaAPI.listBebida()
-                .enqueue(new Callback<List<Bebida>>() {
+        DoceAPI doceAPI = retrofitService.getRetrofit().create(DoceAPI.class);
+
+        doceAPI.listDoce()
+                .enqueue(new Callback<List<Doce>>() {
                     @Override
-                    public void onResponse(@NonNull Call<List<Bebida>> call, @NonNull Response<List<Bebida>> response) {
+                    public void onResponse(@NonNull Call<List<Doce>> call, @NonNull Response<List<Doce>> response) {
                         assert response.body() != null;
-                        bebidas.addAll(response.body());
-                        bebidaAdapter = new BebidaAdapter(bebidas);
+                        doces.addAll(response.body());
+                        doceAdapter = new DoceAdapter(doces);
                         preencherRecyclerView();
                     }
 
                     @Override
-                    public void onFailure(@NonNull Call<List<Bebida>> call, @NonNull Throwable t) {
-                        Toast.makeText(BebidaListActivity.this, "Falha ao pegar do banco", Toast.LENGTH_SHORT).show();
+                    public void onFailure(@NonNull Call<List<Doce>> call, @NonNull Throwable t) {
+                        Toast.makeText(DoceListActivity.this, "Falha ao pegar do banco", Toast.LENGTH_SHORT).show();
                     }
                 });
+
     }
 
     private void preencherRecyclerView() {
-        recyclerView.setAdapter(bebidaAdapter);
+        recyclerView.setAdapter(doceAdapter);
 
-        bebidaAdapter.setListener(new BebidaAdapter.BebidaAdapterListener() {
+        doceAdapter.setListener(new DoceAdapter.DoceAdapterListener() {
             @Override
             public void onItemClick(int position) {
                 enableActionMode(position);
@@ -135,12 +134,12 @@ public class BebidaListActivity extends AppCompatActivity {
                 @Override
                 public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
                     if (item.getItemId() == R.id.action_delete) {
-                        LinkedList<Bebida> deletedItems = new LinkedList<>();
-                        LinkedList<Bebida> adapterList = new LinkedList<>(bebidaAdapter.getBebidas());
-                        for (Bebida bebida : adapterList) {
-                            if (bebida.isSelected()) {
-                                deletedItems.add(bebida);
-                                bebidaAdapter.deletar(bebida.getId(), deletedItems); //isso é uma mega evolução
+                        LinkedList<Doce> deletedItems = new LinkedList<>();
+                        LinkedList<Doce> adapterList = new LinkedList<>(doceAdapter.getDoces());
+                        for (Doce doce : adapterList) {
+                            if (doce.isSelected()) {
+                                deletedItems.add(doce);
+                                doceAdapter.deletar(doce.getId(), deletedItems);
                             }
                         }
 
@@ -152,23 +151,23 @@ public class BebidaListActivity extends AppCompatActivity {
 
                 @Override
                 public void onDestroyActionMode(ActionMode mode) {
-                    bebidaAdapter.selectedItems.clear();
-                    LinkedList<Bebida> adapterList = new LinkedList<>(bebidaAdapter.getBebidas());
-                    for (Bebida bebida : adapterList) {
-                        if (bebida.isSelected()) {
-                            bebida.setSelected(false);
+                    doceAdapter.selectedItems.clear();
+                    LinkedList<Doce> adapterList = new LinkedList<>(doceAdapter.getDoces());
+                    for (Doce doce : adapterList) {
+                        if (doce.isSelected()) {
+                            doce.setSelected(false);
                         }
                     }
 
-                    bebidaAdapter.notifyItemRangeChanged(position, adapterList.size());
+                    doceAdapter.notifyItemRangeChanged(position, adapterList.size());
                     actionMode = null;
                 }
             });
         }
 
-        bebidaAdapter.toggleSelection(position);
+        doceAdapter.toggleSelection(position);
 
-        final int size = bebidaAdapter.selectedItems.size();
+        final int size = doceAdapter.selectedItems.size();
         if (size == 0) {
             actionMode.finish();
         } else {
@@ -176,4 +175,5 @@ public class BebidaListActivity extends AppCompatActivity {
             actionMode.invalidate();
         }
     }
+
 }

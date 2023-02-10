@@ -6,11 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
-import com.lanchonete.Home;
 import com.lanchonete.R;
-import com.lanchonete.funcionario.get.bebida.BebidaListActivity;
-import com.lanchonete.funcionario.get.doce.DoceListActivity;
-import com.lanchonete.funcionario.get.salgado.SalgadoListActivity;
+import com.lanchonete.funcionario.read_delete.bebida.BebidaListActivity;
+import com.lanchonete.funcionario.read_delete.doce.DoceListActivity;
+import com.lanchonete.funcionario.read_delete.salgado.SalgadoListActivity;
 
 public class MenuFuncionario extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.lanchonete.funcionario.get.salgado;
+package com.lanchonete.funcionario.read_delete.bebida;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,10 +13,10 @@ import androidx.appcompat.view.ActionMode;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.lanchonete.R;
-import com.lanchonete.funcionario.post.SalgadoActivity;
-import com.lanchonete.model.Salgado;
+import com.lanchonete.funcionario.create_update.BebidaActivity;
+import com.lanchonete.model.Bebida;
 import com.lanchonete.retrofit.RetrofitService;
-import com.lanchonete.retrofit.api.SalgadoAPI;
+import com.lanchonete.retrofit.api.BebidaAPI;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,29 +24,32 @@ import retrofit2.Response;
 import java.util.LinkedList;
 import java.util.List;
 
-public class SalgadoListActivity extends AppCompatActivity {
+public class BebidaListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     ImageView irInicio;
-    Button buttonAddSalgado;
-    LinkedList<Salgado> salgados = new LinkedList<>();
+    Button buttonAddBebida;
+    LinkedList<Bebida> bebidas = new LinkedList<>();
     private ActionMode actionMode;
-    private SalgadoAdapter salgadoAdapter;
+    private BebidaAdapter bebidaAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_salgado_list);
+        setContentView(R.layout.activity_bebida_list);
 
-        recyclerView = findViewById(R.id.salgadosList_recyclerView);
+        recyclerView = findViewById(R.id.bebidasList_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        buttonAddSalgado = findViewById(R.id.btnAdicionarNovoSalgado);
-        irInicio = findViewById(R.id.imageButtonVoltarInicioSalgado);
+        recyclerView.setHasFixedSize(true);
+
+        buttonAddBebida = findViewById(R.id.btnAdicionarNovaBebida);
+        irInicio = findViewById(R.id.imageButtonVoltarInicioBebida);
 
         carregar();
 
         irInicio.setOnClickListener(v -> finish());
 
-        buttonAddSalgado.setOnClickListener(v -> startActivityForResult(new Intent(this, SalgadoActivity.class), 1));
+        buttonAddBebida.setOnClickListener(v -> startActivityForResult(new Intent(this, BebidaActivity.class), 1));
     }
 
     @Override
@@ -55,52 +58,53 @@ public class SalgadoListActivity extends AppCompatActivity {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Salgado salgado = new Salgado();
-        String[] salgadoArray;
+        Bebida bebida = new Bebida();
+        String[] bebidaArray;
 
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == RESULT_OK) {
-            salgadoArray = data.getStringArrayExtra("salgadoArray");
+            bebidaArray = data.getStringArrayExtra("bebidaArray");
 
 
-            salgado.setId(Integer.parseInt(salgadoArray[0]));
-            salgado.setNome(salgadoArray[1]);
-            salgado.setValor(Double.parseDouble(salgadoArray[2]));
-            salgado.setDescricao(salgadoArray[3]);
-            salgado.setImagem(salgadoArray[4]);
-            salgado.setSelected(Boolean.getBoolean(salgadoArray[5]));
+            bebida.setId(Integer.parseInt(bebidaArray[0]));
+            bebida.setNome(bebidaArray[1]);
+            bebida.setValor(Double.parseDouble(bebidaArray[2]));
+            bebida.setDescricao(bebidaArray[3]);
+            bebida.setImagem(bebidaArray[4]);
+            bebida.setSelected(Boolean.getBoolean(bebidaArray[5]));
 
-            salgadoAdapter.getSalgados().add(salgado);
-            salgadoAdapter.notifyItemInserted(salgadoAdapter.getSalgados().indexOf(salgadoAdapter.getSalgados().getLast()));
+            bebidaAdapter.getBebidas().add(bebida);
+            bebidaAdapter.notifyItemInserted(bebidaAdapter.getBebidas().indexOf(bebidaAdapter.getBebidas().getLast()));
             onRestart();
         }
     }
 
-    public void carregar() {
+
+    private void carregar() {
         RetrofitService retrofitService = new RetrofitService();
-        SalgadoAPI salgadoAPI = retrofitService.getRetrofit().create(SalgadoAPI.class);
-        salgadoAPI.listSalgado()
-                .enqueue(new Callback<List<Salgado>>() {
+        BebidaAPI bebidaAPI = retrofitService.getRetrofit().create(BebidaAPI.class);
+        // Reading
+        bebidaAPI.listBebida()
+                .enqueue(new Callback<List<Bebida>>() {
                     @Override
-                    public void onResponse(@NonNull Call<List<Salgado>> call, @NonNull Response<List<Salgado>> response) {
+                    public void onResponse(@NonNull Call<List<Bebida>> call, @NonNull Response<List<Bebida>> response) {
                         assert response.body() != null;
-                        salgados.addAll(response.body());
-                        salgadoAdapter = new SalgadoAdapter(salgados);
+                        bebidas.addAll(response.body());
+                        bebidaAdapter = new BebidaAdapter(bebidas);
                         preencherRecyclerView();
                     }
 
                     @Override
-                    public void onFailure(@NonNull Call<List<Salgado>> call, @NonNull Throwable t) {
-                        Toast.makeText(SalgadoListActivity.this, "Falha ao pegar do banco", Toast.LENGTH_SHORT).show();
+                    public void onFailure(@NonNull Call<List<Bebida>> call, @NonNull Throwable t) {
+                        Toast.makeText(BebidaListActivity.this, "Falha ao pegar do banco", Toast.LENGTH_SHORT).show();
                     }
                 });
-
     }
 
     private void preencherRecyclerView() {
-        recyclerView.setAdapter(salgadoAdapter);
+        recyclerView.setAdapter(bebidaAdapter);
 
-        salgadoAdapter.setListener(new SalgadoAdapter.SalgadoAdapterListener() {
+        bebidaAdapter.setListener(new BebidaAdapter.BebidaAdapterListener() {
             @Override
             public void onItemClick(int position) {
                 enableActionMode(position);
@@ -131,12 +135,12 @@ public class SalgadoListActivity extends AppCompatActivity {
                 @Override
                 public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
                     if (item.getItemId() == R.id.action_delete) {
-                        LinkedList<Salgado> deletedItems = new LinkedList<>();
-                        LinkedList<Salgado> adapterList = new LinkedList<>(salgadoAdapter.getSalgados());
-                        for (Salgado salgado : adapterList) {
-                            if (salgado.isSelected()) {
-                                deletedItems.add(salgado);
-                                salgadoAdapter.deletar(salgado.getId(), deletedItems);
+                        LinkedList<Bebida> deletedItems = new LinkedList<>();
+                        LinkedList<Bebida> adapterList = new LinkedList<>(bebidaAdapter.getBebidas());
+                        for (Bebida bebida : adapterList) {
+                            if (bebida.isSelected()) {
+                                deletedItems.add(bebida);
+                                bebidaAdapter.deletar(bebida.getId(), deletedItems); //isso é uma mega evolução
                             }
                         }
 
@@ -148,23 +152,23 @@ public class SalgadoListActivity extends AppCompatActivity {
 
                 @Override
                 public void onDestroyActionMode(ActionMode mode) {
-                    salgadoAdapter.selectedItems.clear();
-                    LinkedList<Salgado> adapterList = new LinkedList<>(salgadoAdapter.getSalgados());
-                    for (Salgado salgado : adapterList) {
-                        if (salgado.isSelected()) {
-                            salgado.setSelected(false);
+                    bebidaAdapter.selectedItems.clear();
+                    LinkedList<Bebida> adapterList = new LinkedList<>(bebidaAdapter.getBebidas());
+                    for (Bebida bebida : adapterList) {
+                        if (bebida.isSelected()) {
+                            bebida.setSelected(false);
                         }
                     }
 
-                    salgadoAdapter.notifyItemRangeChanged(position, adapterList.size());
+                    bebidaAdapter.notifyItemRangeChanged(position, adapterList.size());
                     actionMode = null;
                 }
             });
         }
 
-        salgadoAdapter.toggleSelection(position);
+        bebidaAdapter.toggleSelection(position);
 
-        final int size = salgadoAdapter.selectedItems.size();
+        final int size = bebidaAdapter.selectedItems.size();
         if (size == 0) {
             actionMode.finish();
         } else {
@@ -172,5 +176,4 @@ public class SalgadoListActivity extends AppCompatActivity {
             actionMode.invalidate();
         }
     }
-
 }

@@ -8,7 +8,7 @@
 
 
     <TextView
-        android:id="@+id/salgadoListItem_nome"
+        android:id="@+id/salgadosListItem_nome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/salgadoListItem_descricao"
+        android:id="@+id/salgadosListItem_descricao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
@@ -28,29 +28,18 @@
         android:paddingBottom="18dp"
         android:text="@string/descricao"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/salgadoListItem_nome" />
+        app:layout_constraintTop_toBottomOf="@+id/salgadosListItem_nome" />
 
     <TextView
-            android:id="@+id/salgadoListItem_valor"
+            android:id="@+id/salgadosListItem_valor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
             android:text="@string/valor"
             app:layout_constraintTop_toTopOf="parent"
-            tools:context="."
-            app:layout_constraintStart_toEndOf="@+id/salgadoListItem_descricao" android:layout_marginStart="16dp"/>
-    <Button
-            android:text="DELETE"
-            android:textSize="08sp"
-            android:layout_width="73dp"
-            android:layout_height="41dp"
-            android:id="@+id/salgadoDeleteBtn"
-            android:backgroundTint="#F30101"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="44dp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            tools:ignore="HardcodedText"/>
+            android:layout_marginEnd="52dp"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
