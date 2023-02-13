@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.lanchonete.R;
 import com.lanchonete.funcionario.create_update.BebidaActivity;
 import com.lanchonete.model.Bebida;
@@ -31,6 +32,7 @@ public class BebidaListActivity extends AppCompatActivity {
     LinkedList<Bebida> bebidas = new LinkedList<>();
     private ActionMode actionMode;
     private BebidaAdapter bebidaAdapter;
+    SwipeRefreshLayout swipeRefreshLayout;
 
 
     @Override
@@ -50,11 +52,17 @@ public class BebidaListActivity extends AppCompatActivity {
         irInicio.setOnClickListener(v -> finish());
 
         buttonAddBebida.setOnClickListener(v -> startActivityForResult(new Intent(this, BebidaActivity.class), 1));
-    }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
+
+        swipeRefreshLayout = findViewById(R.id.bebidasSwipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            bebidas.clear();
+
+            carregar();
+            bebidaAdapter.notifyDataSetChanged(); // vai ser isso por enquanto, kkk TODO melhorar isso dps pelo amor
+            swipeRefreshLayout.setRefreshing(false);
+        });
+
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -116,6 +124,7 @@ public class BebidaListActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void enableActionMode(int position) {
         if (actionMode == null) { // that if was without brackets, and annoyed we a little

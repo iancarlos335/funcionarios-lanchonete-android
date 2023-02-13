@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.lanchonete.R;
 import com.lanchonete.funcionario.create_update.SalgadoActivity;
 import com.lanchonete.model.Salgado;
@@ -31,6 +32,7 @@ public class SalgadoListActivity extends AppCompatActivity {
     LinkedList<Salgado> salgados = new LinkedList<>();
     private ActionMode actionMode;
     private SalgadoAdapter salgadoAdapter;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,16 @@ public class SalgadoListActivity extends AppCompatActivity {
         irInicio.setOnClickListener(v -> finish());
 
         buttonAddSalgado.setOnClickListener(v -> startActivityForResult(new Intent(this, SalgadoActivity.class), 1));
+
+
+        swipeRefreshLayout = findViewById(R.id.salgadosSwipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            salgados.clear();
+
+            carregar();
+            salgadoAdapter.notifyDataSetChanged(); //TODO melhorar isso dps pelo amor
+            swipeRefreshLayout.setRefreshing(false);
+        });
     }
 
     @Override

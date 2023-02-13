@@ -32,16 +32,25 @@
             app:layout_constraintStart_toStartOf="parent"
             />
 
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/docesList_recyclerView"
-            android:layout_width="358dp"
-            android:layout_height="361dp"
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/docesSwipeRefreshLayout"
+            android:layout_width="360dp"
+            android:layout_height="486dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.49"
+            app:layout_constraintHorizontal_bias="0.515"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tituloListaDoce"
-            />
+            app:layout_constraintVertical_bias="0.388">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/docesList_recyclerView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
     <Button
             android:id="@+id/btnAdicionarNovoDoce"
@@ -52,7 +61,7 @@
             android:backgroundTint="@color/green_foward"
             android:text="@string/adicionar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/docesList_recyclerView"
+            app:layout_constraintTop_toBottomOf="@+id/docesSwipeRefreshLayout"
             />
 
     <ImageButton
@@ -62,18 +71,18 @@
             android:layout_marginStart="56dp"
             android:layout_marginTop="15dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/docesList_recyclerView"
+            app:layout_constraintTop_toBottomOf="@+id/docesSwipeRefreshLayout"
             app:srcCompat="@drawable/ic_baseline_home_24"
             />
 
     <TextView
             android:id="@+id/tituloListaDoce"
-            android:layout_width="196dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="116dp"
+            android:layout_width="219dp"
+            android:layout_height="49dp"
+            android:layout_marginStart="100dp"
             android:layout_marginTop="88dp"
             android:fontFamily="@font/poppinsbold"
-            android:text="Lista Doce"
+            android:text="Lista Doces"
             android:textColor="@color/black"
             android:textSize="34sp"
 
@@ -81,7 +90,6 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="HardcodedText"
             />
-
     <TextView
             android:id="@+id/textItemDescricaoDoces"
             android:layout_width="87dp"
@@ -91,7 +99,7 @@
             android:text="Item/Descrição"
             android:textSize="15sp"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/docesList_recyclerView"
+            app:layout_constraintBottom_toTopOf="@+id/docesSwipeRefreshLayout"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="HardcodedText"
             />
@@ -105,7 +113,7 @@
             android:text="Valor"
             android:textColor="@color/black"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/docesList_recyclerView"
+            app:layout_constraintBottom_toTopOf="@+id/docesSwipeRefreshLayout"
             app:layout_constraintEnd_toEndOf="parent"
             tools:ignore="HardcodedText"
             />

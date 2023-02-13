@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.lanchonete.R;
 import com.lanchonete.funcionario.create_update.DoceActivity;
 import com.lanchonete.model.Doce;
@@ -31,6 +32,7 @@ public class DoceListActivity extends AppCompatActivity {
     LinkedList<Doce> doces = new LinkedList<>();
     private ActionMode actionMode;
     private DoceAdapter doceAdapter;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,16 @@ public class DoceListActivity extends AppCompatActivity {
         irInicio.setOnClickListener(v -> finish());
 
         buttonAddDoce.setOnClickListener(v -> startActivityForResult(new Intent(this, DoceActivity.class), 1));
+
+
+        swipeRefreshLayout = findViewById(R.id.docesSwipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            doces.clear();
+
+            carregar();
+            doceAdapter.notifyDataSetChanged(); //TODO melhorar isso dps pelo amor
+            swipeRefreshLayout.setRefreshing(false);
+        });
     }
 
     @Override
