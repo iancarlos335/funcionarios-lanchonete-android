@@ -135,9 +135,9 @@ public class DoceActivity extends AppCompatActivity {
         btnCadastrar.setOnClickListener(view -> {
             int radioId = radioGroup.getCheckedRadioButtonId();
 
-            boolean nomeEmpty = editTextNome.toString().isEmpty();
-            boolean valorEmpty = editTextValor.toString().isEmpty();
-            boolean descricaoEmpty = editTextDescricao.toString().isEmpty();
+            boolean nomeEmpty = editTextNome.getText().toString().isEmpty();
+            boolean valorEmpty = editTextValor.getText().toString().isEmpty();
+            boolean descricaoEmpty = editTextDescricao.getText().toString().isEmpty();
 
             if (nomeEmpty) {
                 inputLayoutNome.requestFocus();
@@ -147,7 +147,7 @@ public class DoceActivity extends AppCompatActivity {
                 inputLayoutDescricao.requestFocus();
             }
 
-            if (nomeEmpty && valorEmpty && descricaoEmpty && (radioId != -1)) {
+            if (nomeEmpty || valorEmpty || descricaoEmpty || (radioId == -1)) {
                 Toast.makeText(getApplicationContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                 onRestart();
             } else {
