@@ -1,5 +1,4 @@
 *.iml
-app/src/main/java/com/lanchonete/retrofit/RetrofitService.java
 app/lint-baseline.xml
 .gradle
 .idea
